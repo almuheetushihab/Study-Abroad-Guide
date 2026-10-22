@@ -14,11 +14,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.yourname.studyabroad"
+    namespace = "com.shihab.studyabroad"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.yourname.studyabroad"
+        applicationId = "com.shihab.studyabroad"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

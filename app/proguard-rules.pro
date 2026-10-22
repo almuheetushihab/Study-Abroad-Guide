@@ -1,7 +1,7 @@
 # Proguard rules for Study Abroad Guide
 
 # Keep domain models
--keep class com.yourname.studyabroad.domain.model.** { *; }
+-keep class com.shihab.studyabroad.domain.model.** { *; }
 
 # Room
 -keepclassmembers class * extends androidx.room.RoomDatabase {
