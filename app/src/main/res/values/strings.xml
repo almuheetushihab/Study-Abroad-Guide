@@ -1,3 +1,47 @@
 <resources>
-    <string name="app_name">StudyAbroad</string>
+    <string name="app_name">Study Abroad Guide</string>
+
+    <!-- Navigation Tabs -->
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_track">Track</string>
+    <string name="nav_me">Me</string>
+
+    <!-- Sub Navigation Labels -->
+    <string name="nav_scholarships">Scholarships</string>
+    <string name="nav_countries">Countries</string>
+    <string name="nav_universities">Universities</string>
+    <string name="nav_documents">Checklist</string>
+    <string name="nav_saved">Saved</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Explore Hub -->
+    <string name="explore_hub_title">Explore Opportunities</string>
+    <string name="explore_hub_subtitle">Discover verified scholarships, countries, and universities for Bangladeshi students.</string>
+    <string name="explore_countries_desc">Tuition, living cost, work rules and post-study visas</string>
+    <string name="explore_scholarships_desc">Fully funded and partial scholarships with eligibility criteria</string>
+    <string name="explore_universities_desc">World rankings, verified programs and application portals</string>
+
+    <!-- Track -->
+    <string name="track_tab_checklist">Checklist</string>
+    <string name="track_tab_saved">Saved Items</string>
+
+    <!-- Me / Profile -->
+    <string name="me_language_label">App Language</string>
+    <string name="me_language_default">English (Default)</string>
+    <string name="me_disclaimer_label">Notice &amp; Disclaimer</string>
+
+    <!-- States -->
+    <string name="state_loading">Loading...</string>
+    <string name="state_empty">No items found.</string>
+    <string name="state_error">Something went wrong. Please try again.</string>
+    <string name="state_offline">Showing offline cached data.</string>
+    <string name="retry">Retry</string>
+
+    <!-- Statuses -->
+    <string name="status_open">Open</string>
+    <string name="status_opening_soon">Opening Soon</string>
+    <string name="status_closed">Closed</string>
+
+    <string name="sample_data_disclaimer">Notice: Sample data for preview purposes only. Not verified for official application.</string>
 </resources>

@@ -1,0 +1,16 @@
+build:
+  maxIssues: 10
+
+complexity:
+  TooManyFunctions:
+    active: false
+  LongParameterList:
+    active: false
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+
+style:
+  UnusedPrivateMember:
+    active: false
