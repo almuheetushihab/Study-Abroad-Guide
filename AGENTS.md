@@ -5,6 +5,7 @@ Project: Study Abroad Guide (Android, Kotlin, Jetpack Compose, MVVM).
 ## Source of truth
 - Requirements: docs/HANDBOOK.md (SRS in Part 2: FR-* and NFR-* IDs)
 - Architecture and naming: docs/ARCHITECTURE.md
+- Screen sketches: docs/UI_SKETCHES.md
 - If a request conflicts with the Handbook, stop and ask. Do not silently change requirements.
 
 ## Architecture rules

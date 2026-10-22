@@ -21,7 +21,7 @@ This handbook is the single reference to plan, build, test and ship the Study Ab
 
 **Change rule:** requirements change only through a comment on the requirement ID. Accepted changes get a new version number in the change log (end of Part 2).
 
-**Companion doc:** the Master Blueprint has 10 screen sketches (wireframes) in its section 6: [Master Blueprint](https://claude.ai/artifact/P1dm5zfTXYEpN7q92WE2st).
+**Companion doc:** 10 screen sketches (wireframes) are in [UI Sketches](UI_SKETCHES.md).
 
 ### Glossary
 
@@ -585,7 +585,7 @@ Compose screens are not reused in React Native. These choices keep most of the w
 
 ## 4.1 Navigation
 
-Bottom navigation: Home, Explore, Track, Me (Community joins in Release 3). Sketches for the main screens are in the [Master Blueprint](https://claude.ai/artifact/P1dm5zfTXYEpN7q92WE2st), section 6.
+Bottom navigation: Home, Explore, Track, Me (Community joins in Release 3). Sketches for the main screens are in [UI Sketches](UI_SKETCHES.md).
 
 ## 4.2 Screen list
 

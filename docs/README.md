@@ -1,2 +1,3 @@
 - HANDBOOK.md: product, requirements (SRS), design, test and release plan
 - ARCHITECTURE.md: package structure and naming conventions
+- UI_SKETCHES.md: screen wireframes (reference for Part 4 of the handbook)
