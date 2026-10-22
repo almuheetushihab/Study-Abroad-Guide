@@ -1,0 +1,2 @@
+- HANDBOOK.md: product, requirements (SRS), design, test and release plan
+- ARCHITECTURE.md: package structure and naming conventions
