@@ -81,7 +81,7 @@ val LightStatusColors = StatusColors(
     openingSoonColor = Color(0xFFB45309),
     openingSoonContainerColor = Color(0xFFFEF3C7),
     onOpeningSoonContainerColor = Color(0xFF451A03),
-    closedColor = Color(0xFF6B7280),
+    closedColor = Color(0xFF4B5563),
     closedContainerColor = Color(0xFFF3F4F6),
     onClosedContainerColor = Color(0xFF1F2937),
 )

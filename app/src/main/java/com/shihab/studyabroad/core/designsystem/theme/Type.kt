@@ -2,21 +2,33 @@ package com.shihab.studyabroad.core.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.shihab.studyabroad.R
+
+val InterFontFamily = FontFamily(
+    Font(R.font.inter_regular, FontWeight.Normal),
+    Font(R.font.inter_mdium, FontWeight.Medium),
+    Font(R.font.inter_semibold, FontWeight.SemiBold),
+    Font(R.font.inter_bold, FontWeight.Bold),
+)
+
+val NotoSansBengaliFontFamily = FontFamily(
+    Font(R.font.noto_sans_bengali_regular, FontWeight.Normal),
+    Font(R.font.noto_sans_bengali_medium, FontWeight.Medium),
+    Font(R.font.noto_sans_bengali_bold, FontWeight.Bold),
+)
 
 /**
  * Creates Material 3 Typography based on language code ("en" or "bn").
- * English uses Inter family (TODO: bundle Noto Sans Bengali & Inter or Google Fonts),
+ * English uses Inter family,
  * Bangla uses Noto Sans Bengali family with increased line height (~1.5x for body text).
  */
 fun appTypography(languageCode: String): Typography {
     val isBangla = languageCode.startsWith("bn")
-
-    // TODO: Bundle Noto Sans Bengali and Inter in res/font or use Google Fonts via ui-text-google-fonts.
-    // Falls back to FontFamily.Default with language-appropriate line heights.
-    val fontFamily = FontFamily.Default
+    val fontFamily = if (isBangla) NotoSansBengaliFontFamily else InterFontFamily
 
     val bodyLineHeight = if (isBangla) 24.sp * 1.5 else 24.sp * 1.4
     val bodyMediumLineHeight = if (isBangla) 20.sp * 1.5 else 20.sp * 1.4
