@@ -24,9 +24,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.common.LanguageManager
+import com.shihab.studyabroad.core.designsystem.component.PrimaryButton
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier, onNavigateToThemePreview: (() -> Unit)? = null) {
+fun ProfileScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToEditProfile: (() -> Unit)? = null,
+    onNavigateToThemePreview: (() -> Unit)? = null,
+) {
     var currentLang by remember { mutableStateOf(LanguageManager.getCurrentLanguage()) }
 
     Column(
@@ -40,6 +45,15 @@ fun ProfileScreen(modifier: Modifier = Modifier, onNavigateToThemePreview: (() -
         )
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        // Edit Profile Action (FR-PRO-003)
+        if (onNavigateToEditProfile != null) {
+            PrimaryButton(
+                text = stringResource(id = R.string.btn_edit_profile),
+                onClick = onNavigateToEditProfile,
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
 
         // Language Setting Section (FR-PRO-004)
         Card(

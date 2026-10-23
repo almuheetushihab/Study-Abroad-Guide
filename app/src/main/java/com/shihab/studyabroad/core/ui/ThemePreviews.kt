@@ -15,4 +15,10 @@ import androidx.compose.ui.tooling.preview.Preview
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
 )
+@Preview(
+    name = "Bangla",
+    group = "Locale",
+    locale = "bn",
+    showBackground = true,
+)
 annotation class ThemePreviews

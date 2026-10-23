@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Study Abroad Guide</string>
+    <string name="splash_tagline">Your Trusted Guide to Overseas Education</string>
 
     <!-- Navigation Tabs -->
     <string name="nav_home">Home</string>
@@ -26,6 +27,79 @@
     <string name="track_tab_checklist">Checklist</string>
     <string name="track_tab_saved">Saved Items</string>
 
+    <!-- Onboarding -->
+    <string name="onboarding_title_1">Discover Your Future</string>
+    <string name="onboarding_desc_1">Find verified scholarships, countries, and universities tailored for Bangladeshi students.</string>
+    <string name="onboarding_title_2">100% Verified Data</string>
+    <string name="onboarding_desc_2">Real deadlines, official links, tuition fees, and living costs updated regularly.</string>
+    <string name="onboarding_title_3">Stay Safe From Scams</string>
+    <string name="onboarding_desc_3">Official scholarship applications are usually free. Never pay unofficial agents or guarantees.</string>
+    <string name="btn_skip">Skip</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_get_started">Get Started</string>
+
+    <!-- Login / Auth (FR-AUTH-001, FR-AUTH-002, FR-AUTH-003) -->
+    <string name="login_title">Welcome</string>
+    <string name="login_subtitle">Sign in with your phone number to save preferences and sync your application roadmap.</string>
+    <string name="login_phone_label">Phone Number</string>
+    <string name="login_phone_placeholder">e.g. 01712345678</string>
+    <string name="btn_send_otp">Send OTP</string>
+    <string name="btn_google_sign_in">Continue with Google</string>
+    <string name="login_otp_title">Enter 6-Digit OTP</string>
+    <string name="login_otp_subtitle">Verification code sent to %s</string>
+    <string name="login_otp_label">6-Digit Code</string>
+    <string name="btn_verify_otp">Verify &amp; Sign In</string>
+    <string name="btn_resend_otp">Resend Code</string>
+    <string name="btn_back_to_phone">Back to Phone Number</string>
+    <string name="error_invalid_phone">Please enter a valid phone number.</string>
+    <string name="error_invalid_otp">Invalid OTP code. Please enter 6 digits.</string>
+
+    <!-- Track Select (FR-PRO-001) -->
+    <string name="track_select_title">Choose Your Track</string>
+    <string name="track_select_subtitle">Select the profile track that best describes your current stage.</string>
+    <string name="track_fresher_title">Fresher (HSC Pass)</string>
+    <string name="track_fresher_desc">Focus on Bachelor scholarships, low-cost countries, and foundation programs.</string>
+    <string name="track_graduate_title">Graduate (BSc Running/Complete)</string>
+    <string name="track_graduate_desc">Focus on Masters scholarships, university programs, and subject selection.</string>
+    <string name="track_professional_title">Professional (2+ Years Job)</string>
+    <string name="track_professional_desc">Focus on experience-based scholarships, MBA, career switches, and funding.</string>
+    <string name="track_researcher_title">Researcher (MSc Complete)</string>
+    <string name="track_researcher_desc">Focus on PhD funding, research grants, assistantships, and professor contacts.</string>
+    <string name="btn_continue">Continue</string>
+
+    <!-- Profile Setup (FR-PRO-002, FR-PRO-003) -->
+    <string name="profile_setup_title">Profile Setup</string>
+    <string name="profile_edit_title">Edit Profile</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+    <string name="step_indicator">Step %1$d of %2$d: %3$s</string>
+    <string name="step_1_name">Academic Level &amp; Subject</string>
+    <string name="step_2_name">Scores &amp; Grades</string>
+    <string name="step_3_name">Experience &amp; Age</string>
+    <string name="step_4_name">Budget &amp; Target Countries</string>
+    <string name="label_degree_level">Degree Level</string>
+    <string name="label_subject">Field / Subject</string>
+    <string name="label_cgpa">CGPA</string>
+    <string name="label_cgpa_scale">CGPA Scale</string>
+    <string name="label_test_type">Standardized Test</string>
+    <string name="label_test_score">Test Score</string>
+    <string name="label_experience_years">Work Experience (Years)</string>
+    <string name="label_age">Age (Years)</string>
+    <string name="label_budget_range">Estimated Annual Budget Range</string>
+    <string name="label_funding_goal">Funding Goal</string>
+    <string name="label_target_countries">Target Countries (Select at least one)</string>
+    <string name="goal_scholarship">Fully Funded / Scholarship Required</string>
+    <string name="goal_self_funded">Self-Funded / Partial Support</string>
+    <string name="btn_previous">Previous</string>
+    <string name="btn_save_profile">Save Profile</string>
+    <string name="validation_level_required">Please select or enter your degree level.</string>
+    <string name="validation_subject_required">Please enter your field or subject.</string>
+    <string name="validation_cgpa_invalid">CGPA must be between 0.0 and %s.</string>
+    <string name="validation_test_score_invalid">IELTS score must be between 0.0 and 9.0 in steps of 0.5.</string>
+    <string name="validation_age_invalid">Age must be between 15 and 60.</string>
+    <string name="validation_experience_invalid">Experience must be between 0 and 40 years.</string>
+    <string name="validation_budget_required">Please select a budget range.</string>
+    <string name="validation_countries_required">Please select at least one target country.</string>
+
     <!-- Me / Profile & Language -->
     <string name="me_language_label">App Language</string>
     <string name="me_language_en">English</string>
@@ -47,7 +121,7 @@
     <string name="status_closed">Closed</string>
     <string name="status_expected">Expected: %s</string>
 
-    <!-- Trust & Verification Labels (FR-TRU-001, FR-TRU-002, FR-TRU-003) -->
+    <!-- Trust & Verification Labels (FR-TRU-001, FR-TRU-002, FR-TRU-003, FR-TRU-004) -->
     <string name="badge_may_be_outdated">May be outdated</string>
     <string name="label_source">Source</string>
     <string name="label_verified_on">Verified on %s</string>

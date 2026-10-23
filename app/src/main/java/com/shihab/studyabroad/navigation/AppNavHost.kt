@@ -20,16 +20,22 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.shihab.studyabroad.BuildConfig
+import com.shihab.studyabroad.feature.auth.LoginRoute
 import com.shihab.studyabroad.feature.country.CountryScreen
 import com.shihab.studyabroad.feature.debug.ThemePreviewScreen
 import com.shihab.studyabroad.feature.documents.DocumentsScreen
 import com.shihab.studyabroad.feature.explore.ExploreScreen
 import com.shihab.studyabroad.feature.home.HomeRoute
+import com.shihab.studyabroad.feature.onboarding.OnboardingRoute
 import com.shihab.studyabroad.feature.profile.ProfileScreen
+import com.shihab.studyabroad.feature.profilesetup.ProfileSetupRoute
 import com.shihab.studyabroad.feature.saved.SavedScreen
 import com.shihab.studyabroad.feature.scholarship.ScholarshipScreen
+import com.shihab.studyabroad.feature.splash.SplashRoute
 import com.shihab.studyabroad.feature.track.TrackScreen
+import com.shihab.studyabroad.feature.trackselect.TrackSelectRoute
 import com.shihab.studyabroad.feature.university.UniversityScreen
 
 @Composable
@@ -48,7 +54,7 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
 
     val shouldShowBottomBar = currentDestination?.hierarchy?.any { destination ->
         rootTabDestinations.any { routeClass -> destination.hasRoute(routeClass) }
-    } ?: true
+    } ?: false
 
     Scaffold(
         modifier = modifier,
@@ -92,9 +98,66 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Route.Home,
+            startDestination = Route.Splash,
             modifier = Modifier.padding(innerPadding),
         ) {
+            // Start / Onboarding Flow
+            composable<Route.Splash> {
+                SplashRoute(
+                    onNavigateToDestination = { target ->
+                        navController.navigate(target) {
+                            popUpTo(Route.Splash) { inclusive = true }
+                        }
+                    },
+                )
+            }
+
+            composable<Route.Onboarding> {
+                OnboardingRoute(
+                    onOnboardingComplete = {
+                        navController.navigate(Route.Auth) {
+                            popUpTo(Route.Onboarding) { inclusive = true }
+                        }
+                    },
+                )
+            }
+
+            composable<Route.Auth> {
+                LoginRoute(
+                    onLoginSuccess = {
+                        navController.navigate(Route.TrackSelect) {
+                            popUpTo(Route.Auth) { inclusive = true }
+                        }
+                    },
+                )
+            }
+
+            composable<Route.TrackSelect> {
+                TrackSelectRoute(
+                    onTrackSelectComplete = {
+                        navController.navigate(Route.ProfileSetup(isEditMode = false)) {
+                            popUpTo(Route.TrackSelect) { inclusive = true }
+                        }
+                    },
+                )
+            }
+
+            composable<Route.ProfileSetup> { backStackEntry ->
+                val args = backStackEntry.toRoute<Route.ProfileSetup>()
+                ProfileSetupRoute(
+                    isEditMode = args.isEditMode,
+                    onProfileSetupComplete = {
+                        if (args.isEditMode) {
+                            navController.popBackStack()
+                        } else {
+                            navController.navigate(Route.Home) {
+                                popUpTo(Route.ProfileSetup(isEditMode = false)) { inclusive = true }
+                            }
+                        }
+                    },
+                )
+            }
+
             // Tab 1: Home
             composable<Route.Home> {
                 HomeRoute()
@@ -137,6 +200,9 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
             navigation<Route.MeGraph>(startDestination = Route.Me) {
                 composable<Route.Me> {
                     ProfileScreen(
+                        onNavigateToEditProfile = {
+                            navController.navigate(Route.ProfileSetup(isEditMode = true))
+                        },
                         onNavigateToThemePreview = if (BuildConfig.DEBUG) {
                             { navController.navigate(Route.ThemePreview) }
                         } else {

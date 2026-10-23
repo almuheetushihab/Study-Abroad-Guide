@@ -3,9 +3,15 @@ package com.shihab.studyabroad.navigation
 import kotlinx.serialization.Serializable
 
 sealed interface Route {
+    @Serializable data object Splash : Route
+
     @Serializable data object Onboarding : Route
 
     @Serializable data object Auth : Route
+
+    @Serializable data object TrackSelect : Route
+
+    @Serializable data class ProfileSetup(val isEditMode: Boolean = false) : Route
 
     // Top Level Tabs / Tab Graphs
     @Serializable data object Home : Route

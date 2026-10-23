@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">স্টাডি অ্যাব্রোড গাইড</string>
+    <string name="splash_tagline">বিদেশে উচ্চশিক্ষায় আপনার নির্ভরযোগ্য গাইড</string>
 
     <!-- Navigation Tabs -->
     <string name="nav_home">হোম</string>
@@ -26,10 +27,83 @@
     <string name="track_tab_checklist">চেকলিস্ট</string>
     <string name="track_tab_saved">সংরক্ষিত আইটেম</string>
 
+    <!-- Onboarding -->
+    <string name="onboarding_title_1">আপনার ভবিষ্যৎ উন্মোচন করুন</string>
+    <string name="onboarding_desc_1">বাংলাদেশী শিক্ষার্থীদের জন্য উপযুক্ত যাচাইকৃত বৃত্তি, দেশ এবং বিশ্ববিদ্যালয় খুঁজে নিন।</string>
+    <string name="onboarding_title_2">১০০% যাচাইকৃত তথ্য</string>
+    <string name="onboarding_desc_2">সঠিক ডেডলাইন, অফিসিয়াল লিংক, টিউশন ফি এবং জীবনযাত্রার খরচ নিয়মিত আপডেট করা হয়।</string>
+    <string name="onboarding_title_3">স্ক্যাম থেকে নিরাপদ থাকুন</string>
+    <string name="onboarding_desc_3">অফিসিয়াল বৃত্তির আবেদন সাধারণত বিনামূল্যে হয়। কোনো অনানুষ্ঠানিক এজেন্ট বা গ্যারান্টি প্রদানকারীকে টাকা দেবেন না।</string>
+    <string name="btn_skip">এড়িয়ে যান</string>
+    <string name="btn_next">পরবর্তী</string>
+    <string name="btn_get_started">শুরু করুন</string>
+
+    <!-- Login / Auth (FR-AUTH-001, FR-AUTH-002, FR-AUTH-003) -->
+    <string name="login_title">স্বাগতম</string>
+    <string name="login_subtitle">আপনার পছন্দগুলো সংরক্ষণ ও অ্যাক্সেস করতে ফোন নম্বর দিয়ে সাইন ইন করুন।</string>
+    <string name="login_phone_label">ফোন নম্বর</string>
+    <string name="login_phone_placeholder">যেমন: ০১৭১২৩৪৫৬৭৮</string>
+    <string name="btn_send_otp">ওটিপি পাঠান</string>
+    <string name="btn_google_sign_in">গুগল দিয়ে এগিয়ে যান</string>
+    <string name="login_otp_title">৬-সংখ্যার ওটিপি লিখুন</string>
+    <string name="login_otp_subtitle">যাচাইকরণ কোডটি %s নম্বরে পাঠানো হয়েছে</string>
+    <string name="login_otp_label">৬-সংখ্যার কোড</string>
+    <string name="btn_verify_otp">যাচাই করুন ও সাইন ইন করুন</string>
+    <string name="btn_resend_otp">পুনরায় কোড পাঠান</string>
+    <string name="btn_back_to_phone">ফোন নম্বর পরিবর্তনে ফিরুন</string>
+    <string name="error_invalid_phone">অনুগ্রহ করে একটি সঠিক ফোন নম্বর লিখুন।</string>
+    <string name="error_invalid_otp">অকার্যকর ওটিপি কোড। অনুগ্রহ করে ৬-সংখ্যার কোড লিখুন।</string>
+
+    <!-- Track Select (FR-PRO-001) -->
+    <string name="track_select_title">আপনার ট্র্যাক নির্বাচন করুন</string>
+    <string name="track_select_subtitle">আপনার বর্তমান অবস্থানের সাথে সবচেয়ে মিলে এমন ট্র্যাকটি বেছে নিন।</string>
+    <string name="track_fresher_title">ফ্রেশার (এইচএসসি পাস)</string>
+    <string name="track_fresher_desc">ব্যাচেলর বৃত্তি, কম খরচের দেশ এবং ফাউন্ডেশন প্রোগ্রাম।</string>
+    <string name="track_graduate_title">গ্র্যাজুয়েট (বিএসসি চলমান/সম্পন্ন)</string>
+    <string name="track_graduate_desc">মাস্টার্স বৃত্তি, বিশ্ববিদ্যালয় পছন্দ এবং বিষয় নির্বাচন।</string>
+    <string name="track_professional_title">প্রফেশনাল (২+ বছরের অভিজ্ঞতা)</string>
+    <string name="track_professional_desc">অভিজ্ঞতার ভিত্তিতে প্রাপ্ত বৃত্তি, এমবিএ এবং ক্যারিয়ার পরিবর্তন।</string>
+    <string name="track_researcher_title">গবেষক (এমএসসি সম্পন্ন)</string>
+    <string name="track_researcher_desc">পিএইচডি অর্থায়ন, গবেষণা অনুদান এবং প্রফেসরদের সাথে যোগাযোগ।</string>
+    <string name="btn_continue">এগিয়ে যান</string>
+
+    <!-- Profile Setup (FR-PRO-002, FR-PRO-003) -->
+    <string name="profile_setup_title">প্রোফাইল সেটআপ</string>
+    <string name="profile_edit_title">প্রোফাইল সম্পাদনা</string>
+    <string name="btn_edit_profile">প্রোফাইল সম্পাদনা করুন</string>
+    <string name="step_indicator">ধাপ %1$d / %2$d: %3$s</string>
+    <string name="step_1_name">ডিগ্রি স্তর ও বিষয়</string>
+    <string name="step_2_name">নম্বর ও গ্রেড</string>
+    <string name="step_3_name">অভিজ্ঞতা ও বয়স</string>
+    <string name="step_4_name">বাজেট ও লক্ষ্যভিত্তিক দেশ</string>
+    <string name="label_degree_level">ডিগ্রির স্তর</string>
+    <string name="label_subject">বিষয় / ক্ষেত্র</string>
+    <string name="label_cgpa">সিজিপিএ (CGPA)</string>
+    <string name="label_cgpa_scale">সিজিপিএ স্কেল</string>
+    <string name="label_test_type">স্ট্যান্ডার্ডাইজড টেস্ট</string>
+    <string name="label_test_score">টেস্ট স্কোর</string>
+    <string name="label_experience_years">কাজের অভিজ্ঞতা (বছর)</string>
+    <string name="label_age">বয়স (বছর)</string>
+    <string name="label_budget_range">আনুমানিক বার্ষিক বাজেট</string>
+    <string name="label_funding_goal">অর্থায়নের লক্ষ্য</string>
+    <string name="label_target_countries">লক্ষ্যভিত্তিক দেশসমূহ (কমপক্ষে একটি বেছে নিন)</string>
+    <string name="goal_scholarship">পূর্ণাঙ্গ বৃত্তি / স্কলারশিপ প্রয়োজন</string>
+    <string name="goal_self_funded">স্ব-অর্থায়ন / আংশিক সহায়তা</string>
+    <string name="btn_previous">পূর্ববর্তী</string>
+    <string name="btn_save_profile">প্রোফাইল সংরক্ষণ করুন</string>
+    <string name="validation_level_required">অনুগ্রহ করে আপনার ডিগ্রির স্তর নির্বাচন বা লিখুন।</string>
+    <string name="validation_subject_required">অনুগ্রহ করে আপনার বিষয় বা ক্ষেত্র লিখুন।</string>
+    <string name="validation_cgpa_invalid">সিজিপিএ ০.০ থেকে %s এর মধ্যে হতে হবে।</string>
+    <string name="validation_test_score_invalid">আইইএলটিএস (IELTS) স্কোর ০.০ থেকে ৯.০ এর মধ্যে ০.৫ এর ধাপে হতে হবে।</string>
+    <string name="validation_age_invalid">বয়স ১৫ থেকে ৬০ বছরের মধ্যে হতে হবে।</string>
+    <string name="validation_experience_invalid">অভিজ্ঞতা ০ থেকে ৪০ বছরের মধ্যে হতে হবে।</string>
+    <string name="validation_budget_required">অনুগ্রহ করে একটি বাজেটের সীমা নির্বাচন করুন।</string>
+    <string name="validation_countries_required">অনুগ্রহ করে অন্তত একটি লক্ষ্যভিত্তিক দেশ নির্বাচন করুন।</string>
+
     <!-- Me / Profile & Language -->
     <string name="me_language_label">অ্যাপের ভাষা</string>
     <string name="me_language_en">English</string>
-    <string name="me_language_bn">বাংলা</string>
+    <string name="me_language_bn">বাংলা (Bangla)</string>
     <string name="me_language_current">বর্তমান ভাষা: বাংলা</string>
     <string name="me_disclaimer_label">সতর্কবার্তা ও দাবিত্যাগ</string>
 
@@ -47,7 +121,7 @@
     <string name="status_closed">বন্ধ</string>
     <string name="status_expected">সম্ভাব্য: %s</string>
 
-    <!-- Trust & Verification Labels (FR-TRU-001, FR-TRU-002, FR-TRU-003) -->
+    <!-- Trust & Verification Labels (FR-TRU-001, FR-TRU-002, FR-TRU-003, FR-TRU-004) -->
     <string name="badge_may_be_outdated">মেয়াদোত্তীর্ণ হতে পারে</string>
     <string name="label_source">উৎস / সোর্স</string>
     <string name="label_verified_on">যাচাই করা হয়েছে: %s</string>

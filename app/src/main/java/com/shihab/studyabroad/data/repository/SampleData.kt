@@ -180,9 +180,17 @@ object SampleData {
         id = "user_1",
         name = "Rahim Ahmed",
         targetTrack = Track.GRADUATE,
+        level = "Master",
+        subject = "Computer Science",
         cgpa = 3.5,
-        ieltsScore = 7.0,
+        cgpaScale = 4.0,
+        testType = com.shihab.studyabroad.domain.model.TestType.IELTS,
+        testScore = 7.0,
         experienceYears = 1,
+        age = 24,
+        budgetRange = "10-20 Lakh BDT",
+        goal = com.shihab.studyabroad.domain.model.FundingGoal.SCHOLARSHIP,
+        targetCountries = listOf("de", "hu"),
     )
 
     val sampleChecklistItems = listOf(
