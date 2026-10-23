@@ -37,6 +37,10 @@ sealed interface Route {
 
     @Serializable data class CountryDetail(val id: String) : Route
 
+    @Serializable data object CountryComparison : Route
+
+    @Serializable data object UniversityList : Route
+
     @Serializable data class UniversityDetail(val id: String) : Route
 
     @Serializable data object Documents : Route

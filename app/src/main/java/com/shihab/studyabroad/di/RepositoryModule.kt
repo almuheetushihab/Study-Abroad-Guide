@@ -1,5 +1,7 @@
 package com.shihab.studyabroad.di
 
+import com.shihab.studyabroad.core.common.AndroidUrlOpener
+import com.shihab.studyabroad.core.common.UrlOpener
 import com.shihab.studyabroad.data.local.datastore.UserPreferencesRepositoryImpl
 import com.shihab.studyabroad.data.repository.FakeAuthRepository
 import com.shihab.studyabroad.data.repository.FakeChecklistRepository
@@ -51,4 +53,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindChecklistRepository(fakeChecklistRepository: FakeChecklistRepository): ChecklistRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindUrlOpener(androidUrlOpener: AndroidUrlOpener): UrlOpener
 }

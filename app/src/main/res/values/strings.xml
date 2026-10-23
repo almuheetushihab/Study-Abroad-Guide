@@ -145,4 +145,64 @@
 
     <string name="sample_data_disclaimer">Notice: Sample data for preview purposes only. Not verified for official application.</string>
     <string name="disclaimer_body">This app provides guidance based on publicly available research data (Oct 2026). It does not provide legal, immigration, or visa consulting guarantees. Always verify details on official websites.</string>
+
+    <!-- Home Screen -->
+    <string name="home_progress_title">Roadmap Progress</string>
+    <string name="home_progress_subtitle">Next: Register for IELTS test &amp; draft SOP</string>
+    <string name="home_quick_summary">Quick Summary</string>
+    <string name="home_top_fully_funded">Fully Funded</string>
+    <string name="home_top_low_cost">Low Cost</string>
+    <string name="home_top_pr_friendly">PR Friendly</string>
+    <string name="home_deadline_soon">Deadline Soon</string>
+    <string name="home_days_left">%1$d days left</string>
+    <string name="btn_view_all">View All</string>
+    <string name="btn_compare_countries">Compare Countries</string>
+
+    <!-- Country Screen -->
+    <string name="country_tier_all">All</string>
+    <string name="country_tier_scholarship">Tier 1 (Scholarship)</string>
+    <string name="country_tier_pr_work">Tier 2 (PR / Work)</string>
+    <string name="country_comparison_title">Master Comparison</string>
+    <string name="country_compare_select_hint">Select up to 3 countries to compare side-by-side:</string>
+    <string name="country_chart_title">Estimated Annual Living Cost</string>
+    <string name="col_country">Country</string>
+    <string name="col_tier">Tier</string>
+    <string name="col_tuition">Tuition</string>
+    <string name="col_living">Living Cost</string>
+    <string name="col_work">Work Rules</string>
+    <string name="col_post_study">Post-Study</string>
+    <string name="country_scholarships_title">Available Scholarships</string>
+    <string name="country_universities_title">Top Universities</string>
+    <string name="country_work_post_study_title">Work Rights &amp; Post-Study Visa</string>
+    <string name="country_tip_warning_title">Advisory &amp; Tips</string>
+
+    <!-- University Screen -->
+    <string name="university_search_placeholder">Search universities...</string>
+    <string name="university_filter_scholarship">Has Scholarship</string>
+    <string name="university_programs_title">Featured Programs</string>
+    <string name="university_req_vs_profile">Requirement vs Your Profile</string>
+    <string name="req_cgpa">Min CGPA</string>
+    <string name="req_test">Min IELTS / Test Score</string>
+    <string name="req_exp">Work Experience</string>
+    <string name="status_ok">OK</string>
+    <string name="status_low">Low</string>
+    <string name="status_unknown">Unknown</string>
+    <string name="btn_official_website">Visit Official Website</string>
+    <string name="label_world_rank">World Rank: #%1$d</string>
+
+    <!-- Scholarship Screen -->
+    <string name="scholarship_filter_all">All</string>
+    <string name="scholarship_eligibility_title">Eligibility Criteria</string>
+    <string name="scholarship_benefits_title">Benefits &amp; Coverage</string>
+    <string name="scholarship_documents_title">Required Documents</string>
+    <string name="scholarship_deadline_note">Note: Confirm the exact time zone on the official website.</string>
+    <string name="btn_set_reminder">Set Deadline Reminder</string>
+    <string name="reminder_dialog_title">Select Reminder Time</string>
+    <string name="reminder_30_days">30 days before deadline</string>
+    <string name="reminder_14_days">14 days before deadline</string>
+    <string name="reminder_7_days">7 days before deadline</string>
+    <string name="reminder_1_day">1 day before deadline</string>
+    <string name="reminder_confirmation">Reminder set for %1$s before deadline.</string>
+    <string name="btn_official_apply">Apply on Official Site</string>
+    <string name="eligibility_check_official_site">Check the official site</string>
 </resources>

@@ -23,7 +23,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.shihab.studyabroad.BuildConfig
 import com.shihab.studyabroad.feature.auth.LoginRoute
-import com.shihab.studyabroad.feature.country.CountryScreen
+import com.shihab.studyabroad.feature.country.CountryComparisonRoute
+import com.shihab.studyabroad.feature.country.CountryDetailRoute
+import com.shihab.studyabroad.feature.country.CountryListRoute
 import com.shihab.studyabroad.feature.debug.ThemePreviewScreen
 import com.shihab.studyabroad.feature.documents.DocumentsScreen
 import com.shihab.studyabroad.feature.explore.ExploreScreen
@@ -32,11 +34,13 @@ import com.shihab.studyabroad.feature.onboarding.OnboardingRoute
 import com.shihab.studyabroad.feature.profile.ProfileScreen
 import com.shihab.studyabroad.feature.profilesetup.ProfileSetupRoute
 import com.shihab.studyabroad.feature.saved.SavedScreen
-import com.shihab.studyabroad.feature.scholarship.ScholarshipScreen
+import com.shihab.studyabroad.feature.scholarship.ScholarshipDetailRoute
+import com.shihab.studyabroad.feature.scholarship.ScholarshipListRoute
 import com.shihab.studyabroad.feature.splash.SplashRoute
 import com.shihab.studyabroad.feature.track.TrackScreen
 import com.shihab.studyabroad.feature.trackselect.TrackSelectRoute
-import com.shihab.studyabroad.feature.university.UniversityScreen
+import com.shihab.studyabroad.feature.university.UniversityDetailRoute
+import com.shihab.studyabroad.feature.university.UniversityListRoute
 
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
@@ -50,6 +54,7 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
         Route.Me::class,
         Route.CountryList::class,
         Route.Scholarships::class,
+        Route.UniversityList::class,
     )
 
     val shouldShowBottomBar = currentDestination?.hierarchy?.any { destination ->
@@ -160,7 +165,10 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
 
             // Tab 1: Home
             composable<Route.Home> {
-                HomeRoute()
+                HomeRoute(
+                    onNavigateToScholarshipDetail = { id -> navController.navigate(Route.ScholarshipDetail(id)) },
+                    onNavigateToCountryDetail = { id -> navController.navigate(Route.CountryDetail(id)) },
+                )
             }
 
             // Tab 2: Explore Graph
@@ -169,17 +177,54 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
                     ExploreScreen(
                         onNavigateToCountries = { navController.navigate(Route.CountryList) },
                         onNavigateToScholarships = { navController.navigate(Route.Scholarships) },
-                        onNavigateToUniversities = { navController.navigate(Route.UniversityDetail("all")) },
+                        onNavigateToUniversities = { navController.navigate(Route.UniversityList) },
+                        onNavigateToCountryComparison = { navController.navigate(Route.CountryComparison) },
                     )
                 }
+
                 composable<Route.CountryList> {
-                    CountryScreen()
+                    CountryListRoute(
+                        onNavigateToCountryDetail = { id -> navController.navigate(Route.CountryDetail(id)) },
+                        onNavigateToCountryComparison = { navController.navigate(Route.CountryComparison) },
+                    )
                 }
-                composable<Route.Scholarships> {
-                    ScholarshipScreen()
+
+                composable<Route.CountryComparison> {
+                    CountryComparisonRoute(
+                        onBack = { navController.popBackStack() },
+                    )
                 }
+
+                composable<Route.CountryDetail> {
+                    CountryDetailRoute(
+                        onBack = { navController.popBackStack() },
+                        onNavigateToScholarshipDetail = { id -> navController.navigate(Route.ScholarshipDetail(id)) },
+                        onNavigateToUniversityDetail = { id -> navController.navigate(Route.UniversityDetail(id)) },
+                    )
+                }
+
+                composable<Route.UniversityList> {
+                    UniversityListRoute(
+                        onNavigateToUniversityDetail = { id -> navController.navigate(Route.UniversityDetail(id)) },
+                    )
+                }
+
                 composable<Route.UniversityDetail> {
-                    UniversityScreen()
+                    UniversityDetailRoute(
+                        onBack = { navController.popBackStack() },
+                    )
+                }
+
+                composable<Route.Scholarships> {
+                    ScholarshipListRoute(
+                        onNavigateToScholarshipDetail = { id -> navController.navigate(Route.ScholarshipDetail(id)) },
+                    )
+                }
+
+                composable<Route.ScholarshipDetail> {
+                    ScholarshipDetailRoute(
+                        onBack = { navController.popBackStack() },
+                    )
                 }
             }
 

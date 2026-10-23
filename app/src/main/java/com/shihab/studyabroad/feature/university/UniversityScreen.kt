@@ -1,18 +1,11 @@
 package com.shihab.studyabroad.feature.university
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun UniversityScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(text = "Universities")
-    }
+fun UniversityScreen(modifier: Modifier = Modifier, onNavigateToUniversityDetail: (String) -> Unit = {}) {
+    UniversityListRoute(
+        onNavigateToUniversityDetail = onNavigateToUniversityDetail,
+    )
 }

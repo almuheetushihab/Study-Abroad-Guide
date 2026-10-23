@@ -19,4 +19,8 @@ class FakeUniversityRepository @Inject constructor() : UniversityRepository {
     override fun getUniversitiesByCountry(countryId: String): Flow<List<University>> = universitiesFlow.map { list ->
         list.filter { it.countryId == countryId }
     }
+
+    override fun getUniversityById(id: String): Flow<University?> = universitiesFlow.map { list ->
+        list.find { it.id == id }
+    }
 }

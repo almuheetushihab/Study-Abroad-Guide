@@ -145,4 +145,64 @@
 
     <string name="sample_data_disclaimer">সতর্কবার্তা: প্রিভিউ স্যাম্পল ডেটা। অফিসিয়াল আবেদনের জন্য যাচাইকৃত নয়।</string>
     <string name="disclaimer_body">এই অ্যাপটি সর্বজনীন গবেষণা ডেটার (অক্টোবর ২০২৬) উপর ভিত্তি করে নির্দেশনা প্রদান করে। এটি কোনো আইনি, অভিবাসন বা ভিসা পরামর্শের গ্যারান্টি দেয় না। যেকোনো তথ্য অফিসিয়াল ওয়েবসাইট থেকে যাচাই করুন।</string>
+
+    <!-- Home Screen -->
+    <string name="home_progress_title">রোডম্যাপ অগ্রগতি</string>
+    <string name="home_progress_subtitle">পরবর্তী: আইইএলটিএস পরীক্ষা নিবন্ধন এবং এসওপি ড্রাফট</string>
+    <string name="home_quick_summary">দ্রুত সারসংক্ষেপ</string>
+    <string name="home_top_fully_funded">পূর্ণ অর্থায়নকৃত</string>
+    <string name="home_top_low_cost">কম খরচের দেশ</string>
+    <string name="home_top_pr_friendly">পিআর বান্ধব</string>
+    <string name="home_deadline_soon">শীঘ্রই ডেডলাইন</string>
+    <string name="home_days_left">%1$d দিন বাকি</string>
+    <string name="btn_view_all">সব দেখুন</string>
+    <string name="btn_compare_countries">দেশসমূহ তুলনা করুন</string>
+
+    <!-- Country Screen -->
+    <string name="country_tier_all">সব</string>
+    <string name="country_tier_scholarship">টিয়ার ১ (স্কলারশিপ)</string>
+    <string name="country_tier_pr_work">টিয়ার ২ (পিআর / কাজ)</string>
+    <string name="country_comparison_title">মাস্টার তুলনা</string>
+    <string name="country_compare_select_hint">পাশাপাশি তুলনা করতে ৩টি পর্যন্ত দেশ নির্বাচন করুন:</string>
+    <string name="country_chart_title">আনুমানিক বার্ষিক জীবনযাত্রার খরচ</string>
+    <string name="col_country">দেশ</string>
+    <string name="col_tier">টিয়ার</string>
+    <string name="col_tuition">টিউশন</string>
+    <string name="col_living">জীবনযাত্রার খরচ</string>
+    <string name="col_work">কাজের নিয়ম</string>
+    <string name="col_post_study">পড়াশোনা পরবর্তী</string>
+    <string name="country_scholarships_title">উপলব্ধ বৃত্তিসমূহ</string>
+    <string name="country_universities_title">শীর্ষ বিশ্ববিদ্যালয়সমূহ</string>
+    <string name="country_work_post_study_title">কাজের অধিকার ও পোস্ট-স্টাডি ভিসা</string>
+    <string name="country_tip_warning_title">পরামর্শ ও টিপস</string>
+
+    <!-- University Screen -->
+    <string name="university_search_placeholder">বিশ্ববিদ্যালয় খুঁজুন...</string>
+    <string name="university_filter_scholarship">বৃত্তি রয়েছে</string>
+    <string name="university_programs_title">বিশেষ স্থানপ্রাপ্ত প্রোগ্রাম</string>
+    <string name="university_req_vs_profile">যোগ্যতার শর্ত বনাম আপনার প্রোফাইল</string>
+    <string name="req_cgpa">নূন্যতম সিজিপিএ</string>
+    <string name="req_test">নূন্যতম আইইএলটিএস / টেস্ট নম্বর</string>
+    <string name="req_exp">কাজের অভিজ্ঞতা</string>
+    <string name="status_ok">ঠিক আছে</string>
+    <string name="status_low">কম</string>
+    <string name="status_unknown">অজানা</string>
+    <string name="btn_official_website">অফিসিয়াল ওয়েবসাইটে যান</string>
+    <string name="label_world_rank">ওয়ার্ল্ড র‍্যাঙ্ক: #%1$d</string>
+
+    <!-- Scholarship Screen -->
+    <string name="scholarship_filter_all">সব</string>
+    <string name="scholarship_eligibility_title">যোগ্যতার শর্তাবলী</string>
+    <string name="scholarship_benefits_title">সুবিধাদি ও কভারেজ</string>
+    <string name="scholarship_documents_title">প্রয়োজনীয় কাগজপত্র</string>
+    <string name="scholarship_deadline_note">নোট: অফিসিয়াল ওয়েবসাইট থেকে সময়সীমার টাইম জোন নিশ্চিত করুন।</string>
+    <string name="btn_set_reminder">ডেডলাইন রিমাইন্ডার সেট করুন</string>
+    <string name="reminder_dialog_title">রিমাইন্ডারের সময় নির্বাচন করুন</string>
+    <string name="reminder_30_days">ডেডলাইনের ৩০ দিন পূর্বে</string>
+    <string name="reminder_14_days">ডেডলাইনের ১৪ দিন পূর্বে</string>
+    <string name="reminder_7_days">ডেডলাইনের ৭ দিন পূর্বে</string>
+    <string name="reminder_1_day">ডেডলাইনের ১ দিন পূর্বে</string>
+    <string name="reminder_confirmation">ডেডলাইনের %1$s পূর্বে রিমাইন্ডার সেট করা হয়েছে।</string>
+    <string name="btn_official_apply">অফিসিয়াল সাইটে আবেদন করুন</string>
+    <string name="eligibility_check_official_site">অফিসিয়াল সাইটে দেখুন</string>
 </resources>

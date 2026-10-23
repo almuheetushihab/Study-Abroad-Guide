@@ -22,6 +22,7 @@ fun ExploreScreen(
     onNavigateToCountries: () -> Unit,
     onNavigateToScholarships: () -> Unit,
     onNavigateToUniversities: () -> Unit,
+    onNavigateToCountryComparison: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -46,6 +47,12 @@ fun ExploreScreen(
             title = stringResource(id = R.string.nav_countries),
             description = stringResource(id = R.string.explore_countries_desc),
             onClick = onNavigateToCountries,
+        )
+
+        ExploreCard(
+            title = stringResource(id = R.string.country_comparison_title),
+            description = stringResource(id = R.string.country_compare_select_hint),
+            onClick = onNavigateToCountryComparison,
         )
 
         ExploreCard(
