@@ -128,6 +128,7 @@
     <string name="action_report_wrong_info">ভুল তথ্য রিপোর্ট করুন</string>
     <string name="report_info_dialog_title">ভুল তথ্য রিপোর্ট করুন</string>
     <string name="report_info_hint">কী ভুল বা পুরানো রয়েছে তা বর্ণনা করুন...</string>
+    <string name="report_info_error_empty">অনুগ্রহ করে আপনার রিপোর্টের বিবরণ লিখুন।</string>
     <string name="submit">জমা দিন</string>
     <string name="cancel">বাতিল</string>
     <string name="report_submitted_message">রিপোর্ট সফলভাবে জমা হয়েছে। ধন্যবাদ!</string>
@@ -215,6 +216,31 @@
     <string name="doc_attestation_step_3">৩. পররাষ্ট্র মন্ত্রণালয় (MoFA) সত্যায়ন</string>
     <string name="doc_attestation_step_4">৪. গন্তব্য দেশের এম্বাসি সত্যায়ন</string>
     <string name="btn_visit_mofa">পররাষ্ট্র মন্ত্রণালয়ের ওয়েবসাইট দেখুন</string>
+
+    <!-- Notifications Settings (FR-NTF-003, FR-NTF-004) -->
+    <string name="notifications_title">বিজ্ঞপ্তি সেটিংস</string>
+    <string name="notifications_deadline_reminders">ডেডলাইন রিমাইন্ডার</string>
+    <string name="notifications_deadline_reminders_desc">সংরক্ষিত স্কলারশিপের ডেডলাইনের পূর্বে বিজ্ঞপ্তি পান।</string>
+    <string name="notifications_new_scholarships">নতুন স্কলারশিপ ও সুযোগ</string>
+    <string name="notifications_new_scholarships_desc">নতুন স্কলারশিপ প্রকাশিত হলে বিজ্ঞপ্তি পান।</string>
+    <string name="notifications_app_news">অ্যাপ আপডেট ও খবর</string>
+    <string name="notifications_app_news_desc">প্ল্যাটফর্মের আপডেট ও নির্দেশিকা সম্পর্কিত তথ্য পান।</string>
+    <string name="notifications_permission_denied">বিজ্ঞপ্তির অনুমতি বন্ধ রয়েছে। অ্যালার্ট পেতে অ্যান্ড্রয়েড সেটিংস থেকে চালু করুন।</string>
+    <string name="btn_grant_permission">বিজ্ঞপ্তি চালু করুন</string>
+
+    <!-- Me / Profile Summary & Actions (FR-PRO-003, FR-PRO-004, FR-TRU-005, FR-AUTH-004) -->
+    <string name="me_profile_summary">প্রোফাইল সারসংক্ষেপ</string>
+    <string name="me_notification_settings">বিজ্ঞপ্তি সেটিংস</string>
+    <string name="me_delete_account">অ্যাকাউন্ট মুছুন ও ডেটা সচ্ছ করুন</string>
+    <string name="me_delete_account_dialog_title">অ্যাকাউন্ট মুছে ফেলবেন?</string>
+    <string name="me_delete_account_dialog_msg">এটি স্থায়ীভাবে আপনার প্রোফাইল, সমস্ত সংরক্ষিত তথ্য এবং চেকলিস্ট মুছে ফেলবে। এটি পুনরুদ্ধার করা সম্ভব নয়।</string>
+    <string name="me_delete_account_confirm">মুছে ফেলুন</string>
+    <string name="me_delete_account_success">স্থায়ীভাবে সমস্ত ডেটা ও প্রোফাইল মোছা হয়েছে।</string>
+    <string name="me_app_version">অ্যাপ ভার্সন: %s</string>
+    <string name="me_disclaimer_title">সতর্কবার্তা ও দাবিত্যাগ</string>
+    <string name="me_view_disclaimer">পূর্ণাঙ্গ দাবিত্যাগ দেখুন</string>
+    <string name="disclaimer_screen_title">অফিসিয়াল দাবিত্যাগ</string>
+    <string name="disclaimer_full_body">স্টাডি অ্যাব্রোড গাইড অ্যাপটি সর্বজনীন গবেষণা ডেটার (অক্টোবর ২০২৬) ওপর ভিত্তি করে শিক্ষামূলক তথ্য ও গাইডলাইন প্রদান করে। এটি কোনো আইনি, ভিসা বা ইমিগ্রেশন কনসাল্টিং সার্ভিস প্রদান করে না, এবং কোনো ভর্তি বা স্কলারশিপের নিশ্চয়তা দেয় না। যেকোনো আর্থিক বা আবেদনসংক্রান্ত সিদ্ধান্ত নেওয়ার আগে সর্বদা অফিশিয়াল বিশ্ববিদ্যালয় ও সরকারি পোর্টাল থেকে তথ্য যাচাই করুন।</string>
 
     <!-- Saved Items (FR-SAV-001) -->
     <string name="saved_empty_title">কোনো সংরক্ষিত বস্তু নেই</string>

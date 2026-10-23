@@ -36,6 +36,8 @@ captures/
 
 # Google Services / Sensitive config
 google-services.json
+*service-account*.json
+*.pem
 
 # External native build folder
 .externalNativeBuild

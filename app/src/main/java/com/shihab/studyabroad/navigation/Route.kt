@@ -51,5 +51,7 @@ sealed interface Route {
 
     @Serializable data object Profile : Route
 
+    @Serializable data object Disclaimer : Route
+
     @Serializable data object ThemePreview : Route
 }

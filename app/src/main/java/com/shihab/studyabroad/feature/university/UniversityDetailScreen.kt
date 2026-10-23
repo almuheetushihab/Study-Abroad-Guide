@@ -1,5 +1,6 @@
 package com.shihab.studyabroad.feature.university
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,13 +19,18 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,6 +42,7 @@ import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.InfoCard
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
+import com.shihab.studyabroad.core.designsystem.component.ReportWrongInfoDialog
 import com.shihab.studyabroad.core.designsystem.component.StaleBadge
 import com.shihab.studyabroad.core.designsystem.component.VerifiedFooter
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
@@ -52,6 +59,7 @@ fun UniversityDetailRoute(onBack: () -> Unit = {}, viewModel: UniversityDetailVi
         uiState = uiState,
         onBack = onBack,
         onToggleSave = viewModel::onToggleSave,
+        onSubmitReport = viewModel::submitReport,
         onOpenWebsite = viewModel::openWebsite,
         onRetry = {},
     )
@@ -63,6 +71,7 @@ fun UniversityDetailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit = {},
     onToggleSave: () -> Unit = {},
+    onSubmitReport: (String, (Boolean) -> Unit) -> Unit = { _, _ -> },
     onOpenWebsite: (String) -> Unit = {},
     onRetry: () -> Unit = {},
 ) {
@@ -104,6 +113,7 @@ fun UniversityDetailScreen(
             )
             is UniversityDetailUiState.Content -> UniversityDetailContent(
                 data = uiState.data,
+                onSubmitReport = onSubmitReport,
                 onOpenWebsite = onOpenWebsite,
                 modifier = contentModifier,
             )
@@ -111,6 +121,7 @@ fun UniversityDetailScreen(
                 OfflineBanner(lastUpdated = "2025-01-15")
                 UniversityDetailContent(
                     data = uiState.data,
+                    onSubmitReport = onSubmitReport,
                     onOpenWebsite = onOpenWebsite,
                 )
             }
@@ -119,8 +130,30 @@ fun UniversityDetailScreen(
 }
 
 @Composable
-private fun UniversityDetailContent(data: UniversityDetailData, onOpenWebsite: (String) -> Unit, modifier: Modifier = Modifier) {
+private fun UniversityDetailContent(
+    data: UniversityDetailData,
+    onSubmitReport: (String, (Boolean) -> Unit) -> Unit,
+    onOpenWebsite: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val university = data.university
+    val context = LocalContext.current
+    var showReportDialog by remember { mutableStateOf(false) }
+    val reportSubmittedMessage = stringResource(id = R.string.report_submitted_message)
+
+    if (showReportDialog) {
+        ReportWrongInfoDialog(
+            onDismiss = { showReportDialog = false },
+            onSubmit = { message ->
+                onSubmitReport(message) { success ->
+                    if (success) {
+                        Toast.makeText(context, reportSubmittedMessage, Toast.LENGTH_SHORT).show()
+                    }
+                    showReportDialog = false
+                }
+            },
+        )
+    }
 
     Column(
         modifier = modifier
@@ -197,6 +230,16 @@ private fun UniversityDetailContent(data: UniversityDetailData, onOpenWebsite: (
                 .heightIn(min = 48.dp),
         ) {
             Text(text = stringResource(R.string.btn_official_website))
+        }
+
+        // Report Wrong Info Button
+        OutlinedButton(
+            onClick = { showReportDialog = true },
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 48.dp),
+        ) {
+            Text(text = stringResource(id = R.string.action_report_wrong_info))
         }
 
         // Verified Footer

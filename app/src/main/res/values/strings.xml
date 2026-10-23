@@ -128,6 +128,7 @@
     <string name="action_report_wrong_info">Report wrong info</string>
     <string name="report_info_dialog_title">Report Incorrect Information</string>
     <string name="report_info_hint">Describe what is incorrect or outdated...</string>
+    <string name="report_info_error_empty">Please enter a description for your report.</string>
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="report_submitted_message">Report submitted successfully. Thank you!</string>
@@ -215,6 +216,31 @@
     <string name="doc_attestation_step_3">3. Ministry of Foreign Affairs (MoFA) Legalization</string>
     <string name="doc_attestation_step_4">4. Embassy Attestation of Destination Country</string>
     <string name="btn_visit_mofa">Visit MoFA Official Portal</string>
+
+    <!-- Notifications Settings (FR-NTF-003, FR-NTF-004) -->
+    <string name="notifications_title">Notification Settings</string>
+    <string name="notifications_deadline_reminders">Deadline Reminders</string>
+    <string name="notifications_deadline_reminders_desc">Get notified before saved scholarship deadlines expire.</string>
+    <string name="notifications_new_scholarships">New Scholarships &amp; Opportunities</string>
+    <string name="notifications_new_scholarships_desc">Receive alerts when new funding opportunities are published.</string>
+    <string name="notifications_app_news">App Updates &amp; News</string>
+    <string name="notifications_app_news_desc">Stay updated with platform news and guide improvements.</string>
+    <string name="notifications_permission_denied">Notification permission is disabled. Enable it in Android Settings to receive alerts.</string>
+    <string name="btn_grant_permission">Enable Notifications</string>
+
+    <!-- Me / Profile Summary & Actions (FR-PRO-003, FR-PRO-004, FR-TRU-005, FR-AUTH-004) -->
+    <string name="me_profile_summary">Profile Summary</string>
+    <string name="me_notification_settings">Notification Settings</string>
+    <string name="me_delete_account">Delete Account &amp; Clear Local Data</string>
+    <string name="me_delete_account_dialog_title">Delete Account?</string>
+    <string name="me_delete_account_dialog_msg">This will permanently remove your profile and clear all locally saved data and checklists. This action cannot be undone.</string>
+    <string name="me_delete_account_confirm">Delete Account</string>
+    <string name="me_delete_account_success">Local data and profile cleared successfully.</string>
+    <string name="me_app_version">App Version: %s</string>
+    <string name="me_disclaimer_title">Notice &amp; Disclaimer</string>
+    <string name="me_view_disclaimer">View Full Disclaimer</string>
+    <string name="disclaimer_screen_title">Official Disclaimer</string>
+    <string name="disclaimer_full_body">The Study Abroad Guide application provides educational guidance and information based on publicly available research data (Oct 2026). It does not provide legal, visa, or immigration consulting services, nor does it guarantee admission or scholarship awards. Always verify details on official university and government portals before making financial or application decisions.</string>
 
     <!-- Saved Items (FR-SAV-001) -->
     <string name="saved_empty_title">No saved items</string>

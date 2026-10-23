@@ -9,10 +9,12 @@ import com.shihab.studyabroad.data.repository.FakeCountryRepository
 import com.shihab.studyabroad.data.repository.FakeScholarshipRepository
 import com.shihab.studyabroad.data.repository.FakeUniversityRepository
 import com.shihab.studyabroad.data.repository.FakeUserProfileRepository
+import com.shihab.studyabroad.data.repository.ReportRepositoryImpl
 import com.shihab.studyabroad.data.repository.SavedRepositoryImpl
 import com.shihab.studyabroad.domain.repository.AuthRepository
 import com.shihab.studyabroad.domain.repository.ChecklistRepository
 import com.shihab.studyabroad.domain.repository.CountryRepository
+import com.shihab.studyabroad.domain.repository.ReportRepository
 import com.shihab.studyabroad.domain.repository.SavedRepository
 import com.shihab.studyabroad.domain.repository.ScholarshipRepository
 import com.shihab.studyabroad.domain.repository.UniversityRepository
@@ -59,6 +61,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindSavedRepository(savedRepositoryImpl: SavedRepositoryImpl): SavedRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindReportRepository(reportRepositoryImpl: ReportRepositoryImpl): ReportRepository
 
     @Binds
     @Singleton

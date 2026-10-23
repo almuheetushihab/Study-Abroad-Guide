@@ -4,10 +4,12 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.shihab.studyabroad.data.local.dao.ChecklistProgressDao
 import com.shihab.studyabroad.data.local.dao.CountryDao
+import com.shihab.studyabroad.data.local.dao.ReportDao
 import com.shihab.studyabroad.data.local.dao.SavedItemDao
 import com.shihab.studyabroad.data.local.dao.ScholarshipDao
 import com.shihab.studyabroad.data.local.entity.ChecklistProgressEntity
 import com.shihab.studyabroad.data.local.entity.CountryEntity
+import com.shihab.studyabroad.data.local.entity.ReportEntity
 import com.shihab.studyabroad.data.local.entity.SavedItemEntity
 import com.shihab.studyabroad.data.local.entity.ScholarshipEntity
 
@@ -17,8 +19,9 @@ import com.shihab.studyabroad.data.local.entity.ScholarshipEntity
         CountryEntity::class,
         SavedItemEntity::class,
         ChecklistProgressEntity::class,
+        ReportEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -26,4 +29,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun countryDao(): CountryDao
     abstract fun savedItemDao(): SavedItemDao
     abstract fun checklistProgressDao(): ChecklistProgressDao
+    abstract fun reportDao(): ReportDao
 }

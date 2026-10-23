@@ -1,0 +1,22 @@
+package com.shihab.studyabroad.domain.usecase
+
+import com.shihab.studyabroad.core.common.AppResult
+import com.shihab.studyabroad.domain.model.Report
+import com.shihab.studyabroad.domain.model.ReportRefType
+import com.shihab.studyabroad.domain.repository.ReportRepository
+import javax.inject.Inject
+
+class SubmitReportUseCase @Inject constructor(private val reportRepository: ReportRepository) {
+    suspend operator fun invoke(refType: ReportRefType, refId: String, message: String): AppResult<Unit> {
+        val trimmedMessage = message.trim()
+        if (trimmedMessage.isBlank()) {
+            return AppResult.Error(IllegalArgumentException("Report message cannot be blank."))
+        }
+        val report = Report(
+            refType = refType,
+            refId = refId,
+            message = trimmedMessage,
+        )
+        return reportRepository.submitReport(report)
+    }
+}

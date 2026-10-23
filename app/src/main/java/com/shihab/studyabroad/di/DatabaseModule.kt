@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.shihab.studyabroad.data.local.AppDatabase
 import com.shihab.studyabroad.data.local.dao.ChecklistProgressDao
 import com.shihab.studyabroad.data.local.dao.CountryDao
+import com.shihab.studyabroad.data.local.dao.ReportDao
 import com.shihab.studyabroad.data.local.dao.SavedItemDao
 import com.shihab.studyabroad.data.local.dao.ScholarshipDao
 import com.shihab.studyabroad.data.local.datastore.UserPreferencesDataStore
@@ -38,6 +39,9 @@ object DatabaseModule {
 
     @Provides
     fun provideChecklistProgressDao(database: AppDatabase): ChecklistProgressDao = database.checklistProgressDao()
+
+    @Provides
+    fun provideReportDao(database: AppDatabase): ReportDao = database.reportDao()
 
     @Provides
     @Singleton

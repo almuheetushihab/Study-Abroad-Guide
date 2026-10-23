@@ -3,13 +3,16 @@ package com.shihab.studyabroad.feature.university
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.core.common.UrlOpener
+import com.shihab.studyabroad.domain.model.ReportRefType
 import com.shihab.studyabroad.domain.model.SavedType
 import com.shihab.studyabroad.domain.repository.SavedRepository
 import com.shihab.studyabroad.domain.repository.UniversityRepository
 import com.shihab.studyabroad.domain.repository.UserProfileRepository
 import com.shihab.studyabroad.domain.usecase.CompareRequirementUseCase
 import com.shihab.studyabroad.domain.usecase.IsRecordStaleUseCase
+import com.shihab.studyabroad.domain.usecase.SubmitReportUseCase
 import com.shihab.studyabroad.domain.usecase.ToggleSavedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,6 +31,7 @@ class UniversityDetailViewModel @Inject constructor(
     private val toggleSavedUseCase: ToggleSavedUseCase,
     private val compareRequirementUseCase: CompareRequirementUseCase,
     private val isRecordStaleUseCase: IsRecordStaleUseCase,
+    private val submitReportUseCase: SubmitReportUseCase,
     val urlOpener: UrlOpener,
 ) : ViewModel() {
 
@@ -62,6 +66,13 @@ class UniversityDetailViewModel @Inject constructor(
     fun onToggleSave() {
         viewModelScope.launch {
             toggleSavedUseCase(SavedType.UNIVERSITY, universityId)
+        }
+    }
+
+    fun submitReport(message: String, onComplete: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val result = submitReportUseCase(ReportRefType.UNIVERSITY, universityId, message)
+            onComplete(result is AppResult.Success)
         }
     }
 

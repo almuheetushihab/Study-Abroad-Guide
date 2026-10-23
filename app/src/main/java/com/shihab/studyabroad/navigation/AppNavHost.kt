@@ -30,8 +30,10 @@ import com.shihab.studyabroad.feature.debug.ThemePreviewScreen
 import com.shihab.studyabroad.feature.documents.DocumentsRoute
 import com.shihab.studyabroad.feature.explore.ExploreScreen
 import com.shihab.studyabroad.feature.home.HomeRoute
+import com.shihab.studyabroad.feature.notifications.NotificationsRoute
 import com.shihab.studyabroad.feature.onboarding.OnboardingRoute
-import com.shihab.studyabroad.feature.profile.ProfileScreen
+import com.shihab.studyabroad.feature.profile.DisclaimerScreen
+import com.shihab.studyabroad.feature.profile.ProfileRoute
 import com.shihab.studyabroad.feature.profilesetup.ProfileSetupRoute
 import com.shihab.studyabroad.feature.saved.SavedRoute
 import com.shihab.studyabroad.feature.scholarship.ScholarshipDetailRoute
@@ -252,15 +254,38 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
             // Tab 4: Me Graph
             navigation<Route.MeGraph>(startDestination = Route.Me) {
                 composable<Route.Me> {
-                    ProfileScreen(
+                    ProfileRoute(
                         onNavigateToEditProfile = {
                             navController.navigate(Route.ProfileSetup(isEditMode = true))
+                        },
+                        onNavigateToNotificationSettings = {
+                            navController.navigate(Route.Notifications)
+                        },
+                        onNavigateToDisclaimer = {
+                            navController.navigate(Route.Disclaimer)
+                        },
+                        onNavigateToAuth = {
+                            navController.navigate(Route.Auth) {
+                                popUpTo(0) { inclusive = true }
+                            }
                         },
                         onNavigateToThemePreview = if (BuildConfig.DEBUG) {
                             { navController.navigate(Route.ThemePreview) }
                         } else {
                             null
                         },
+                    )
+                }
+
+                composable<Route.Notifications> {
+                    NotificationsRoute(
+                        onBack = { navController.popBackStack() },
+                    )
+                }
+
+                composable<Route.Disclaimer> {
+                    DisclaimerScreen(
+                        onBack = { navController.popBackStack() },
                     )
                 }
             }

@@ -29,6 +29,10 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
     private val selectedTrackKey = stringPreferencesKey("selected_track")
     private val userProfileJsonKey = stringPreferencesKey("user_profile_json")
 
+    private val deadlineRemindersKey = booleanPreferencesKey("deadline_reminders_enabled")
+    private val newScholarshipsKey = booleanPreferencesKey("new_scholarships_enabled")
+    private val appNewsKey = booleanPreferencesKey("app_news_enabled")
+
     override val isOnboardingDone: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
         preferences[onboardingDoneKey] ?: false
     }
@@ -57,6 +61,18 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
         }
     }
 
+    override val deadlineRemindersEnabled: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+        preferences[deadlineRemindersKey] ?: true
+    }
+
+    override val newScholarshipsEnabled: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+        preferences[newScholarshipsKey] ?: true
+    }
+
+    override val appNewsEnabled: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+        preferences[appNewsKey] ?: true
+    }
+
     override suspend fun setOnboardingDone(done: Boolean) {
         context.preferencesDataStore.edit { preferences ->
             preferences[onboardingDoneKey] = done
@@ -83,11 +99,32 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
         }
     }
 
+    override suspend fun setDeadlineRemindersEnabled(enabled: Boolean) {
+        context.preferencesDataStore.edit { preferences ->
+            preferences[deadlineRemindersKey] = enabled
+        }
+    }
+
+    override suspend fun setNewScholarshipsEnabled(enabled: Boolean) {
+        context.preferencesDataStore.edit { preferences ->
+            preferences[newScholarshipsKey] = enabled
+        }
+    }
+
+    override suspend fun setAppNewsEnabled(enabled: Boolean) {
+        context.preferencesDataStore.edit { preferences ->
+            preferences[appNewsKey] = enabled
+        }
+    }
+
     override suspend fun clearSession() {
         context.preferencesDataStore.edit { preferences ->
             preferences.remove(signedInKey)
             preferences.remove(selectedTrackKey)
             preferences.remove(userProfileJsonKey)
+            preferences.remove(deadlineRemindersKey)
+            preferences.remove(newScholarshipsKey)
+            preferences.remove(appNewsKey)
         }
     }
 }
