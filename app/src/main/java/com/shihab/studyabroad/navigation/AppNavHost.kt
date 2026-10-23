@@ -21,6 +21,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.shihab.studyabroad.feature.country.CountryScreen
+import com.shihab.studyabroad.feature.debug.ThemePreviewScreen
 import com.shihab.studyabroad.feature.documents.DocumentsScreen
 import com.shihab.studyabroad.feature.explore.ExploreScreen
 import com.shihab.studyabroad.feature.home.HomeRoute
@@ -134,8 +135,17 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
             // Tab 4: Me Graph
             navigation<Route.MeGraph>(startDestination = Route.Me) {
                 composable<Route.Me> {
-                    ProfileScreen()
+                    ProfileScreen(
+                        onNavigateToThemePreview = { navController.navigate(Route.ThemePreview) },
+                    )
                 }
+            }
+
+            // Theme Preview Destination
+            composable<Route.ThemePreview> {
+                ThemePreviewScreen(
+                    onBack = { navController.popBackStack() },
+                )
             }
         }
     }

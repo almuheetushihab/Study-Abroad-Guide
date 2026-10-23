@@ -26,22 +26,49 @@
     <string name="track_tab_checklist">Checklist</string>
     <string name="track_tab_saved">Saved Items</string>
 
-    <!-- Me / Profile -->
+    <!-- Me / Profile & Language -->
     <string name="me_language_label">App Language</string>
-    <string name="me_language_default">English (Default)</string>
+    <string name="me_language_en">English</string>
+    <string name="me_language_bn">বাংলা (Bangla)</string>
+    <string name="me_language_current">Current Language: English</string>
     <string name="me_disclaimer_label">Notice &amp; Disclaimer</string>
 
-    <!-- States -->
+    <!-- States & Common Actions -->
     <string name="state_loading">Loading...</string>
     <string name="state_empty">No items found.</string>
     <string name="state_error">Something went wrong. Please try again.</string>
     <string name="state_offline">Showing offline cached data.</string>
     <string name="retry">Retry</string>
+    <string name="label_last_updated">Last updated: %s</string>
 
     <!-- Statuses -->
     <string name="status_open">Open</string>
     <string name="status_opening_soon">Opening Soon</string>
     <string name="status_closed">Closed</string>
+    <string name="status_expected">Expected: %s</string>
+
+    <!-- Trust & Verification Labels (FR-TRU-001, FR-TRU-002, FR-TRU-003) -->
+    <string name="badge_may_be_outdated">May be outdated</string>
+    <string name="label_source">Source</string>
+    <string name="label_verified_on">Verified on %s</string>
+    <string name="action_report_wrong_info">Report wrong info</string>
+    <string name="report_info_dialog_title">Report Incorrect Information</string>
+    <string name="report_info_hint">Describe what is incorrect or outdated...</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="report_submitted_message">Report submitted successfully. Thank you!</string>
+
+    <!-- Warnings & Scam Alerts -->
+    <string name="scam_alert_title">Scam Alert &amp; Safety Notice</string>
+    <string name="scam_alert_message">Official scholarship applications are usually free. Do not pay unofficial agents or guarantees.</string>
+    <string name="warning_banner_title">Important Notice</string>
+
+    <!-- Key Stats Labels -->
+    <string name="label_deadline">Deadline</string>
+    <string name="label_tuition">Tuition Fee</string>
+    <string name="label_living_cost">Living Cost</string>
+    <string name="label_work_rules">Work Rules</string>
 
     <string name="sample_data_disclaimer">Notice: Sample data for preview purposes only. Not verified for official application.</string>
+    <string name="disclaimer_body">This app provides guidance based on publicly available research data (Oct 2026). It does not provide legal, immigration, or visa consulting guarantees. Always verify details on official websites.</string>
 </resources>
