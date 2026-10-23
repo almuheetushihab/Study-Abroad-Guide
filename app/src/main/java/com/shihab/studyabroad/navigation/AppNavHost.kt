@@ -27,13 +27,13 @@ import com.shihab.studyabroad.feature.country.CountryComparisonRoute
 import com.shihab.studyabroad.feature.country.CountryDetailRoute
 import com.shihab.studyabroad.feature.country.CountryListRoute
 import com.shihab.studyabroad.feature.debug.ThemePreviewScreen
-import com.shihab.studyabroad.feature.documents.DocumentsScreen
+import com.shihab.studyabroad.feature.documents.DocumentsRoute
 import com.shihab.studyabroad.feature.explore.ExploreScreen
 import com.shihab.studyabroad.feature.home.HomeRoute
 import com.shihab.studyabroad.feature.onboarding.OnboardingRoute
 import com.shihab.studyabroad.feature.profile.ProfileScreen
 import com.shihab.studyabroad.feature.profilesetup.ProfileSetupRoute
-import com.shihab.studyabroad.feature.saved.SavedScreen
+import com.shihab.studyabroad.feature.saved.SavedRoute
 import com.shihab.studyabroad.feature.scholarship.ScholarshipDetailRoute
 import com.shihab.studyabroad.feature.scholarship.ScholarshipListRoute
 import com.shihab.studyabroad.feature.splash.SplashRoute
@@ -231,13 +231,21 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
             // Tab 3: Track Graph
             navigation<Route.TrackGraph>(startDestination = Route.Track) {
                 composable<Route.Track> {
-                    TrackScreen()
+                    TrackScreen(
+                        onNavigateToCountryDetail = { id -> navController.navigate(Route.CountryDetail(id)) },
+                        onNavigateToUniversityDetail = { id -> navController.navigate(Route.UniversityDetail(id)) },
+                        onNavigateToScholarshipDetail = { id -> navController.navigate(Route.ScholarshipDetail(id)) },
+                    )
                 }
                 composable<Route.Documents> {
-                    DocumentsScreen()
+                    DocumentsRoute()
                 }
                 composable<Route.Saved> {
-                    SavedScreen()
+                    SavedRoute(
+                        onNavigateToCountryDetail = { id -> navController.navigate(Route.CountryDetail(id)) },
+                        onNavigateToUniversityDetail = { id -> navController.navigate(Route.UniversityDetail(id)) },
+                        onNavigateToScholarshipDetail = { id -> navController.navigate(Route.ScholarshipDetail(id)) },
+                    )
                 }
             }
 

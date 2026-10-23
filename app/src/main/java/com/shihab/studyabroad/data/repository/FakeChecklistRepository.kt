@@ -1,6 +1,7 @@
 package com.shihab.studyabroad.data.repository
 
 import com.shihab.studyabroad.domain.model.ChecklistItem
+import com.shihab.studyabroad.domain.model.Track
 import com.shihab.studyabroad.domain.repository.ChecklistRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,7 @@ class FakeChecklistRepository @Inject constructor() : ChecklistRepository {
 
     private val checklistFlow = MutableStateFlow(SampleData.sampleChecklistItems)
 
-    override fun getChecklistItems(): Flow<List<ChecklistItem>> = checklistFlow.asStateFlow()
+    override fun getChecklistItems(track: Track?): Flow<List<ChecklistItem>> = checklistFlow.asStateFlow()
 
     override suspend fun toggleItemCompleted(id: String) {
         checklistFlow.value = checklistFlow.value.map { item ->

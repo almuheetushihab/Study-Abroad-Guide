@@ -13,6 +13,10 @@ kotlin {
     jvmToolchain(17)
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 android {
     namespace = "com.shihab.studyabroad"
     compileSdk = 35

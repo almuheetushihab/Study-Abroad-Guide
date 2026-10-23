@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
+import com.shihab.studyabroad.core.designsystem.component.AppErrorContent
+import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.PrimaryButton
 import com.shihab.studyabroad.core.designsystem.component.SecondaryButton
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
@@ -35,6 +37,54 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 fun ProfileSetupScreen(
+    uiState: ProfileSetupUiState,
+    onLevelChanged: (String) -> Unit,
+    onSubjectChanged: (String) -> Unit,
+    onCgpaChanged: (String) -> Unit,
+    onCgpaScaleChanged: (Double) -> Unit,
+    onTestTypeChanged: (TestType) -> Unit,
+    onTestScoreChanged: (String) -> Unit,
+    onExperienceYearsChanged: (String) -> Unit,
+    onAgeChanged: (String) -> Unit,
+    onBudgetRangeChanged: (String) -> Unit,
+    onGoalChanged: (FundingGoal) -> Unit,
+    onCountryToggled: (String) -> Unit,
+    onNextStep: () -> Unit,
+    onPreviousStep: () -> Unit,
+    modifier: Modifier = Modifier,
+    onRetry: () -> Unit = {},
+) {
+    when (uiState) {
+        is ProfileSetupUiState.Loading -> AppLoadingWheel(modifier = modifier)
+        is ProfileSetupUiState.Error -> AppErrorContent(
+            message = uiState.message.asString(),
+            onRetry = onRetry,
+            modifier = modifier,
+        )
+        is ProfileSetupUiState.Content -> {
+            ProfileSetupContent(
+                uiState = uiState,
+                onLevelChanged = onLevelChanged,
+                onSubjectChanged = onSubjectChanged,
+                onCgpaChanged = onCgpaChanged,
+                onCgpaScaleChanged = onCgpaScaleChanged,
+                onTestTypeChanged = onTestTypeChanged,
+                onTestScoreChanged = onTestScoreChanged,
+                onExperienceYearsChanged = onExperienceYearsChanged,
+                onAgeChanged = onAgeChanged,
+                onBudgetRangeChanged = onBudgetRangeChanged,
+                onGoalChanged = onGoalChanged,
+                onCountryToggled = onCountryToggled,
+                onNextStep = onNextStep,
+                onPreviousStep = onPreviousStep,
+                modifier = modifier,
+            )
+        }
+    }
+}
+
+@Composable
+private fun ProfileSetupContent(
     uiState: ProfileSetupUiState.Content,
     onLevelChanged: (String) -> Unit,
     onSubjectChanged: (String) -> Unit,
@@ -151,6 +201,52 @@ fun ProfileSetupScreenStep1Preview() {
     StudyAbroadTheme {
         ProfileSetupScreen(
             uiState = ProfileSetupUiState.Content(currentStep = 1),
+            onLevelChanged = {},
+            onSubjectChanged = {},
+            onCgpaChanged = {},
+            onCgpaScaleChanged = {},
+            onTestTypeChanged = {},
+            onTestScoreChanged = {},
+            onExperienceYearsChanged = {},
+            onAgeChanged = {},
+            onBudgetRangeChanged = {},
+            onGoalChanged = {},
+            onCountryToggled = {},
+            onNextStep = {},
+            onPreviousStep = {},
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+fun ProfileSetupScreenStep2Preview() {
+    StudyAbroadTheme {
+        ProfileSetupScreen(
+            uiState = ProfileSetupUiState.Content(currentStep = 2),
+            onLevelChanged = {},
+            onSubjectChanged = {},
+            onCgpaChanged = {},
+            onCgpaScaleChanged = {},
+            onTestTypeChanged = {},
+            onTestScoreChanged = {},
+            onExperienceYearsChanged = {},
+            onAgeChanged = {},
+            onBudgetRangeChanged = {},
+            onGoalChanged = {},
+            onCountryToggled = {},
+            onNextStep = {},
+            onPreviousStep = {},
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+fun ProfileSetupScreenStep3Preview() {
+    StudyAbroadTheme {
+        ProfileSetupScreen(
+            uiState = ProfileSetupUiState.Content(currentStep = 3),
             onLevelChanged = {},
             onSubjectChanged = {},
             onCgpaChanged = {},

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.shihab.studyabroad.core.designsystem.component.AppErrorContent
+import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.ScamAlertCard
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
 import com.shihab.studyabroad.core.ui.ThemePreviews
@@ -18,6 +20,40 @@ import com.shihab.studyabroad.feature.auth.components.PhoneLoginForm
 
 @Composable
 fun LoginScreen(
+    uiState: LoginUiState,
+    onPhoneNumberChanged: (String) -> Unit,
+    onOtpCodeChanged: (String) -> Unit,
+    onSendOtp: () -> Unit,
+    onVerifyOtp: () -> Unit,
+    onSignInWithGoogle: () -> Unit,
+    onBackToPhone: () -> Unit,
+    modifier: Modifier = Modifier,
+    onRetry: () -> Unit = {},
+) {
+    when (uiState) {
+        is LoginUiState.Loading -> AppLoadingWheel(modifier = modifier)
+        is LoginUiState.Error -> AppErrorContent(
+            message = uiState.message.asString(),
+            onRetry = onRetry,
+            modifier = modifier,
+        )
+        is LoginUiState.Content -> {
+            LoginContent(
+                uiState = uiState,
+                onPhoneNumberChanged = onPhoneNumberChanged,
+                onOtpCodeChanged = onOtpCodeChanged,
+                onSendOtp = onSendOtp,
+                onVerifyOtp = onVerifyOtp,
+                onSignInWithGoogle = onSignInWithGoogle,
+                onBackToPhone = onBackToPhone,
+                modifier = modifier,
+            )
+        }
+    }
+}
+
+@Composable
+private fun LoginContent(
     uiState: LoginUiState.Content,
     onPhoneNumberChanged: (String) -> Unit,
     onOtpCodeChanged: (String) -> Unit,

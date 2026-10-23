@@ -11,7 +11,12 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -52,6 +57,7 @@ fun ScholarshipDetailRoute(onBack: () -> Unit = {}, viewModel: ScholarshipDetail
         uiState = uiState,
         onBack = onBack,
         onSetReminderDays = viewModel::onSetReminderDays,
+        onToggleSave = viewModel::onToggleSave,
         onOpenApplyUrl = viewModel::openApplyUrl,
         onRetry = {},
     )
@@ -63,6 +69,7 @@ fun ScholarshipDetailScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit = {},
     onSetReminderDays: (Int) -> Unit = {},
+    onToggleSave: () -> Unit = {},
     onOpenApplyUrl: (String) -> Unit = {},
     onRetry: () -> Unit = {},
 ) {
@@ -74,6 +81,21 @@ fun ScholarshipDetailScreen(
                     else -> stringResource(id = R.string.nav_scholarships)
                 },
                 onBack = onBack,
+                actions = {
+                    if (uiState is ScholarshipDetailUiState.Content) {
+                        val isSaved = uiState.data.isSaved
+                        IconButton(
+                            onClick = onToggleSave,
+                            modifier = Modifier.heightIn(min = 48.dp),
+                        ) {
+                            Icon(
+                                imageVector = if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                                contentDescription = if (isSaved) stringResource(R.string.btn_saved) else stringResource(R.string.btn_save),
+                                tint = if (isSaved) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                    }
+                },
             )
         },
         modifier = modifier,

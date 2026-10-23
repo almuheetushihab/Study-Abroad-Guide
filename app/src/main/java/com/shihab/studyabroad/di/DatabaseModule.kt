@@ -3,7 +3,9 @@ package com.shihab.studyabroad.di
 import android.content.Context
 import androidx.room.Room
 import com.shihab.studyabroad.data.local.AppDatabase
+import com.shihab.studyabroad.data.local.dao.ChecklistProgressDao
 import com.shihab.studyabroad.data.local.dao.CountryDao
+import com.shihab.studyabroad.data.local.dao.SavedItemDao
 import com.shihab.studyabroad.data.local.dao.ScholarshipDao
 import com.shihab.studyabroad.data.local.datastore.UserPreferencesDataStore
 import dagger.Module
@@ -30,6 +32,12 @@ object DatabaseModule {
 
     @Provides
     fun provideCountryDao(database: AppDatabase): CountryDao = database.countryDao()
+
+    @Provides
+    fun provideSavedItemDao(database: AppDatabase): SavedItemDao = database.savedItemDao()
+
+    @Provides
+    fun provideChecklistProgressDao(database: AppDatabase): ChecklistProgressDao = database.checklistProgressDao()
 
     @Provides
     @Singleton

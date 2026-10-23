@@ -10,6 +10,7 @@ data class CountryDetailData(
     val scholarships: List<Scholarship> = emptyList(),
     val universities: List<University> = emptyList(),
     val isStale: Boolean = false,
+    val isSaved: Boolean = false,
 )
 
 sealed interface CountryDetailUiState {

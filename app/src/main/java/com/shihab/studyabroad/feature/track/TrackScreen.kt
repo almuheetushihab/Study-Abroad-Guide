@@ -16,11 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.shihab.studyabroad.R
-import com.shihab.studyabroad.feature.documents.DocumentsScreen
-import com.shihab.studyabroad.feature.saved.SavedScreen
+import com.shihab.studyabroad.feature.documents.DocumentsRoute
+import com.shihab.studyabroad.feature.saved.SavedRoute
 
 @Composable
-fun TrackScreen(modifier: Modifier = Modifier) {
+fun TrackScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToCountryDetail: (String) -> Unit = {},
+    onNavigateToUniversityDetail: (String) -> Unit = {},
+    onNavigateToScholarshipDetail: (String) -> Unit = {},
+) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     val tabs = listOf(
         stringResource(id = R.string.track_tab_checklist),
@@ -48,8 +53,13 @@ fun TrackScreen(modifier: Modifier = Modifier) {
         }
 
         when (selectedTabIndex) {
-            0 -> DocumentsScreen(modifier = Modifier.padding())
-            1 -> SavedScreen(modifier = Modifier.padding())
+            0 -> DocumentsRoute(modifier = Modifier.padding())
+            1 -> SavedRoute(
+                onNavigateToCountryDetail = onNavigateToCountryDetail,
+                onNavigateToUniversityDetail = onNavigateToUniversityDetail,
+                onNavigateToScholarshipDetail = onNavigateToScholarshipDetail,
+                modifier = Modifier.padding(),
+            )
         }
     }
 }

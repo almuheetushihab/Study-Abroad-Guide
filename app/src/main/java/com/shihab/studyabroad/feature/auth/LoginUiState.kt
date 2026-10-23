@@ -8,6 +8,7 @@ enum class LoginStep {
 }
 
 sealed interface LoginUiState {
+    data object Loading : LoginUiState
     data class Content(
         val step: LoginStep = LoginStep.PHONE_ENTRY,
         val phoneNumber: String = "",
@@ -16,4 +17,5 @@ sealed interface LoginUiState {
         val errorMessage: UiText? = null,
         val isSignedIn: Boolean = false,
     ) : LoginUiState
+    data class Error(val message: UiText) : LoginUiState
 }

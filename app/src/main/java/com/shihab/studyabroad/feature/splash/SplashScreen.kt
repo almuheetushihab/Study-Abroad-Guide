@@ -26,3 +26,11 @@ fun SplashScreenLoadingPreview() {
         SplashScreen(uiState = SplashUiState.Loading)
     }
 }
+
+@ThemePreviews
+@Composable
+fun SplashScreenContentPreview() {
+    StudyAbroadTheme {
+        SplashScreen(uiState = SplashUiState.Content(startDestination = com.shihab.studyabroad.navigation.Route.Onboarding))
+    }
+}

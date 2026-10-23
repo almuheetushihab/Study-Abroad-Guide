@@ -1,5 +1,6 @@
 package com.shihab.studyabroad.feature.profilesetup
 
+import com.shihab.studyabroad.core.ui.UiText
 import com.shihab.studyabroad.domain.model.Country
 import com.shihab.studyabroad.domain.model.FundingGoal
 import com.shihab.studyabroad.domain.model.TestType
@@ -20,6 +21,7 @@ data class ProfileFormState(
 )
 
 sealed interface ProfileSetupUiState {
+    data object Loading : ProfileSetupUiState
     data class Content(
         val currentStep: Int = 1,
         val totalSteps: Int = 4,
@@ -30,4 +32,5 @@ sealed interface ProfileSetupUiState {
         val isLoading: Boolean = false,
         val isSaved: Boolean = false,
     ) : ProfileSetupUiState
+    data class Error(val message: UiText) : ProfileSetupUiState
 }

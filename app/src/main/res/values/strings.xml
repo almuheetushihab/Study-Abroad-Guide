@@ -205,4 +205,26 @@
     <string name="reminder_confirmation">Reminder set for %1$s before deadline.</string>
     <string name="btn_official_apply">Apply on Official Site</string>
     <string name="eligibility_check_official_site">Check the official site</string>
+
+    <!-- Documents & Checklist (FR-DOC-001, FR-DOC-002, FR-DOC-003) -->
+    <string name="doc_progress_title">Checklist Completion</string>
+    <string name="doc_attestation_title">Attestation Steps (Bangladesh)</string>
+    <string name="doc_attestation_subtitle">Follow these official steps to attest your academic certificates before applying.</string>
+    <string name="doc_attestation_step_1">1. Education Board / University Attestation</string>
+    <string name="doc_attestation_step_2">2. Ministry of Education (MoE) Verification</string>
+    <string name="doc_attestation_step_3">3. Ministry of Foreign Affairs (MoFA) Legalization</string>
+    <string name="doc_attestation_step_4">4. Embassy Attestation of Destination Country</string>
+    <string name="btn_visit_mofa">Visit MoFA Official Portal</string>
+
+    <!-- Saved Items (FR-SAV-001) -->
+    <string name="saved_empty_title">No saved items</string>
+    <string name="saved_empty_desc">Save countries, universities, or scholarships to access them easily offline.</string>
+    <string name="saved_group_countries">Saved Countries</string>
+    <string name="saved_group_universities">Saved Universities</string>
+    <string name="saved_group_scholarships">Saved Scholarships</string>
+    <string name="btn_unsave">Unsave</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_saved">Saved</string>
+    <string name="item_removed_message">Item removed from saved list</string>
+    <string name="btn_undo">Undo</string>
 </resources>

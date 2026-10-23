@@ -4,15 +4,19 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shihab.studyabroad.core.common.UrlOpener
+import com.shihab.studyabroad.domain.model.SavedType
+import com.shihab.studyabroad.domain.repository.SavedRepository
 import com.shihab.studyabroad.domain.repository.UniversityRepository
 import com.shihab.studyabroad.domain.repository.UserProfileRepository
 import com.shihab.studyabroad.domain.usecase.CompareRequirementUseCase
 import com.shihab.studyabroad.domain.usecase.IsRecordStaleUseCase
+import com.shihab.studyabroad.domain.usecase.ToggleSavedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +24,8 @@ class UniversityDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     universityRepository: UniversityRepository,
     userProfileRepository: UserProfileRepository,
+    savedRepository: SavedRepository,
+    private val toggleSavedUseCase: ToggleSavedUseCase,
     private val compareRequirementUseCase: CompareRequirementUseCase,
     private val isRecordStaleUseCase: IsRecordStaleUseCase,
     val urlOpener: UrlOpener,
@@ -30,7 +36,8 @@ class UniversityDetailViewModel @Inject constructor(
     val uiState: StateFlow<UniversityDetailUiState> = combine(
         universityRepository.getUniversityById(universityId),
         userProfileRepository.getUserProfile(),
-    ) { university, profile ->
+        savedRepository.isSaved(SavedType.UNIVERSITY, universityId),
+    ) { university, profile, isSaved ->
         if (university == null) {
             UniversityDetailUiState.Empty
         } else {
@@ -42,6 +49,7 @@ class UniversityDetailViewModel @Inject constructor(
                     university = university,
                     requirementComparison = comparison,
                     isStale = isStale,
+                    isSaved = isSaved,
                 ),
             )
         }
@@ -50,6 +58,12 @@ class UniversityDetailViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = UniversityDetailUiState.Loading,
     )
+
+    fun onToggleSave() {
+        viewModelScope.launch {
+            toggleSavedUseCase(SavedType.UNIVERSITY, universityId)
+        }
+    }
 
     fun openWebsite(url: String) {
         urlOpener.openUrl(url)

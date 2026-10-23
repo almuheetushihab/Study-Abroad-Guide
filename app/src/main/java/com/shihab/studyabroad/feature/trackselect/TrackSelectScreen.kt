@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
+import com.shihab.studyabroad.core.designsystem.component.AppErrorContent
+import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.PrimaryButton
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
 import com.shihab.studyabroad.core.ui.ThemePreviews
@@ -22,6 +24,32 @@ import com.shihab.studyabroad.feature.trackselect.components.TrackOptionCard
 
 @Composable
 fun TrackSelectScreen(
+    uiState: TrackSelectUiState,
+    onSelectTrack: (Track) -> Unit,
+    onContinue: () -> Unit,
+    modifier: Modifier = Modifier,
+    onRetry: () -> Unit = {},
+) {
+    when (uiState) {
+        is TrackSelectUiState.Loading -> AppLoadingWheel(modifier = modifier)
+        is TrackSelectUiState.Error -> AppErrorContent(
+            message = uiState.message.asString(),
+            onRetry = onRetry,
+            modifier = modifier,
+        )
+        is TrackSelectUiState.Content -> {
+            TrackSelectContent(
+                uiState = uiState,
+                onSelectTrack = onSelectTrack,
+                onContinue = onContinue,
+                modifier = modifier,
+            )
+        }
+    }
+}
+
+@Composable
+private fun TrackSelectContent(
     uiState: TrackSelectUiState.Content,
     onSelectTrack: (Track) -> Unit,
     onContinue: () -> Unit,

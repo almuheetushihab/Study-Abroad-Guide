@@ -22,13 +22,41 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
+import com.shihab.studyabroad.core.designsystem.component.AppErrorContent
+import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.PrimaryButton
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
 import com.shihab.studyabroad.core.ui.ThemePreviews
 import com.shihab.studyabroad.feature.onboarding.components.OnboardingPageContent
 
 @Composable
-fun OnboardingScreen(uiState: OnboardingUiState.Content, onNext: () -> Unit, onSkip: () -> Unit, modifier: Modifier = Modifier) {
+fun OnboardingScreen(
+    uiState: OnboardingUiState,
+    onNext: () -> Unit,
+    onSkip: () -> Unit,
+    modifier: Modifier = Modifier,
+    onRetry: () -> Unit = {},
+) {
+    when (uiState) {
+        is OnboardingUiState.Loading -> AppLoadingWheel(modifier = modifier)
+        is OnboardingUiState.Error -> AppErrorContent(
+            message = uiState.message.asString(),
+            onRetry = onRetry,
+            modifier = modifier,
+        )
+        is OnboardingUiState.Content -> {
+            OnboardingContent(
+                uiState = uiState,
+                onNext = onNext,
+                onSkip = onSkip,
+                modifier = modifier,
+            )
+        }
+    }
+}
+
+@Composable
+private fun OnboardingContent(uiState: OnboardingUiState.Content, onNext: () -> Unit, onSkip: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()

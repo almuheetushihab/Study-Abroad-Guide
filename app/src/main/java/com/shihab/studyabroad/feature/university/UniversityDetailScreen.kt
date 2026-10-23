@@ -11,7 +11,12 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
@@ -46,6 +51,7 @@ fun UniversityDetailRoute(onBack: () -> Unit = {}, viewModel: UniversityDetailVi
     UniversityDetailScreen(
         uiState = uiState,
         onBack = onBack,
+        onToggleSave = viewModel::onToggleSave,
         onOpenWebsite = viewModel::openWebsite,
         onRetry = {},
     )
@@ -56,6 +62,7 @@ fun UniversityDetailScreen(
     uiState: UniversityDetailUiState,
     modifier: Modifier = Modifier,
     onBack: () -> Unit = {},
+    onToggleSave: () -> Unit = {},
     onOpenWebsite: (String) -> Unit = {},
     onRetry: () -> Unit = {},
 ) {
@@ -67,6 +74,21 @@ fun UniversityDetailScreen(
                     else -> stringResource(id = R.string.nav_universities)
                 },
                 onBack = onBack,
+                actions = {
+                    if (uiState is UniversityDetailUiState.Content) {
+                        val isSaved = uiState.data.isSaved
+                        IconButton(
+                            onClick = onToggleSave,
+                            modifier = Modifier.heightIn(min = 48.dp),
+                        ) {
+                            Icon(
+                                imageVector = if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                                contentDescription = if (isSaved) stringResource(R.string.btn_saved) else stringResource(R.string.btn_save),
+                                tint = if (isSaved) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                    }
+                },
             )
         },
         modifier = modifier,

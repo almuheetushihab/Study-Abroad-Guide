@@ -12,6 +12,11 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
@@ -52,6 +57,7 @@ fun CountryDetailRoute(
         onBack = onBack,
         onScholarshipClick = onNavigateToScholarshipDetail,
         onUniversityClick = onNavigateToUniversityDetail,
+        onToggleSave = viewModel::onToggleSave,
         onOpenSource = viewModel::openSourceUrl,
         onRetry = {},
     )
@@ -64,6 +70,7 @@ fun CountryDetailScreen(
     onBack: () -> Unit = {},
     onScholarshipClick: (String) -> Unit = {},
     onUniversityClick: (String) -> Unit = {},
+    onToggleSave: () -> Unit = {},
     onOpenSource: (String) -> Unit = {},
     onRetry: () -> Unit = {},
 ) {
@@ -75,6 +82,21 @@ fun CountryDetailScreen(
                     else -> stringResource(id = R.string.nav_countries)
                 },
                 onBack = onBack,
+                actions = {
+                    if (uiState is CountryDetailUiState.Content) {
+                        val isSaved = uiState.data.isSaved
+                        IconButton(
+                            onClick = onToggleSave,
+                            modifier = Modifier.heightIn(min = 48.dp),
+                        ) {
+                            Icon(
+                                imageVector = if (isSaved) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                                contentDescription = if (isSaved) stringResource(R.string.btn_saved) else stringResource(R.string.btn_save),
+                                tint = if (isSaved) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                    }
+                },
             )
         },
         modifier = modifier,

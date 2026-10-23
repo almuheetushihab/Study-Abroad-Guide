@@ -8,6 +8,7 @@ data class UniversityDetailData(
     val university: University,
     val requirementComparison: RequirementComparisonResult,
     val isStale: Boolean = false,
+    val isSaved: Boolean = false,
 )
 
 sealed interface UniversityDetailUiState {

@@ -205,4 +205,26 @@
     <string name="reminder_confirmation">ডেডলাইনের %1$s পূর্বে রিমাইন্ডার সেট করা হয়েছে।</string>
     <string name="btn_official_apply">অফিসিয়াল সাইটে আবেদন করুন</string>
     <string name="eligibility_check_official_site">অফিসিয়াল সাইটে দেখুন</string>
+
+    <!-- Documents & Checklist (FR-DOC-001, FR-DOC-002, FR-DOC-003) -->
+    <string name="doc_progress_title">চেকলিস্ট অগ্রগতি</string>
+    <string name="doc_attestation_title">সত্যায়ন প্রক্রিয়া (বাংলাদেশ)</string>
+    <string name="doc_attestation_subtitle">আবেদন করার পূর্বে আপনার একাডেমিক সনদ সত্যায়িত করতে এই অফিসিয়াল ধাপগুলো অনুসরণ করুন।</string>
+    <string name="doc_attestation_step_1">১. শিক্ষা বোর্ড / বিশ্ববিদ্যালয় সত্যায়ন</string>
+    <string name="doc_attestation_step_2">২. শিক্ষা মন্ত্রণালয় (MoE) সত্যায়ন</string>
+    <string name="doc_attestation_step_3">৩. পররাষ্ট্র মন্ত্রণালয় (MoFA) সত্যায়ন</string>
+    <string name="doc_attestation_step_4">৪. গন্তব্য দেশের এম্বাসি সত্যায়ন</string>
+    <string name="btn_visit_mofa">পররাষ্ট্র মন্ত্রণালয়ের ওয়েবসাইট দেখুন</string>
+
+    <!-- Saved Items (FR-SAV-001) -->
+    <string name="saved_empty_title">কোনো সংরক্ষিত বস্তু নেই</string>
+    <string name="saved_empty_desc">সহজে অ্যাক্সেস করার জন্য দেশ, বিশ্ববিদ্যালয় বা স্কলারশিপ সংরক্ষণ করুন।</string>
+    <string name="saved_group_countries">সংরক্ষিত দেশসমূহ</string>
+    <string name="saved_group_universities">সংরক্ষিত বিশ্ববিদ্যালয়সমূহ</string>
+    <string name="saved_group_scholarships">সংরক্ষিত বৃত্তিসমূহ</string>
+    <string name="btn_unsave">মুছুন</string>
+    <string name="btn_save">সংরক্ষণ</string>
+    <string name="btn_saved">সংরক্ষিত</string>
+    <string name="item_removed_message">সংরক্ষিত তালিকা থেকে সরানো হয়েছে</string>
+    <string name="btn_undo">পূর্বাবস্থায় ফেরান</string>
 </resources>

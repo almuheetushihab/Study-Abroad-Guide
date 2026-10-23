@@ -4,22 +4,28 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shihab.studyabroad.core.common.UrlOpener
+import com.shihab.studyabroad.domain.model.SavedType
 import com.shihab.studyabroad.domain.model.ScholarshipStatus
+import com.shihab.studyabroad.domain.repository.SavedRepository
 import com.shihab.studyabroad.domain.repository.ScholarshipRepository
 import com.shihab.studyabroad.domain.usecase.GetScholarshipStatusUseCase
 import com.shihab.studyabroad.domain.usecase.IsRecordStaleUseCase
+import com.shihab.studyabroad.domain.usecase.ToggleSavedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ScholarshipDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     scholarshipRepository: ScholarshipRepository,
+    savedRepository: SavedRepository,
+    private val toggleSavedUseCase: ToggleSavedUseCase,
     private val getScholarshipStatusUseCase: GetScholarshipStatusUseCase,
     private val isRecordStaleUseCase: IsRecordStaleUseCase,
     val urlOpener: UrlOpener,
@@ -31,7 +37,8 @@ class ScholarshipDetailViewModel @Inject constructor(
     val uiState: StateFlow<ScholarshipDetailUiState> = combine(
         scholarshipRepository.getScholarshipById(scholarshipId),
         selectedReminderDays,
-    ) { scholarship, reminderDays ->
+        savedRepository.isSaved(SavedType.SCHOLARSHIP, scholarshipId),
+    ) { scholarship, reminderDays, isSaved ->
         if (scholarship == null) {
             ScholarshipDetailUiState.Empty
         } else {
@@ -57,6 +64,7 @@ class ScholarshipDetailViewModel @Inject constructor(
                     isStale = isStale,
                     reminderDays = reminderDays,
                     reminderConfirmationMessage = confirmationMessage,
+                    isSaved = isSaved,
                 ),
             )
         }
@@ -68,6 +76,12 @@ class ScholarshipDetailViewModel @Inject constructor(
 
     fun onSetReminderDays(days: Int) {
         selectedReminderDays.value = days
+    }
+
+    fun onToggleSave() {
+        viewModelScope.launch {
+            toggleSavedUseCase(SavedType.SCHOLARSHIP, scholarshipId)
+        }
     }
 
     fun openApplyUrl(url: String) {

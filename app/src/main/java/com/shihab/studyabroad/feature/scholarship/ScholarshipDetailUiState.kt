@@ -11,6 +11,7 @@ data class ScholarshipDetailData(
     val isStale: Boolean = false,
     val reminderDays: Int? = null,
     val reminderConfirmationMessage: String? = null,
+    val isSaved: Boolean = false,
 )
 
 sealed interface ScholarshipDetailUiState {
