@@ -2,6 +2,7 @@ package com.shihab.studyabroad.feature.scholarship
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.domain.model.FundingType
 import com.shihab.studyabroad.domain.model.ScholarshipStatus
 import com.shihab.studyabroad.domain.repository.ScholarshipRepository
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class ScholarshipListViewModel @Inject constructor(
     scholarshipRepository: ScholarshipRepository,
     private val getScholarshipStatusUseCase: GetScholarshipStatusUseCase,
+    private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
 
     private val countryFilter = MutableStateFlow("All")
@@ -62,18 +64,22 @@ class ScholarshipListViewModel @Inject constructor(
 
     fun onSelectCountryFilter(country: String) {
         countryFilter.value = country
+        analyticsTracker.logEvent("search_performed", mapOf("area" to "scholarships"))
     }
 
     fun onSelectLevelFilter(level: String) {
         levelFilter.value = level
+        analyticsTracker.logEvent("search_performed", mapOf("area" to "scholarships"))
     }
 
     fun onSelectFundingFilter(funding: String) {
         fundingFilter.value = funding
+        analyticsTracker.logEvent("search_performed", mapOf("area" to "scholarships"))
     }
 
     fun onSelectStatusFilter(status: String) {
         statusFilter.value = status
+        analyticsTracker.logEvent("search_performed", mapOf("area" to "scholarships"))
     }
 
     private fun filterScholarships(

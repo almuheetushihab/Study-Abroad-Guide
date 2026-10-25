@@ -26,6 +26,7 @@ fun OtpVerifyForm(
     onResendOtp: () -> Unit,
     onBackToPhone: () -> Unit,
     isLoading: Boolean,
+    resendCountdown: Int,
     errorMessage: UiText?,
     modifier: Modifier = Modifier,
 ) {
@@ -64,10 +65,16 @@ fun OtpVerifyForm(
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        val resendText = if (resendCountdown > 0) {
+            stringResource(id = R.string.btn_resend_otp_countdown, resendCountdown)
+        } else {
+            stringResource(id = R.string.btn_resend_otp)
+        }
+
         SecondaryButton(
-            text = stringResource(id = R.string.btn_resend_otp),
+            text = resendText,
             onClick = onResendOtp,
-            enabled = !isLoading,
+            enabled = !isLoading && resendCountdown == 0,
         )
 
         Spacer(modifier = Modifier.height(8.dp))

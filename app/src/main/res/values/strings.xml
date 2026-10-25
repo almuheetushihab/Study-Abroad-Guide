@@ -50,9 +50,17 @@
     <string name="login_otp_label">6-Digit Code</string>
     <string name="btn_verify_otp">Verify &amp; Sign In</string>
     <string name="btn_resend_otp">Resend Code</string>
+    <string name="btn_resend_otp_countdown">Resend Code in %ds</string>
     <string name="btn_back_to_phone">Back to Phone Number</string>
     <string name="error_invalid_phone">Please enter a valid phone number.</string>
     <string name="error_invalid_otp">Invalid OTP code. Please enter 6 digits.</string>
+    <string name="error_auth_invalid_code">Invalid verification code. Please check and try again.</string>
+    <string name="error_auth_expired_code">Verification code has expired. Please request a new code.</string>
+    <string name="error_auth_too_many_requests">Too many attempts. Please try again later.</string>
+    <string name="error_auth_network_error">Network error. Please check your internet connection.</string>
+    <string name="error_auth_cancelled">Sign-in was cancelled.</string>
+    <string name="error_auth_requires_recent_login">For security, please sign in again before deleting your account.</string>
+    <string name="error_auth_generic">Authentication failed. Please try again.</string>
 
     <!-- Track Select (FR-PRO-001) -->
     <string name="track_select_title">Choose Your Track</string>

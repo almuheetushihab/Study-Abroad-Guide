@@ -15,6 +15,7 @@ sealed interface LoginUiState {
         val otpCode: String = "",
         val isLoading: Boolean = false,
         val errorMessage: UiText? = null,
+        val resendCountdown: Int = 0,
         val isSignedIn: Boolean = false,
     ) : LoginUiState
     data class Error(val message: UiText) : LoginUiState

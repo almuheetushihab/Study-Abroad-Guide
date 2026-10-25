@@ -10,3 +10,10 @@
 
 # Kotlin Serializer
 -keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
+
+# Credential Manager & Google ID
+-keep class androidx.credentials.** { *; }
+-keep class com.google.android.libraries.identity.googleid.** { *; }
+
+# Firebase Auth
+-keep class com.google.firebase.auth.** { *; }

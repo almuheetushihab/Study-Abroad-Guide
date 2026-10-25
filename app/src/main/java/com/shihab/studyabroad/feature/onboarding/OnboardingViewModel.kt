@@ -2,6 +2,7 @@ package com.shihab.studyabroad.feature.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,10 +12,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingViewModel @Inject constructor(private val userPreferencesRepository: UserPreferencesRepository) : ViewModel() {
+class OnboardingViewModel @Inject constructor(
+    private val userPreferencesRepository: UserPreferencesRepository,
+    analyticsTracker: AnalyticsTracker,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(OnboardingUiState.Content())
     val uiState: StateFlow<OnboardingUiState.Content> = _uiState.asStateFlow()
+
+    init {
+        analyticsTracker.logEvent("onboarding_started")
+    }
 
     fun onNextPage() {
         val current = _uiState.value.currentPage

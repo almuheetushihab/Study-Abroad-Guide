@@ -50,9 +50,17 @@
     <string name="login_otp_label">৬-সংখ্যার কোড</string>
     <string name="btn_verify_otp">যাচাই করুন ও সাইন ইন করুন</string>
     <string name="btn_resend_otp">পুনরায় কোড পাঠান</string>
+    <string name="btn_resend_otp_countdown">%d সেকেন্ড পর পুনরায় পাঠান</string>
     <string name="btn_back_to_phone">ফোন নম্বর পরিবর্তনে ফিরুন</string>
     <string name="error_invalid_phone">অনুগ্রহ করে একটি সঠিক ফোন নম্বর লিখুন।</string>
     <string name="error_invalid_otp">অকার্যকর ওটিপি কোড। অনুগ্রহ করে ৬-সংখ্যার কোড লিখুন।</string>
+    <string name="error_auth_invalid_code">অকার্যকর যাচাইকরণ কোড। অনুগ্রহ করে পরীক্ষা করে আবার চেষ্টা করুন।</string>
+    <string name="error_auth_expired_code">যাচাইকরণ কোডের মেয়াদ শেষ হয়ে গেছে। অনুগ্রহ করে নতুন কোড অনুরোধ করুন।</string>
+    <string name="error_auth_too_many_requests">অতিরিক্ত চেষ্টা করা হয়েছে। অনুগ্রহ করে পরে চেষ্টা করুন।</string>
+    <string name="error_auth_network_error">নেটওয়ার্ক সমস্যা। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।</string>
+    <string name="error_auth_cancelled">সাইন ইন বাতিল করা হয়েছে।</string>
+    <string name="error_auth_requires_recent_login">নিরাপত্তার স্বার্থে, আপনার অ্যাকাউন্ট মোছার পূর্বে অনুগ্রহ করে পুনরায় সাইন ইন করুন।</string>
+    <string name="error_auth_generic">অথেন্টিকেশন ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।</string>
 
     <!-- Track Select (FR-PRO-001) -->
     <string name="track_select_title">আপনার ট্র্যাক নির্বাচন করুন</string>

@@ -3,6 +3,7 @@ package com.shihab.studyabroad.feature.scholarship
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.core.common.UrlOpener
 import com.shihab.studyabroad.domain.model.ReportRefType
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,6 +34,7 @@ class ScholarshipDetailViewModel @Inject constructor(
     private val getScholarshipStatusUseCase: GetScholarshipStatusUseCase,
     private val isRecordStaleUseCase: IsRecordStaleUseCase,
     private val submitReportUseCase: SubmitReportUseCase,
+    private val analyticsTracker: AnalyticsTracker,
     val urlOpener: UrlOpener,
 ) : ViewModel() {
 
@@ -72,6 +75,16 @@ class ScholarshipDetailViewModel @Inject constructor(
                 ),
             )
         }
+    }.onEach { state ->
+        if (state is ScholarshipDetailUiState.Content) {
+            analyticsTracker.logEvent(
+                "scholarship_viewed",
+                mapOf(
+                    "scholarshipId" to scholarshipId,
+                    "status" to state.data.status.name,
+                ),
+            )
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -80,6 +93,7 @@ class ScholarshipDetailViewModel @Inject constructor(
 
     fun onSetReminderDays(days: Int) {
         selectedReminderDays.value = days
+        analyticsTracker.logEvent("reminder_set", mapOf("daysBefore" to days))
     }
 
     fun onToggleSave() {

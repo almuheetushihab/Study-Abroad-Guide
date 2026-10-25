@@ -1,6 +1,7 @@
 package com.shihab.studyabroad.feature.scholarship
 
 import app.cash.turbine.test
+import com.shihab.studyabroad.data.repository.FakeAnalyticsTracker
 import com.shihab.studyabroad.data.repository.FakeScholarshipRepository
 import com.shihab.studyabroad.domain.usecase.GetScholarshipStatusUseCase
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class ScholarshipListViewModelTest {
 
     private val testDispatcher = StandardTestDispatcher()
     private val repository = FakeScholarshipRepository()
+    private val analyticsTracker = FakeAnalyticsTracker()
 
     private val fixedClock = object : Clock {
         override fun now(): Instant = Instant.parse("2026-10-23T00:00:00Z")
@@ -40,6 +42,7 @@ class ScholarshipListViewModelTest {
         viewModel = ScholarshipListViewModel(
             scholarshipRepository = repository,
             getScholarshipStatusUseCase = getScholarshipStatusUseCase,
+            analyticsTracker = analyticsTracker,
         )
     }
 

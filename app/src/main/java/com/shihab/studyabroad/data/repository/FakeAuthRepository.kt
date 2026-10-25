@@ -1,14 +1,28 @@
 package com.shihab.studyabroad.data.repository
 
 import com.shihab.studyabroad.core.common.AppResult
+import com.shihab.studyabroad.domain.model.AuthUser
 import com.shihab.studyabroad.domain.repository.AuthRepository
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class FakeAuthRepository @Inject constructor(private val userPreferencesRepository: UserPreferencesRepository) : AuthRepository {
+
+    override val currentUser: Flow<AuthUser?> = userPreferencesRepository.isSignedIn.map { signedIn ->
+        if (signedIn) {
+            AuthUser(
+                id = "fake_user_id",
+                displayName = "Test Student",
+                phone = "+8801712345678",
+            )
+        } else {
+            null
+        }
+    }
 
     override val isSignedIn: Flow<Boolean> = userPreferencesRepository.isSignedIn
 
@@ -27,6 +41,8 @@ class FakeAuthRepository @Inject constructor(private val userPreferencesReposito
         return AppResult.Success(Unit)
     }
 
+    override suspend fun resendOtp(phoneNumber: String): AppResult<Unit> = sendOtp(phoneNumber)
+
     override suspend fun signInWithGoogle(): AppResult<Unit> {
         userPreferencesRepository.setSignedIn(true)
         return AppResult.Success(Unit)
@@ -34,5 +50,10 @@ class FakeAuthRepository @Inject constructor(private val userPreferencesReposito
 
     override suspend fun signOut() {
         userPreferencesRepository.setSignedIn(false)
+    }
+
+    override suspend fun deleteAccount(): AppResult<Unit> {
+        userPreferencesRepository.setSignedIn(false)
+        return AppResult.Success(Unit)
     }
 }

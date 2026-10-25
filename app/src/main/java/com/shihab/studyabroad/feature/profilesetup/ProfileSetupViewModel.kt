@@ -2,6 +2,7 @@ package com.shihab.studyabroad.feature.profilesetup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.domain.model.FundingGoal
 import com.shihab.studyabroad.domain.model.TestType
 import com.shihab.studyabroad.domain.model.UserProfile
@@ -21,6 +22,7 @@ class ProfileSetupViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
     private val countryRepository: CountryRepository,
     private val validateProfileFieldsUseCase: ValidateProfileFieldsUseCase,
+    private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProfileSetupUiState.Content())
@@ -205,6 +207,7 @@ class ProfileSetupViewModel @Inject constructor(
             )
 
             userPreferencesRepository.saveUserProfile(profile)
+            analyticsTracker.logEvent("profile_completed", mapOf("track" to currentTrack.name))
             _uiState.value = _uiState.value.copy(isLoading = false, isSaved = true)
         }
     }

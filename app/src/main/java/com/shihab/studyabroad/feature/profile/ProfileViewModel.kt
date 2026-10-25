@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shihab.studyabroad.BuildConfig
 import com.shihab.studyabroad.core.common.AppResult
+import com.shihab.studyabroad.core.common.AuthErrorMapper
+import com.shihab.studyabroad.core.ui.UiText
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import com.shihab.studyabroad.domain.usecase.DeleteAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,15 +24,18 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val isDeleteSuccess = MutableStateFlow(false)
+    private val errorMessage = MutableStateFlow<UiText?>(null)
 
     val uiState: StateFlow<ProfileUiState> = combine(
         userPreferencesRepository.userProfile,
         isDeleteSuccess,
-    ) { profile, deleteSuccess ->
+        errorMessage,
+    ) { profile, deleteSuccess, errorMsg ->
         ProfileUiState.Content(
             userProfile = profile,
             appVersion = BuildConfig.VERSION_NAME,
             isDeleteSuccess = deleteSuccess,
+            errorMessage = errorMsg,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -38,14 +43,21 @@ class ProfileViewModel @Inject constructor(
         initialValue = ProfileUiState.Loading,
     )
 
-    fun onDeleteAccount(onComplete: (Boolean) -> Unit) {
+    fun onDeleteAccount(onResult: (Boolean, UiText?) -> Unit) {
         viewModelScope.launch {
-            val result = deleteAccountUseCase()
-            val success = result is AppResult.Success
-            if (success) {
-                isDeleteSuccess.value = true
+            errorMessage.value = null
+            when (val result = deleteAccountUseCase()) {
+                is AppResult.Success -> {
+                    isDeleteSuccess.value = true
+                    onResult(true, null)
+                }
+                is AppResult.Error -> {
+                    val error = AuthErrorMapper.mapExceptionToUiText(result.throwable)
+                    errorMessage.value = error
+                    onResult(false, error)
+                }
+                else -> {}
             }
-            onComplete(success)
         }
     }
 }

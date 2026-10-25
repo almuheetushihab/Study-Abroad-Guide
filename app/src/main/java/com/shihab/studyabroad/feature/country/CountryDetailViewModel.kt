@@ -3,6 +3,7 @@ package com.shihab.studyabroad.feature.country
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.core.common.UrlOpener
 import com.shihab.studyabroad.domain.model.ReportRefType
@@ -18,6 +19,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,6 +34,7 @@ class CountryDetailViewModel @Inject constructor(
     private val toggleSavedUseCase: ToggleSavedUseCase,
     private val isRecordStaleUseCase: IsRecordStaleUseCase,
     private val submitReportUseCase: SubmitReportUseCase,
+    analyticsTracker: AnalyticsTracker,
     val urlOpener: UrlOpener,
 ) : ViewModel() {
 
@@ -56,6 +59,10 @@ class CountryDetailViewModel @Inject constructor(
                     isSaved = isSaved,
                 ),
             )
+        }
+    }.onEach { state ->
+        if (state is CountryDetailUiState.Content) {
+            analyticsTracker.logEvent("country_viewed", mapOf("countryId" to countryId))
         }
     }.stateIn(
         scope = viewModelScope,

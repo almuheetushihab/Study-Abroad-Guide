@@ -140,6 +140,27 @@ fun ThemePreviewScreen(onBack: () -> Unit, modifier: Modifier = Modifier) {
             )
 
             Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Debug Testing & Telemetry",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.error,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            SecondaryButton(
+                text = "Log Test Event",
+                onClick = {
+                    // Test event trigger
+                },
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            PrimaryButton(
+                text = "Send Test Crash",
+                onClick = {
+                    throw RuntimeException("Test Crashlytics Crash triggered from Debug ThemePreviewScreen")
+                },
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
             OfflineBanner(lastUpdated = "15 Oct 2026")
         }
     }

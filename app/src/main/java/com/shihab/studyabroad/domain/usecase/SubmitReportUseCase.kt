@@ -1,12 +1,16 @@
 package com.shihab.studyabroad.domain.usecase
 
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.domain.model.Report
 import com.shihab.studyabroad.domain.model.ReportRefType
 import com.shihab.studyabroad.domain.repository.ReportRepository
 import javax.inject.Inject
 
-class SubmitReportUseCase @Inject constructor(private val reportRepository: ReportRepository) {
+class SubmitReportUseCase @Inject constructor(
+    private val reportRepository: ReportRepository,
+    private val analyticsTracker: AnalyticsTracker,
+) {
     suspend operator fun invoke(refType: ReportRefType, refId: String, message: String): AppResult<Unit> {
         val trimmedMessage = message.trim()
         if (trimmedMessage.isBlank()) {
@@ -17,6 +21,10 @@ class SubmitReportUseCase @Inject constructor(private val reportRepository: Repo
             refId = refId,
             message = trimmedMessage,
         )
-        return reportRepository.submitReport(report)
+        val result = reportRepository.submitReport(report)
+        if (result is AppResult.Success) {
+            analyticsTracker.logEvent("report_submitted", mapOf("refType" to refType.name))
+        }
+        return result
     }
 }

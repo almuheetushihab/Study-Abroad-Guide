@@ -1,5 +1,6 @@
 package com.shihab.studyabroad.domain.usecase
 
+import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.domain.model.ReportRefType
 import com.shihab.studyabroad.domain.repository.ReportRepository
@@ -14,12 +15,17 @@ import org.junit.Test
 class SubmitReportUseCaseTest {
 
     private lateinit var reportRepository: ReportRepository
+    private lateinit var analyticsTracker: AnalyticsTracker
     private lateinit var submitReportUseCase: SubmitReportUseCase
 
     @Before
     fun setUp() {
         reportRepository = mockk(relaxed = true)
-        submitReportUseCase = SubmitReportUseCase(reportRepository)
+        analyticsTracker = mockk(relaxed = true)
+        submitReportUseCase = SubmitReportUseCase(
+            reportRepository = reportRepository,
+            analyticsTracker = analyticsTracker,
+        )
     }
 
     @Test
@@ -41,6 +47,9 @@ class SubmitReportUseCaseTest {
                         it.message == "Deadline is incorrect on the page"
                 },
             )
+        }
+        coVerify(exactly = 1) {
+            analyticsTracker.logEvent("report_submitted", mapOf("refType" to ReportRefType.SCHOLARSHIP.name))
         }
     }
 

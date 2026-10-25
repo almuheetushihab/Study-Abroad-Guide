@@ -39,6 +39,7 @@ import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.InfoCard
 import com.shihab.studyabroad.core.designsystem.component.LabeledValue
 import com.shihab.studyabroad.core.designsystem.component.PrimaryButton
+import com.shihab.studyabroad.core.ui.UiText
 import com.shihab.studyabroad.domain.model.TestType
 
 @Composable
@@ -69,7 +70,7 @@ fun ProfileScreen(
     onNavigateToEditProfile: () -> Unit = {},
     onNavigateToNotificationSettings: () -> Unit = {},
     onNavigateToDisclaimer: () -> Unit = {},
-    onDeleteAccount: ((Boolean) -> Unit) -> Unit = {},
+    onDeleteAccount: ((Boolean, UiText?) -> Unit) -> Unit = { _ -> },
     onNavigateToAuth: () -> Unit = {},
     onNavigateToThemePreview: (() -> Unit)? = null,
 ) {
@@ -97,10 +98,12 @@ fun ProfileScreen(
                 Button(
                     onClick = {
                         showDeleteDialog = false
-                        onDeleteAccount { success ->
+                        onDeleteAccount { success, errorMsg ->
                             if (success) {
                                 Toast.makeText(context, deleteSuccessMessage, Toast.LENGTH_SHORT).show()
                                 onNavigateToAuth()
+                            } else if (errorMsg != null) {
+                                Toast.makeText(context, errorMsg.asString(context), Toast.LENGTH_LONG).show()
                             }
                         }
                     },
