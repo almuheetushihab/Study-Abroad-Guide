@@ -24,6 +24,7 @@ class DeleteAccountUseCaseTest {
     fun setUp() {
         authRepository = mockk(relaxed = true)
         localDataCleaner = mockk(relaxed = true)
+        coEvery { localDataCleaner.clearAllLocalData() } returns AppResult.Success(Unit)
         deleteAccountUseCase = DeleteAccountUseCase(
             authRepository = authRepository,
             localDataCleaner = localDataCleaner,
@@ -62,6 +63,18 @@ class DeleteAccountUseCaseTest {
         assertEquals(DeleteAccountResult.Error(error), result)
         coVerify(exactly = 1) { authRepository.deleteAccount() }
         coVerify(exactly = 0) { localDataCleaner.clearAllLocalData() }
+    }
+
+    @Test
+    fun `initialDelete handles cleaner failure and returns error`() = runTest {
+        val cleanError = Exception("Failed to clear Room database")
+        coEvery { authRepository.deleteAccount() } returns DeleteAccountResult.Success
+        coEvery { localDataCleaner.clearAllLocalData() } returns AppResult.Error(cleanError)
+
+        val result = deleteAccountUseCase.initialDelete()
+
+        assertEquals(DeleteAccountResult.Error(cleanError), result)
+        coVerify(exactly = 1) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test

@@ -1,26 +1,21 @@
 package com.shihab.studyabroad.data.local.datastore
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import com.shihab.studyabroad.domain.model.Track
 import com.shihab.studyabroad.domain.model.UserProfile
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private val Context.preferencesDataStore: DataStore<Preferences> by preferencesDataStore(name = "study_abroad_preferences")
-
 @Singleton
-class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext private val context: Context) : UserPreferencesRepository {
+class UserPreferencesRepositoryImpl @Inject constructor(private val dataStore: DataStore<Preferences>) : UserPreferencesRepository {
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -33,15 +28,15 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
     private val newScholarshipsKey = booleanPreferencesKey("new_scholarships_enabled")
     private val appNewsKey = booleanPreferencesKey("app_news_enabled")
 
-    override val isOnboardingDone: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+    override val isOnboardingDone: Flow<Boolean> = dataStore.data.map { preferences ->
         preferences[onboardingDoneKey] ?: false
     }
 
-    override val isSignedIn: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+    override val isSignedIn: Flow<Boolean> = dataStore.data.map { preferences ->
         preferences[signedInKey] ?: false
     }
 
-    override val selectedTrack: Flow<Track?> = context.preferencesDataStore.data.map { preferences ->
+    override val selectedTrack: Flow<Track?> = dataStore.data.map { preferences ->
         preferences[selectedTrackKey]?.let {
             try {
                 Track.valueOf(it)
@@ -51,7 +46,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
         }
     }
 
-    override val userProfile: Flow<UserProfile?> = context.preferencesDataStore.data.map { preferences ->
+    override val userProfile: Flow<UserProfile?> = dataStore.data.map { preferences ->
         preferences[userProfileJsonKey]?.let { jsonString ->
             try {
                 json.decodeFromString<UserProfile>(jsonString)
@@ -61,64 +56,64 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
         }
     }
 
-    override val deadlineRemindersEnabled: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+    override val deadlineRemindersEnabled: Flow<Boolean> = dataStore.data.map { preferences ->
         preferences[deadlineRemindersKey] ?: true
     }
 
-    override val newScholarshipsEnabled: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+    override val newScholarshipsEnabled: Flow<Boolean> = dataStore.data.map { preferences ->
         preferences[newScholarshipsKey] ?: true
     }
 
-    override val appNewsEnabled: Flow<Boolean> = context.preferencesDataStore.data.map { preferences ->
+    override val appNewsEnabled: Flow<Boolean> = dataStore.data.map { preferences ->
         preferences[appNewsKey] ?: true
     }
 
     override suspend fun setOnboardingDone(done: Boolean) {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[onboardingDoneKey] = done
         }
     }
 
     override suspend fun setSignedIn(signedIn: Boolean) {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[signedInKey] = signedIn
         }
     }
 
     override suspend fun setSelectedTrack(track: Track) {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[selectedTrackKey] = track.name
         }
     }
 
     override suspend fun saveUserProfile(profile: UserProfile) {
         val jsonString = json.encodeToString(profile)
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[userProfileJsonKey] = jsonString
             preferences[selectedTrackKey] = profile.targetTrack.name
         }
     }
 
     override suspend fun setDeadlineRemindersEnabled(enabled: Boolean) {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[deadlineRemindersKey] = enabled
         }
     }
 
     override suspend fun setNewScholarshipsEnabled(enabled: Boolean) {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[newScholarshipsKey] = enabled
         }
     }
 
     override suspend fun setAppNewsEnabled(enabled: Boolean) {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[appNewsKey] = enabled
         }
     }
 
     override suspend fun clearSession() {
-        context.preferencesDataStore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences.remove(signedInKey)
             preferences.remove(selectedTrackKey)
             preferences.remove(userProfileJsonKey)

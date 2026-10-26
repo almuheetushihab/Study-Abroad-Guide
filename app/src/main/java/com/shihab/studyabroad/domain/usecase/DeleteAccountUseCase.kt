@@ -13,7 +13,10 @@ class DeleteAccountUseCase @Inject constructor(
     suspend fun initialDelete(): DeleteAccountResult {
         val result = authRepository.deleteAccount()
         if (result is DeleteAccountResult.Success) {
-            localDataCleaner.clearAllLocalData()
+            val cleanResult = localDataCleaner.clearAllLocalData()
+            if (cleanResult is AppResult.Error) {
+                return DeleteAccountResult.Error(cleanResult.throwable)
+            }
         }
         return result
     }
@@ -21,7 +24,7 @@ class DeleteAccountUseCase @Inject constructor(
     suspend fun reauthenticateAndDeleteWithGoogle(): AppResult<Unit> {
         val result = authRepository.reauthenticateAndDeleteWithGoogle()
         if (result is AppResult.Success) {
-            localDataCleaner.clearAllLocalData()
+            return localDataCleaner.clearAllLocalData()
         }
         return result
     }
@@ -29,7 +32,7 @@ class DeleteAccountUseCase @Inject constructor(
     suspend fun reauthenticateAndDeleteWithPhone(otp: String): AppResult<Unit> {
         val result = authRepository.reauthenticateAndDeleteWithPhone(otp)
         if (result is AppResult.Success) {
-            localDataCleaner.clearAllLocalData()
+            return localDataCleaner.clearAllLocalData()
         }
         return result
     }
