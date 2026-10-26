@@ -269,6 +269,11 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
                                 popUpTo(0) { inclusive = true }
                             }
                         },
+                        onNavigateToOnboarding = {
+                            navController.navigate(Route.Onboarding) {
+                                popUpTo(0) { inclusive = true }
+                            }
+                        },
                         onNavigateToThemePreview = if (BuildConfig.DEBUG) {
                             { navController.navigate(Route.ThemePreview) }
                         } else {

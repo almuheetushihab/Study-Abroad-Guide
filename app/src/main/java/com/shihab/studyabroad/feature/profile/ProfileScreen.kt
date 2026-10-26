@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -19,9 +20,12 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -39,7 +44,6 @@ import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.InfoCard
 import com.shihab.studyabroad.core.designsystem.component.LabeledValue
 import com.shihab.studyabroad.core.designsystem.component.PrimaryButton
-import com.shihab.studyabroad.core.ui.UiText
 import com.shihab.studyabroad.domain.model.TestType
 
 @Composable
@@ -48,6 +52,7 @@ fun ProfileRoute(
     onNavigateToNotificationSettings: () -> Unit = {},
     onNavigateToDisclaimer: () -> Unit = {},
     onNavigateToAuth: () -> Unit = {},
+    onNavigateToOnboarding: () -> Unit = {},
     onNavigateToThemePreview: (() -> Unit)? = null,
     viewModel: ProfileViewModel = hiltViewModel(),
 ) {
@@ -57,8 +62,19 @@ fun ProfileRoute(
         onNavigateToEditProfile = onNavigateToEditProfile,
         onNavigateToNotificationSettings = onNavigateToNotificationSettings,
         onNavigateToDisclaimer = onNavigateToDisclaimer,
-        onDeleteAccount = viewModel::onDeleteAccount,
-        onNavigateToAuth = onNavigateToAuth,
+        onSignOutClicked = viewModel::onSignOutClicked,
+        onDismissSignOutDialog = viewModel::onDismissSignOutDialog,
+        onConfirmSignOut = { viewModel.onConfirmSignOut(onNavigateToAuth) },
+        onDeleteAccountClicked = viewModel::onDeleteAccountClicked,
+        onDismissDeleteDialog = viewModel::onDismissDeleteDialog,
+        onConfirmDeleteAccount = { viewModel.onConfirmDeleteAccount(onNavigateToOnboarding) },
+        onDismissReauthDialog = viewModel::onDismissReauthDialog,
+        onConfirmReauth = { viewModel.onConfirmReauth(onNavigateToOnboarding) },
+        onOtpCodeChanged = viewModel::onOtpCodeChanged,
+        onResendOtpClicked = viewModel::onResendOtpClicked,
+        onConfirmOtpAndDelete = { viewModel.onConfirmOtpAndDelete(onNavigateToOnboarding) },
+        onDismissOtpDialog = viewModel::onDismissOtpDialog,
+        onClearErrorMessage = viewModel::clearErrorMessage,
         onNavigateToThemePreview = onNavigateToThemePreview,
     )
 }
@@ -70,18 +86,71 @@ fun ProfileScreen(
     onNavigateToEditProfile: () -> Unit = {},
     onNavigateToNotificationSettings: () -> Unit = {},
     onNavigateToDisclaimer: () -> Unit = {},
-    onDeleteAccount: ((Boolean, UiText?) -> Unit) -> Unit = { _ -> },
-    onNavigateToAuth: () -> Unit = {},
+    onSignOutClicked: () -> Unit = {},
+    onDismissSignOutDialog: () -> Unit = {},
+    onConfirmSignOut: () -> Unit = {},
+    onDeleteAccountClicked: () -> Unit = {},
+    onDismissDeleteDialog: () -> Unit = {},
+    onConfirmDeleteAccount: () -> Unit = {},
+    onDismissReauthDialog: () -> Unit = {},
+    onConfirmReauth: () -> Unit = {},
+    onOtpCodeChanged: (String) -> Unit = {},
+    onResendOtpClicked: () -> Unit = {},
+    onConfirmOtpAndDelete: () -> Unit = {},
+    onDismissOtpDialog: () -> Unit = {},
+    onClearErrorMessage: () -> Unit = {},
     onNavigateToThemePreview: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     var currentLang by remember { mutableStateOf(LanguageManager.getCurrentLanguage()) }
-    var showDeleteDialog by remember { mutableStateOf(false) }
-    val deleteSuccessMessage = stringResource(id = R.string.me_delete_account_success)
 
-    if (showDeleteDialog) {
+    if (uiState is ProfileUiState.Content && uiState.errorMessage != null) {
+        val message = uiState.errorMessage.asString(context)
+        LaunchedEffect(uiState.errorMessage) {
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            onClearErrorMessage()
+        }
+    }
+
+    if (uiState is ProfileUiState.Content && uiState.showSignOutDialog) {
         AlertDialog(
-            onDismissRequest = { showDeleteDialog = false },
+            onDismissRequest = onDismissSignOutDialog,
+            title = {
+                Text(
+                    text = stringResource(id = R.string.me_sign_out_dialog_title),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(id = R.string.me_sign_out_dialog_msg),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = onConfirmSignOut,
+                    enabled = !uiState.isProcessing,
+                    modifier = Modifier.heightIn(min = 48.dp),
+                ) {
+                    Text(text = stringResource(id = R.string.me_sign_out_confirm))
+                }
+            },
+            dismissButton = {
+                OutlinedButton(
+                    onClick = onDismissSignOutDialog,
+                    enabled = !uiState.isProcessing,
+                    modifier = Modifier.heightIn(min = 48.dp),
+                ) {
+                    Text(text = stringResource(id = R.string.cancel))
+                }
+            },
+        )
+    }
+
+    if (uiState is ProfileUiState.Content && uiState.showDeleteDialog) {
+        AlertDialog(
+            onDismissRequest = onDismissDeleteDialog,
             title = {
                 Text(
                     text = stringResource(id = R.string.me_delete_account_dialog_title),
@@ -96,17 +165,8 @@ fun ProfileScreen(
             },
             confirmButton = {
                 Button(
-                    onClick = {
-                        showDeleteDialog = false
-                        onDeleteAccount { success, errorMsg ->
-                            if (success) {
-                                Toast.makeText(context, deleteSuccessMessage, Toast.LENGTH_SHORT).show()
-                                onNavigateToAuth()
-                            } else if (errorMsg != null) {
-                                Toast.makeText(context, errorMsg.asString(context), Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    },
+                    onClick = onConfirmDeleteAccount,
+                    enabled = !uiState.isProcessing,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.error,
                         contentColor = MaterialTheme.colorScheme.onError,
@@ -118,7 +178,108 @@ fun ProfileScreen(
             },
             dismissButton = {
                 OutlinedButton(
-                    onClick = { showDeleteDialog = false },
+                    onClick = onDismissDeleteDialog,
+                    enabled = !uiState.isProcessing,
+                    modifier = Modifier.heightIn(min = 48.dp),
+                ) {
+                    Text(text = stringResource(id = R.string.cancel))
+                }
+            },
+        )
+    }
+
+    if (uiState is ProfileUiState.Content && uiState.showReauthDialog) {
+        AlertDialog(
+            onDismissRequest = onDismissReauthDialog,
+            title = {
+                Text(
+                    text = stringResource(id = R.string.me_reauth_dialog_title),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(id = R.string.me_reauth_dialog_msg),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = onConfirmReauth,
+                    enabled = !uiState.isProcessing,
+                    modifier = Modifier.heightIn(min = 48.dp),
+                ) {
+                    Text(text = stringResource(id = R.string.me_reauth_confirm))
+                }
+            },
+            dismissButton = {
+                OutlinedButton(
+                    onClick = onDismissReauthDialog,
+                    enabled = !uiState.isProcessing,
+                    modifier = Modifier.heightIn(min = 48.dp),
+                ) {
+                    Text(text = stringResource(id = R.string.cancel))
+                }
+            },
+        )
+    }
+
+    if (uiState is ProfileUiState.Content && uiState.showOtpDialog) {
+        AlertDialog(
+            onDismissRequest = onDismissOtpDialog,
+            title = {
+                Text(
+                    text = stringResource(id = R.string.me_reauth_otp_title),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        text = stringResource(id = R.string.me_reauth_otp_msg),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    OutlinedTextField(
+                        value = uiState.otpCode,
+                        onValueChange = onOtpCodeChanged,
+                        label = { Text(text = stringResource(id = R.string.login_otp_label)) },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    if (uiState.otpResendSeconds > 0) {
+                        Text(
+                            text = stringResource(id = R.string.me_reauth_resend_countdown, uiState.otpResendSeconds),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    } else {
+                        TextButton(
+                            onClick = onResendOtpClicked,
+                            enabled = !uiState.isProcessing,
+                        ) {
+                            Text(text = stringResource(id = R.string.me_reauth_resend_otp))
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = onConfirmOtpAndDelete,
+                    enabled = !uiState.isProcessing && uiState.otpCode.length == 6,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error,
+                        contentColor = MaterialTheme.colorScheme.onError,
+                    ),
+                    modifier = Modifier.heightIn(min = 48.dp),
+                ) {
+                    Text(text = stringResource(id = R.string.me_reauth_verify_and_delete))
+                }
+            },
+            dismissButton = {
+                OutlinedButton(
+                    onClick = onDismissOtpDialog,
+                    enabled = !uiState.isProcessing,
                     modifier = Modifier.heightIn(min = 48.dp),
                 ) {
                     Text(text = stringResource(id = R.string.cancel))
@@ -313,7 +474,37 @@ fun ProfileScreen(
                     }
                 }
 
-                // Section 5: Delete Account Placeholder (FR-AUTH-004)
+                // Section 5: Sign Out Card (FR-AUTH-005)
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.me_sign_out_title),
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(id = R.string.me_sign_out_subtitle),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        OutlinedButton(
+                            onClick = onSignOutClicked,
+                            enabled = !uiState.isProcessing,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 48.dp),
+                        ) {
+                            Text(text = stringResource(id = R.string.me_sign_out_button))
+                        }
+                    }
+                }
+
+                // Section 6: Delete Account Card (FR-AUTH-004)
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -333,7 +524,8 @@ fun ProfileScreen(
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         Button(
-                            onClick = { showDeleteDialog = true },
+                            onClick = onDeleteAccountClicked,
+                            enabled = !uiState.isProcessing,
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.error,
                                 contentColor = MaterialTheme.colorScheme.onError,
@@ -347,7 +539,7 @@ fun ProfileScreen(
                     }
                 }
 
-                // Section 6: Debug Theme Preview (Debug builds only)
+                // Section 7: Debug Theme Preview (Debug builds only)
                 if (onNavigateToThemePreview != null) {
                     Card(
                         modifier = Modifier
@@ -372,7 +564,7 @@ fun ProfileScreen(
                     }
                 }
 
-                // Section 7: App Version
+                // Section 8: App Version
                 Text(
                     text = stringResource(id = R.string.me_app_version, uiState.appVersion),
                     style = MaterialTheme.typography.bodySmall,

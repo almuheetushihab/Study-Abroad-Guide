@@ -1,7 +1,9 @@
 package com.shihab.studyabroad.data.repository
 
 import com.shihab.studyabroad.core.common.AppResult
+import com.shihab.studyabroad.domain.model.AuthProvider
 import com.shihab.studyabroad.domain.model.AuthUser
+import com.shihab.studyabroad.domain.model.DeleteAccountResult
 import com.shihab.studyabroad.domain.repository.AuthRepository
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,12 +14,18 @@ import javax.inject.Singleton
 @Singleton
 class FakeAuthRepository @Inject constructor(private val userPreferencesRepository: UserPreferencesRepository) : AuthRepository {
 
+    var providerForFake: AuthProvider = AuthProvider.PHONE
+    var shouldRequireReauth: Boolean = false
+    var reauthShouldFail: Boolean = false
+    var deleteShouldFail: Boolean = false
+
     override val currentUser: Flow<AuthUser?> = userPreferencesRepository.isSignedIn.map { signedIn ->
         if (signedIn) {
             AuthUser(
                 id = "fake_user_id",
                 displayName = "Test Student",
                 phone = "+8801712345678",
+                provider = providerForFake,
             )
         } else {
             null
@@ -52,7 +60,30 @@ class FakeAuthRepository @Inject constructor(private val userPreferencesReposito
         userPreferencesRepository.setSignedIn(false)
     }
 
-    override suspend fun deleteAccount(): AppResult<Unit> {
+    override suspend fun deleteAccount(): DeleteAccountResult {
+        if (shouldRequireReauth) {
+            shouldRequireReauth = false
+            return DeleteAccountResult.ReauthenticationRequired(providerForFake)
+        }
+        if (deleteShouldFail) {
+            return DeleteAccountResult.Error(Exception("Delete failed"))
+        }
+        userPreferencesRepository.setSignedIn(false)
+        return DeleteAccountResult.Success
+    }
+
+    override suspend fun reauthenticateAndDeleteWithGoogle(): AppResult<Unit> {
+        if (reauthShouldFail) {
+            return AppResult.Error(Exception("Google re-auth failed"))
+        }
+        userPreferencesRepository.setSignedIn(false)
+        return AppResult.Success(Unit)
+    }
+
+    override suspend fun reauthenticateAndDeleteWithPhone(otp: String): AppResult<Unit> {
+        if (reauthShouldFail) {
+            return AppResult.Error(Exception("Phone re-auth failed"))
+        }
         userPreferencesRepository.setSignedIn(false)
         return AppResult.Success(Unit)
     }

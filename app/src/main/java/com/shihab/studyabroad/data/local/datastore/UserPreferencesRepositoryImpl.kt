@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.shihab.studyabroad.data.local.AppDatabase
 import com.shihab.studyabroad.domain.model.Track
 import com.shihab.studyabroad.domain.model.UserProfile
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
@@ -20,7 +21,10 @@ import javax.inject.Singleton
 private val Context.preferencesDataStore: DataStore<Preferences> by preferencesDataStore(name = "study_abroad_preferences")
 
 @Singleton
-class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext private val context: Context) : UserPreferencesRepository {
+class UserPreferencesRepositoryImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val appDatabase: AppDatabase,
+) : UserPreferencesRepository {
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -125,6 +129,17 @@ class UserPreferencesRepositoryImpl @Inject constructor(@ApplicationContext priv
             preferences.remove(deadlineRemindersKey)
             preferences.remove(newScholarshipsKey)
             preferences.remove(appNewsKey)
+        }
+    }
+
+    override suspend fun clearAllData() {
+        try {
+            appDatabase.clearAllTables()
+        } catch (_: Exception) {
+            // Best effort database clear
+        }
+        context.preferencesDataStore.edit { preferences ->
+            preferences.clear()
         }
     }
 }

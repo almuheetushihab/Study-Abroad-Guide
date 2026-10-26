@@ -261,4 +261,23 @@
     <string name="btn_saved">Saved</string>
     <string name="item_removed_message">Item removed from saved list</string>
     <string name="btn_undo">Undo</string>
+
+    <!-- Sign Out & Re-authentication (FR-AUTH-005, FR-AUTH-004) -->
+    <string name="me_sign_out_title">Sign Out</string>
+    <string name="me_sign_out_subtitle">End your session on this device</string>
+    <string name="me_sign_out_button">Sign Out</string>
+    <string name="me_sign_out_dialog_title">Sign Out?</string>
+    <string name="me_sign_out_dialog_msg">Are you sure you want to sign out? Your saved items and checklists will remain on this device.</string>
+    <string name="me_sign_out_confirm">Sign Out</string>
+    <string name="me_sign_out_success">Signed out successfully.</string>
+
+    <string name="me_reauth_dialog_title">Confirm Identity</string>
+    <string name="me_reauth_dialog_msg">For your security, please confirm your identity to delete your account.</string>
+    <string name="me_reauth_confirm">Confirm Identity</string>
+    <string name="me_reauth_otp_title">Enter Verification Code</string>
+    <string name="me_reauth_otp_msg">Enter the 6-digit verification code sent to your phone to confirm identity.</string>
+    <string name="me_reauth_resend_otp">Resend OTP</string>
+    <string name="me_reauth_resend_countdown">Resend code in %1$ds</string>
+    <string name="me_reauth_verify_and_delete">Verify &amp; Delete Account</string>
+    <string name="me_reauth_cancelled">Re-authentication cancelled. Account was not deleted.</string>
 </resources>

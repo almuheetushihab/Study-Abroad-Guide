@@ -1,13 +1,15 @@
 package com.shihab.studyabroad.domain.usecase
 
 import com.shihab.studyabroad.core.common.AppResult
-import com.shihab.studyabroad.data.local.AppDatabase
+import com.shihab.studyabroad.domain.model.AuthProvider
+import com.shihab.studyabroad.domain.model.DeleteAccountResult
 import com.shihab.studyabroad.domain.repository.AuthRepository
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -16,31 +18,95 @@ class DeleteAccountUseCaseTest {
 
     private lateinit var authRepository: AuthRepository
     private lateinit var userPreferencesRepository: UserPreferencesRepository
-    private lateinit var appDatabase: AppDatabase
     private lateinit var deleteAccountUseCase: DeleteAccountUseCase
 
     @Before
     fun setUp() {
         authRepository = mockk(relaxed = true)
         userPreferencesRepository = mockk(relaxed = true)
-        appDatabase = mockk(relaxed = true)
         deleteAccountUseCase = DeleteAccountUseCase(
             authRepository = authRepository,
             userPreferencesRepository = userPreferencesRepository,
-            appDatabase = appDatabase,
         )
     }
 
     @Test
-    fun `invoke clears database tables and clears session in preferences`() = runTest {
-        coEvery { authRepository.deleteAccount() } returns AppResult.Success(Unit)
-        coEvery { userPreferencesRepository.clearSession() } returns Unit
+    fun `initialDelete succeeds directly and clears all local data`() = runTest {
+        coEvery { authRepository.deleteAccount() } returns DeleteAccountResult.Success
 
-        val result = deleteAccountUseCase()
+        val result = deleteAccountUseCase.initialDelete()
+
+        assertEquals(DeleteAccountResult.Success, result)
+        coVerify(exactly = 1) { authRepository.deleteAccount() }
+        coVerify(exactly = 1) { userPreferencesRepository.clearAllData() }
+    }
+
+    @Test
+    fun `initialDelete returns ReauthenticationRequired and does NOT clear local data`() = runTest {
+        coEvery { authRepository.deleteAccount() } returns DeleteAccountResult.ReauthenticationRequired(AuthProvider.PHONE)
+
+        val result = deleteAccountUseCase.initialDelete()
+
+        assertEquals(DeleteAccountResult.ReauthenticationRequired(AuthProvider.PHONE), result)
+        coVerify(exactly = 1) { authRepository.deleteAccount() }
+        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+    }
+
+    @Test
+    fun `initialDelete fails with error and does NOT clear local data`() = runTest {
+        val error = Exception("Delete failed")
+        coEvery { authRepository.deleteAccount() } returns DeleteAccountResult.Error(error)
+
+        val result = deleteAccountUseCase.initialDelete()
+
+        assertEquals(DeleteAccountResult.Error(error), result)
+        coVerify(exactly = 1) { authRepository.deleteAccount() }
+        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+    }
+
+    @Test
+    fun `reauthenticateAndDeleteWithGoogle succeeds and clears all local data`() = runTest {
+        coEvery { authRepository.reauthenticateAndDeleteWithGoogle() } returns AppResult.Success(Unit)
+
+        val result = deleteAccountUseCase.reauthenticateAndDeleteWithGoogle()
 
         assertTrue(result is AppResult.Success)
-        coVerify(exactly = 1) { authRepository.deleteAccount() }
-        coVerify(exactly = 1) { appDatabase.clearAllTables() }
-        coVerify(exactly = 1) { userPreferencesRepository.clearSession() }
+        coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithGoogle() }
+        coVerify(exactly = 1) { userPreferencesRepository.clearAllData() }
+    }
+
+    @Test
+    fun `reauthenticateAndDeleteWithGoogle fails and keeps all local data`() = runTest {
+        val error = Exception("Google re-auth failed")
+        coEvery { authRepository.reauthenticateAndDeleteWithGoogle() } returns AppResult.Error(error)
+
+        val result = deleteAccountUseCase.reauthenticateAndDeleteWithGoogle()
+
+        assertTrue(result is AppResult.Error)
+        coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithGoogle() }
+        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+    }
+
+    @Test
+    fun `reauthenticateAndDeleteWithPhone succeeds and clears all local data`() = runTest {
+        coEvery { authRepository.reauthenticateAndDeleteWithPhone("123456") } returns AppResult.Success(Unit)
+
+        val result = deleteAccountUseCase.reauthenticateAndDeleteWithPhone("123456")
+
+        assertTrue(result is AppResult.Success)
+        coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithPhone("123456") }
+        coVerify(exactly = 1) { userPreferencesRepository.clearAllData() }
+    }
+
+    @Test
+    fun `reauthenticateAndDeleteWithPhone fails and keeps all local data`() = runTest {
+        val error = Exception("Phone re-auth failed")
+        coEvery { authRepository.reauthenticateAndDeleteWithPhone("123456") } returns AppResult.Error(error)
+
+        val result = deleteAccountUseCase.reauthenticateAndDeleteWithPhone("123456")
+
+        assertTrue(result is AppResult.Error)
+        coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithPhone("123456") }
+        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
     }
 }

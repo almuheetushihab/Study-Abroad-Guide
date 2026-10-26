@@ -194,6 +194,7 @@ Columns: Pri = priority (M/S/C), Rel = release, Ver = verification method.
 | FR-AUTH-002 | The app MUST let a user sign in with Google as an alternative to OTP. | M | R1 | T |
 | FR-AUTH-003 | The session MUST persist across app restarts until the user signs out. | M | R1 | T |
 | FR-AUTH-004 | The user MUST be able to delete the account and personal data from inside the app. | M | R1 | T |
+| FR-AUTH-005 | The user MUST be able to sign out from the Me tab; signing out ends the session and returns to the Login screen. | M | R1 | T |
 
 ### Profile (PRO)
 
@@ -412,6 +413,7 @@ Alternative: missing profile fields are listed; the plan still shows with Unknow
 | Version | Date | Change |
 | --- | --- | --- |
 | 1.0 | 22 Oct 2026 | First full draft |
+| 1.1 | 24 Oct 2026 | Added FR-AUTH-005 (Sign out from Me tab) and re-authentication flow for account deletion |
 
 ---
 
@@ -772,6 +774,7 @@ No personal data (name, phone, email) in event parameters.
 | search\_performed | Search or filter used | area |
 | plan\_generated (R2) | Plan A/B/C shown | track |
 | report\_submitted | Wrong-info report sent | refType |
+| sign\_out | User signs out from Me tab | - |
 | sync\_failed (non-fatal) | Sync error | errorCode |
 
 Main funnel: install, onboarding\_started, profile\_completed, scholarship\_viewed, reminder\_set.

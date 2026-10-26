@@ -261,4 +261,23 @@
     <string name="btn_saved">সংরক্ষিত</string>
     <string name="item_removed_message">সংরক্ষিত তালিকা থেকে সরানো হয়েছে</string>
     <string name="btn_undo">পূর্বাবস্থায় ফেরান</string>
+
+    <!-- Sign Out & Re-authentication (FR-AUTH-005, FR-AUTH-004) -->
+    <string name="me_sign_out_title">সাইন আউট</string>
+    <string name="me_sign_out_subtitle">এই ডিভাইসে আপনার সেশন শেষ করুন</string>
+    <string name="me_sign_out_button">সাইন আউট</string>
+    <string name="me_sign_out_dialog_title">সাইন আউট করবেন?</string>
+    <string name="me_sign_out_dialog_msg">আপনি কি নিশ্চিত যে সাইন আউট করতে চান? আপনার সংরক্ষিত তথ্য ও চেকলিস্ট এই ডিভাইসে থাকবে।</string>
+    <string name="me_sign_out_confirm">সাইন আউট</string>
+    <string name="me_sign_out_success">সফলভাবে সাইন আউট হয়েছে।</string>
+
+    <string name="me_reauth_dialog_title">পরিচয় নিশ্চিতকরণ</string>
+    <string name="me_reauth_dialog_msg">আপনার নিরাপত্তার জন্য, অ্যাকাউন্টটি মুছে ফেলতে আপনার পরিচয় নিশ্চিত করুন।</string>
+    <string name="me_reauth_confirm">পরিচয় নিশ্চিত করুন</string>
+    <string name="me_reauth_otp_title">যাচাইকরণ কোড লিখুন</string>
+    <string name="me_reauth_otp_msg">পরিচয় নিশ্চিত করতে আপনার ফোনে পাঠানো ৬-ডিজিটের যাচাইকরণ কোডটি লিখুন।</string>
+    <string name="me_reauth_resend_otp">পুনরায় OTP পাঠান</string>
+    <string name="me_reauth_resend_countdown">%1$d সেকেন্ড পরে পুনরায় পাঠান</string>
+    <string name="me_reauth_verify_and_delete">যাচাই করুন ও অ্যাকাউন্ট মুছুন</string>
+    <string name="me_reauth_cancelled">পুনরায় পরিচয় নিশ্চিতকরণ বাতিল করা হয়েছে। অ্যাকাউন্ট মোছা হয়নি।</string>
 </resources>

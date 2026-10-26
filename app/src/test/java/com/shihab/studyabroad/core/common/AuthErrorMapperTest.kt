@@ -22,7 +22,15 @@ class AuthErrorMapperTest {
 
     @Test
     fun `maps requires recent login exception to recent login string resource`() {
-        val exception = Exception("FirebaseAuthRecentLoginRequiredException: REQUIRES_RECENT_LOGIN")
+        val exception =
+            Exception("This operation is sensitive and requires recent authentication. Log in again before retrying this request.")
+        val result = AuthErrorMapper.mapExceptionToUiText(exception)
+        assertEquals(UiText.StringResource(R.string.error_auth_requires_recent_login), result)
+    }
+
+    @Test
+    fun `maps ERROR_REQUIRES_RECENT_LOGIN exception code to recent login string resource`() {
+        val exception = Exception("An internal error has occurred. [ ERROR_REQUIRES_RECENT_LOGIN ]")
         val result = AuthErrorMapper.mapExceptionToUiText(exception)
         assertEquals(UiText.StringResource(R.string.error_auth_requires_recent_login), result)
     }
