@@ -48,8 +48,8 @@ import com.shihab.studyabroad.core.designsystem.component.StaleBadge
 import com.shihab.studyabroad.core.designsystem.component.StatusChip
 import com.shihab.studyabroad.core.designsystem.component.VerifiedFooter
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.ScholarshipStatus
 import com.shihab.studyabroad.feature.scholarship.components.ReminderDialog
 
@@ -320,7 +320,7 @@ fun ScholarshipDetailScreenPreview() {
         ScholarshipDetailScreen(
             uiState = ScholarshipDetailUiState.Content(
                 ScholarshipDetailData(
-                    scholarship = SampleData.sampleScholarships.first(),
+                    scholarship = PreviewData.sampleScholarships.first(),
                     status = ScholarshipStatus.OPEN,
                     isStale = false,
                 ),

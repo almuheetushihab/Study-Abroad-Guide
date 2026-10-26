@@ -24,8 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.Country
 
 enum class ComparisonSortColumn {
@@ -151,7 +151,7 @@ private fun TableHeaderCell(title: String, isSelected: Boolean, onClick: () -> U
 fun CountryComparisonTablePreview() {
     StudyAbroadTheme {
         CountryComparisonTable(
-            selectedCountries = SampleData.sampleCountries.take(3),
+            selectedCountries = PreviewData.sampleCountries.take(3),
             sortColumn = ComparisonSortColumn.NAME,
             onSortColumnClick = {},
         )

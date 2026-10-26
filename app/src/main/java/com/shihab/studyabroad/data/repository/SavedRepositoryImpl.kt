@@ -8,11 +8,12 @@ import com.shihab.studyabroad.domain.model.SavedType
 import com.shihab.studyabroad.domain.repository.SavedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Clock
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SavedRepositoryImpl @Inject constructor(private val savedItemDao: SavedItemDao) : SavedRepository {
+class SavedRepositoryImpl @Inject constructor(private val savedItemDao: SavedItemDao, private val clock: Clock) : SavedRepository {
 
     override fun observeSavedItems(): Flow<List<SavedItem>> = savedItemDao.observeAllSavedItems().map { entities ->
         entities.map { it.toDomain() }
@@ -28,7 +29,7 @@ class SavedRepositoryImpl @Inject constructor(private val savedItemDao: SavedIte
                 SavedItem(
                     type = type,
                     itemId = itemId,
-                    savedAt = System.currentTimeMillis(),
+                    savedAt = clock.now().toEpochMilliseconds(),
                 ).toEntity(),
             )
         }
@@ -39,7 +40,7 @@ class SavedRepositoryImpl @Inject constructor(private val savedItemDao: SavedIte
             SavedItem(
                 type = type,
                 itemId = itemId,
-                savedAt = System.currentTimeMillis(),
+                savedAt = clock.now().toEpochMilliseconds(),
             ).toEntity(),
         )
     }

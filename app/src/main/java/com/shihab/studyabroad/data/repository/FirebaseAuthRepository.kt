@@ -20,12 +20,12 @@ import com.shihab.studyabroad.BuildConfig
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.core.common.CrashReporter
+import com.shihab.studyabroad.core.common.PhoneAuthLauncher
 import com.shihab.studyabroad.core.common.PhoneNumberNormalizer
 import com.shihab.studyabroad.domain.model.AuthProvider
 import com.shihab.studyabroad.domain.model.AuthUser
 import com.shihab.studyabroad.domain.model.DeleteAccountResult
 import com.shihab.studyabroad.domain.repository.AuthRepository
-import com.shihab.studyabroad.domain.repository.PhoneAuthLauncher
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.awaitClose

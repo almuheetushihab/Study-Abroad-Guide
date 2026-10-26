@@ -119,9 +119,9 @@ dependencies {
     implementation(libs.firebase.crashlytics)
 
     // Credential Manager & Google ID
-    implementation("androidx.credentials:credentials:1.3.0")
-    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
 
     // KotlinX
     implementation(libs.kotlinx.serialization.json)

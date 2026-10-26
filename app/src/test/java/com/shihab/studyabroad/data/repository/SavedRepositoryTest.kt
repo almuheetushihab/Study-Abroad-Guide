@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -17,13 +19,17 @@ import org.junit.Test
 
 class SavedRepositoryTest {
 
+    private val fixedClock = object : Clock {
+        override fun now(): Instant = Instant.fromEpochMilliseconds(1000L)
+    }
+
     private lateinit var dao: FakeSavedItemDao
     private lateinit var repository: SavedRepositoryImpl
 
     @Before
     fun setUp() {
         dao = FakeSavedItemDao()
-        repository = SavedRepositoryImpl(dao)
+        repository = SavedRepositoryImpl(dao, fixedClock)
     }
 
     @Test

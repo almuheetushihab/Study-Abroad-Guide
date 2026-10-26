@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.designsystem.component.WarningBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.Country
 import com.shihab.studyabroad.domain.model.CountryTier
 
@@ -89,7 +89,7 @@ fun CountryCard(country: Country, onClick: () -> Unit, modifier: Modifier = Modi
 fun CountryCardPreview() {
     StudyAbroadTheme {
         CountryCard(
-            country = SampleData.sampleCountries.first(),
+            country = PreviewData.sampleCountries.first(),
             onClick = {},
         )
     }

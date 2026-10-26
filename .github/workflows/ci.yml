@@ -36,5 +36,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run Lint, Spotless Check, and Unit Tests
-        run: ./gradlew lint spotlessCheck testDebugUnitTest assembleDebug
+      - name: Run Lint, Spotless Check, Unit Tests, and Build Assemblies
+        run: ./gradlew lint spotlessCheck testDebugUnitTest assembleDebug assembleRelease
+
+      - name: Upload Test Reports on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-reports
+          path: app/build/reports/tests/

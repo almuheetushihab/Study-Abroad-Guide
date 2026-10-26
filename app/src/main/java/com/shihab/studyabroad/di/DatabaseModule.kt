@@ -2,6 +2,7 @@ package com.shihab.studyabroad.di
 
 import android.content.Context
 import androidx.room.Room
+import com.shihab.studyabroad.BuildConfig
 import com.shihab.studyabroad.data.local.AppDatabase
 import com.shihab.studyabroad.data.local.dao.ChecklistProgressDao
 import com.shihab.studyabroad.data.local.dao.CountryDao
@@ -22,11 +23,17 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase = Room.databaseBuilder(
-        context,
-        AppDatabase::class.java,
-        "study_abroad.db",
-    ).fallbackToDestructiveMigration().build()
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        val builder = Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "study_abroad.db",
+        )
+        if (BuildConfig.DEBUG) {
+            builder.fallbackToDestructiveMigration()
+        }
+        return builder.build()
+    }
 
     @Provides
     fun provideScholarshipDao(database: AppDatabase): ScholarshipDao = database.scholarshipDao()

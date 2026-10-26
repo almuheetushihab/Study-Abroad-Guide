@@ -4,13 +4,19 @@ import com.shihab.studyabroad.domain.model.Eligibility
 import com.shihab.studyabroad.domain.model.FundingType
 import com.shihab.studyabroad.domain.model.Scholarship
 import com.shihab.studyabroad.domain.model.ScholarshipStatus
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class GetScholarshipStatusUseCaseTest {
 
-    private val useCase = GetScholarshipStatusUseCase()
+    private val fixedClock = object : Clock {
+        override fun now(): Instant = Instant.fromEpochMilliseconds(1000L)
+    }
+
+    private val useCase = GetScholarshipStatusUseCase(fixedClock)
 
     private val sampleScholarship = Scholarship(
         id = "test-scholarship",

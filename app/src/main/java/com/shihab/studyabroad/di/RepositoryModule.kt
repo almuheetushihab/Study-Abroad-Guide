@@ -3,6 +3,7 @@ package com.shihab.studyabroad.di
 import com.shihab.studyabroad.core.common.AnalyticsTracker
 import com.shihab.studyabroad.core.common.AndroidUrlOpener
 import com.shihab.studyabroad.core.common.CrashReporter
+import com.shihab.studyabroad.core.common.PhoneAuthLauncher
 import com.shihab.studyabroad.core.common.UrlOpener
 import com.shihab.studyabroad.data.local.datastore.UserPreferencesRepositoryImpl
 import com.shihab.studyabroad.data.repository.AndroidPhoneAuthLauncher
@@ -10,16 +11,17 @@ import com.shihab.studyabroad.data.repository.ChecklistRepositoryImpl
 import com.shihab.studyabroad.data.repository.FakeCountryRepository
 import com.shihab.studyabroad.data.repository.FakeScholarshipRepository
 import com.shihab.studyabroad.data.repository.FakeUniversityRepository
-import com.shihab.studyabroad.data.repository.FakeUserProfileRepository
 import com.shihab.studyabroad.data.repository.FirebaseAnalyticsTracker
 import com.shihab.studyabroad.data.repository.FirebaseAuthRepository
 import com.shihab.studyabroad.data.repository.FirebaseCrashReporter
+import com.shihab.studyabroad.data.repository.LocalDataCleanerImpl
 import com.shihab.studyabroad.data.repository.ReportRepositoryImpl
 import com.shihab.studyabroad.data.repository.SavedRepositoryImpl
+import com.shihab.studyabroad.data.repository.UserProfileRepositoryImpl
 import com.shihab.studyabroad.domain.repository.AuthRepository
 import com.shihab.studyabroad.domain.repository.ChecklistRepository
 import com.shihab.studyabroad.domain.repository.CountryRepository
-import com.shihab.studyabroad.domain.repository.PhoneAuthLauncher
+import com.shihab.studyabroad.domain.repository.LocalDataCleaner
 import com.shihab.studyabroad.domain.repository.ReportRepository
 import com.shihab.studyabroad.domain.repository.SavedRepository
 import com.shihab.studyabroad.domain.repository.ScholarshipRepository
@@ -39,6 +41,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindUserPreferencesRepository(impl: UserPreferencesRepositoryImpl): UserPreferencesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindLocalDataCleaner(impl: LocalDataCleanerImpl): LocalDataCleaner
 
     @Binds
     @Singleton
@@ -70,7 +76,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindUserProfileRepository(fakeUserProfileRepository: FakeUserProfileRepository): UserProfileRepository
+    abstract fun bindUserProfileRepository(userProfileRepositoryImpl: UserProfileRepositoryImpl): UserProfileRepository
 
     @Binds
     @Singleton

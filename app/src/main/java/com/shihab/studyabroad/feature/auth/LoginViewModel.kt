@@ -1,6 +1,5 @@
 package com.shihab.studyabroad.feature.auth
 
-import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shihab.studyabroad.R
@@ -8,7 +7,6 @@ import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.core.common.AuthErrorMapper
 import com.shihab.studyabroad.core.ui.UiText
 import com.shihab.studyabroad.domain.repository.AuthRepository
-import com.shihab.studyabroad.domain.repository.PhoneAuthLauncher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -19,17 +17,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository, private val phoneAuthLauncher: PhoneAuthLauncher) :
-    ViewModel() {
+class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState.Content())
     val uiState: StateFlow<LoginUiState.Content> = _uiState.asStateFlow()
 
     private var countdownJob: Job? = null
-
-    fun registerActivity(activity: Activity?) {
-        phoneAuthLauncher.registerActivity(activity)
-    }
 
     fun onPhoneNumberChanged(number: String) {
         _uiState.value = _uiState.value.copy(

@@ -4,7 +4,7 @@ import com.shihab.studyabroad.core.common.AppResult
 import com.shihab.studyabroad.domain.model.AuthProvider
 import com.shihab.studyabroad.domain.model.DeleteAccountResult
 import com.shihab.studyabroad.domain.repository.AuthRepository
-import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
+import com.shihab.studyabroad.domain.repository.LocalDataCleaner
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -17,16 +17,16 @@ import org.junit.Test
 class DeleteAccountUseCaseTest {
 
     private lateinit var authRepository: AuthRepository
-    private lateinit var userPreferencesRepository: UserPreferencesRepository
+    private lateinit var localDataCleaner: LocalDataCleaner
     private lateinit var deleteAccountUseCase: DeleteAccountUseCase
 
     @Before
     fun setUp() {
         authRepository = mockk(relaxed = true)
-        userPreferencesRepository = mockk(relaxed = true)
+        localDataCleaner = mockk(relaxed = true)
         deleteAccountUseCase = DeleteAccountUseCase(
             authRepository = authRepository,
-            userPreferencesRepository = userPreferencesRepository,
+            localDataCleaner = localDataCleaner,
         )
     }
 
@@ -38,7 +38,7 @@ class DeleteAccountUseCaseTest {
 
         assertEquals(DeleteAccountResult.Success, result)
         coVerify(exactly = 1) { authRepository.deleteAccount() }
-        coVerify(exactly = 1) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 1) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test
@@ -49,7 +49,7 @@ class DeleteAccountUseCaseTest {
 
         assertEquals(DeleteAccountResult.ReauthenticationRequired(AuthProvider.PHONE), result)
         coVerify(exactly = 1) { authRepository.deleteAccount() }
-        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 0) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test
@@ -61,7 +61,7 @@ class DeleteAccountUseCaseTest {
 
         assertEquals(DeleteAccountResult.Error(error), result)
         coVerify(exactly = 1) { authRepository.deleteAccount() }
-        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 0) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test
@@ -72,7 +72,7 @@ class DeleteAccountUseCaseTest {
 
         assertTrue(result is AppResult.Success)
         coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithGoogle() }
-        coVerify(exactly = 1) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 1) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test
@@ -84,7 +84,7 @@ class DeleteAccountUseCaseTest {
 
         assertTrue(result is AppResult.Error)
         coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithGoogle() }
-        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 0) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test
@@ -95,7 +95,7 @@ class DeleteAccountUseCaseTest {
 
         assertTrue(result is AppResult.Success)
         coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithPhone("123456") }
-        coVerify(exactly = 1) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 1) { localDataCleaner.clearAllLocalData() }
     }
 
     @Test
@@ -107,6 +107,6 @@ class DeleteAccountUseCaseTest {
 
         assertTrue(result is AppResult.Error)
         coVerify(exactly = 1) { authRepository.reauthenticateAndDeleteWithPhone("123456") }
-        coVerify(exactly = 0) { userPreferencesRepository.clearAllData() }
+        coVerify(exactly = 0) { localDataCleaner.clearAllLocalData() }
     }
 }

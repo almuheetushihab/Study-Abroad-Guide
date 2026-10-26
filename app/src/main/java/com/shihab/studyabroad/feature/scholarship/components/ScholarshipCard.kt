@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.designsystem.component.StatusChip
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.Scholarship
 import com.shihab.studyabroad.domain.model.ScholarshipStatus
 
@@ -75,7 +75,7 @@ fun ScholarshipCard(scholarship: Scholarship, status: ScholarshipStatus, onClick
 fun ScholarshipCardPreview() {
     StudyAbroadTheme {
         ScholarshipCard(
-            scholarship = SampleData.sampleScholarships.first(),
+            scholarship = PreviewData.sampleScholarships.first(),
             status = ScholarshipStatus.OPEN,
             onClick = {},
         )

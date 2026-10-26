@@ -26,8 +26,8 @@ import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.FilterChipRow
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.feature.country.components.CountryCard
 
 @Composable
@@ -133,7 +133,7 @@ fun CountryListScreenContentPreview() {
         CountryListScreen(
             uiState = CountryListUiState.Content(
                 CountryListData(
-                    countries = SampleData.sampleCountries,
+                    countries = PreviewData.sampleCountries,
                 ),
             ),
         )

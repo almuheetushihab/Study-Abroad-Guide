@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FakeUserProfileRepository @Inject constructor(private val userPreferencesRepository: UserPreferencesRepository) :
+class UserProfileRepositoryImpl @Inject constructor(private val userPreferencesRepository: UserPreferencesRepository) :
     UserProfileRepository {
 
     override fun getUserProfile(): Flow<UserProfile?> = userPreferencesRepository.userProfile

@@ -47,8 +47,8 @@ import com.shihab.studyabroad.core.designsystem.component.StaleBadge
 import com.shihab.studyabroad.core.designsystem.component.VerifiedFooter
 import com.shihab.studyabroad.core.designsystem.component.WarningBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.CountryTier
 
 @Composable
@@ -295,9 +295,9 @@ fun CountryDetailScreenPreview() {
         CountryDetailScreen(
             uiState = CountryDetailUiState.Content(
                 CountryDetailData(
-                    country = SampleData.sampleCountries.first(),
-                    scholarships = SampleData.sampleScholarships.take(2),
-                    universities = SampleData.sampleUniversities.take(2),
+                    country = PreviewData.sampleCountries.first(),
+                    scholarships = PreviewData.sampleScholarships.take(2),
+                    universities = PreviewData.sampleUniversities.take(2),
                     isStale = true,
                 ),
             ),

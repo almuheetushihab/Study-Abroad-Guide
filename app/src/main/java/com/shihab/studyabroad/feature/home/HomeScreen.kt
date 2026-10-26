@@ -23,8 +23,8 @@ import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.feature.home.components.DeadlineSoonSection
 import com.shihab.studyabroad.feature.home.components.ProgressCard
 import com.shihab.studyabroad.feature.home.components.QuickSummarySection
@@ -132,10 +132,10 @@ fun HomeScreenContentPreview() {
             uiState = HomeUiState.Content(
                 HomeData(
                     progressPercentage = 60,
-                    topFullyFundedScholarships = SampleData.sampleScholarships.take(3),
-                    topLowCostCountries = SampleData.sampleCountries.take(3),
-                    topPrFriendlyCountries = SampleData.sampleCountries.take(3),
-                    deadlineSoonScholarships = SampleData.sampleScholarships.take(3),
+                    topFullyFundedScholarships = PreviewData.sampleScholarships.take(3),
+                    topLowCostCountries = PreviewData.sampleCountries.take(3),
+                    topPrFriendlyCountries = PreviewData.sampleCountries.take(3),
+                    deadlineSoonScholarships = PreviewData.sampleScholarships.take(3),
                 ),
             ),
         )

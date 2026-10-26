@@ -28,8 +28,8 @@ import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.feature.country.components.ComparisonSortColumn
 import com.shihab.studyabroad.feature.country.components.CountryComparisonTable
 import com.shihab.studyabroad.feature.country.components.CountryCostBarChart
@@ -146,9 +146,9 @@ fun CountryComparisonScreenPreview() {
         CountryComparisonScreen(
             uiState = CountryComparisonUiState.Content(
                 CountryComparisonData(
-                    availableCountries = SampleData.sampleCountries,
-                    selectedCountryIds = SampleData.sampleCountries.take(3).map { it.id }.toSet(),
-                    comparedCountries = SampleData.sampleCountries.take(3),
+                    availableCountries = PreviewData.sampleCountries,
+                    selectedCountryIds = PreviewData.sampleCountries.take(3).map { it.id }.toSet(),
+                    comparedCountries = PreviewData.sampleCountries.take(3),
                 ),
             ),
         )

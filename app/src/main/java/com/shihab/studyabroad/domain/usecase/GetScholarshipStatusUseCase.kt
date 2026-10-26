@@ -11,10 +11,7 @@ import kotlinx.datetime.toLocalDateTime
  * Computes dynamic scholarship status (OPEN, OPENING_SOON, CLOSED).
  * Status is NEVER stored in database or domain model.
  */
-class GetScholarshipStatusUseCase(
-    private val clock: Clock = Clock.System,
-    private val timeZone: TimeZone = TimeZone.currentSystemDefault(),
-) {
+class GetScholarshipStatusUseCase(private val clock: Clock, private val timeZone: TimeZone = TimeZone.currentSystemDefault()) {
     operator fun invoke(scholarship: Scholarship, overrideToday: LocalDate? = null): ScholarshipStatus {
         val today = overrideToday ?: clock.now().toLocalDateTime(timeZone).date
         return computeStatus(

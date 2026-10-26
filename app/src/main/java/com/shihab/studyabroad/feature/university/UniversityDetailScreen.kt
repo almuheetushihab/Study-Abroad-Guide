@@ -46,8 +46,8 @@ import com.shihab.studyabroad.core.designsystem.component.ReportWrongInfoDialog
 import com.shihab.studyabroad.core.designsystem.component.StaleBadge
 import com.shihab.studyabroad.core.designsystem.component.VerifiedFooter
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.RequirementStatus
 import com.shihab.studyabroad.domain.usecase.RequirementComparisonResult
 import com.shihab.studyabroad.feature.university.components.RequirementMeter
@@ -258,7 +258,7 @@ fun UniversityDetailScreenPreview() {
         UniversityDetailScreen(
             uiState = UniversityDetailUiState.Content(
                 UniversityDetailData(
-                    university = SampleData.sampleUniversities.first(),
+                    university = PreviewData.sampleUniversities.first(),
                     requirementComparison = RequirementComparisonResult(
                         cgpaStatus = RequirementStatus.OK,
                         testStatus = RequirementStatus.LOW,

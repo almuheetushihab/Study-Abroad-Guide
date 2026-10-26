@@ -22,5 +22,4 @@ interface UserPreferencesRepository {
     suspend fun setNewScholarshipsEnabled(enabled: Boolean)
     suspend fun setAppNewsEnabled(enabled: Boolean)
     suspend fun clearSession()
-    suspend fun clearAllData()
 }

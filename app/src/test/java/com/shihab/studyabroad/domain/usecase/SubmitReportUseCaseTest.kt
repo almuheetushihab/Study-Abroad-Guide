@@ -8,11 +8,17 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
 class SubmitReportUseCaseTest {
+
+    private val fixedClock = object : Clock {
+        override fun now(): Instant = Instant.fromEpochMilliseconds(1700000000000L)
+    }
 
     private lateinit var reportRepository: ReportRepository
     private lateinit var analyticsTracker: AnalyticsTracker
@@ -25,6 +31,7 @@ class SubmitReportUseCaseTest {
         submitReportUseCase = SubmitReportUseCase(
             reportRepository = reportRepository,
             analyticsTracker = analyticsTracker,
+            clock = fixedClock,
         )
     }
 
@@ -44,7 +51,8 @@ class SubmitReportUseCaseTest {
                 match {
                     it.refType == ReportRefType.SCHOLARSHIP &&
                         it.refId == "sch_stipendium_hungaricum" &&
-                        it.message == "Deadline is incorrect on the page"
+                        it.message == "Deadline is incorrect on the page" &&
+                        it.createdAt == 1700000000000L
                 },
             )
         }

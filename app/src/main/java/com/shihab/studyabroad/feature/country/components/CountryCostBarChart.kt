@@ -21,8 +21,8 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.Country
 
 /**
@@ -123,6 +123,6 @@ private fun parseCostValue(text: String): Int {
 @Composable
 fun CountryCostBarChartPreview() {
     StudyAbroadTheme {
-        CountryCostBarChart(selectedCountries = SampleData.sampleCountries.take(3))
+        CountryCostBarChart(selectedCountries = PreviewData.sampleCountries.take(3))
     }
 }

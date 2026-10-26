@@ -1,4 +1,4 @@
-package com.shihab.studyabroad.domain.repository
+package com.shihab.studyabroad.core.common
 
 import android.app.Activity
 

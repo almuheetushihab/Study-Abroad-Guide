@@ -22,8 +22,8 @@ import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.FilterChipRow
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.ScholarshipStatus
 import com.shihab.studyabroad.feature.scholarship.components.ScholarshipCard
 
@@ -148,7 +148,7 @@ fun ScholarshipListScreenContentPreview() {
         ScholarshipListScreen(
             uiState = ScholarshipListUiState.Content(
                 ScholarshipListData(
-                    items = SampleData.sampleScholarships.map {
+                    items = PreviewData.sampleScholarships.map {
                         ScholarshipItemState(it, ScholarshipStatus.OPEN)
                     },
                 ),

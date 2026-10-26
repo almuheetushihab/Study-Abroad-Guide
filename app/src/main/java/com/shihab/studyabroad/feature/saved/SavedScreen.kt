@@ -27,8 +27,8 @@ import com.shihab.studyabroad.core.designsystem.component.AppLoadingWheel
 import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.domain.model.PopulatedSavedItems
 import com.shihab.studyabroad.domain.model.SavedType
 import com.shihab.studyabroad.feature.saved.components.SavedGroupSection
@@ -207,9 +207,9 @@ fun SavedScreenPreview() {
         SavedScreen(
             uiState = SavedUiState.Content(
                 data = PopulatedSavedItems(
-                    countries = SampleData.sampleCountries.take(2),
-                    universities = SampleData.sampleUniversities.take(2),
-                    scholarships = SampleData.sampleScholarships.take(2),
+                    countries = PreviewData.sampleCountries.take(2),
+                    universities = PreviewData.sampleUniversities.take(2),
+                    scholarships = PreviewData.sampleScholarships.take(2),
                 ),
             ),
         )

@@ -1,5 +1,7 @@
 package com.shihab.studyabroad.domain.usecase
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -7,7 +9,11 @@ import org.junit.Test
 
 class IsRecordStaleUseCaseTest {
 
-    private val useCase = IsRecordStaleUseCase()
+    private val fixedClock = object : Clock {
+        override fun now(): Instant = Instant.fromEpochMilliseconds(1000L)
+    }
+
+    private val useCase = IsRecordStaleUseCase(fixedClock)
     private val today = LocalDate(2025, 4, 15)
 
     @Test

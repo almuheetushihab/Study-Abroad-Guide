@@ -7,11 +7,13 @@ import com.shihab.studyabroad.domain.model.Track
 import com.shihab.studyabroad.domain.repository.ChecklistRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Clock
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ChecklistRepositoryImpl @Inject constructor(private val checklistProgressDao: ChecklistProgressDao) : ChecklistRepository {
+class ChecklistRepositoryImpl @Inject constructor(private val checklistProgressDao: ChecklistProgressDao, private val clock: Clock) :
+    ChecklistRepository {
 
     override fun getChecklistItems(track: Track?): Flow<List<ChecklistItem>> {
         val baseItems = getItemsForTrack(track)
@@ -31,7 +33,7 @@ class ChecklistRepositoryImpl @Inject constructor(private val checklistProgressD
             ChecklistProgressEntity(
                 itemId = id,
                 isChecked = newChecked,
-                updatedAt = System.currentTimeMillis(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             ),
         )
     }

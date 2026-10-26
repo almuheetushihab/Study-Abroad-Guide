@@ -1,7 +1,6 @@
 package com.shihab.studyabroad.feature.auth
 
 import app.cash.turbine.test
-import com.shihab.studyabroad.data.repository.AndroidPhoneAuthLauncher
 import com.shihab.studyabroad.data.repository.FakeAuthRepository
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import io.mockk.coEvery
@@ -24,17 +23,14 @@ class LoginViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
     private val userPreferencesRepository: UserPreferencesRepository = mockk(relaxed = true)
     private lateinit var fakeAuthRepository: FakeAuthRepository
-    private lateinit var phoneAuthLauncher: AndroidPhoneAuthLauncher
     private lateinit var viewModel: LoginViewModel
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         fakeAuthRepository = FakeAuthRepository(userPreferencesRepository)
-        phoneAuthLauncher = AndroidPhoneAuthLauncher()
         viewModel = LoginViewModel(
             authRepository = fakeAuthRepository,
-            phoneAuthLauncher = phoneAuthLauncher,
         )
     }
 

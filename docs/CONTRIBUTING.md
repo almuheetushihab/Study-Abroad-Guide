@@ -20,6 +20,14 @@ Follow Conventional Commits style:
 
 ---
 
+## 🗄️ Database Migrations
+From the first public release:
+- Every Room schema change needs an explicit `Migration` implementation.
+- Updated schema JSON files must be committed under `app/schemas/`.
+- Schema migrations must be accompanied by an automated migration test verifying data preservation.
+
+---
+
 ## ✅ Definition of Done (DoD)
 Before opening or merging a Pull Request, ensure all the following criteria are met:
 

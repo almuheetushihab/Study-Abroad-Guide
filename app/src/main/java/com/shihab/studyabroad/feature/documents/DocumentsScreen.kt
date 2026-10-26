@@ -23,8 +23,8 @@ import com.shihab.studyabroad.core.designsystem.component.AppTopBar
 import com.shihab.studyabroad.core.designsystem.component.OfflineBanner
 import com.shihab.studyabroad.core.designsystem.component.ProgressBarWithLabel
 import com.shihab.studyabroad.core.designsystem.theme.StudyAbroadTheme
+import com.shihab.studyabroad.core.ui.PreviewData
 import com.shihab.studyabroad.core.ui.ThemePreviews
-import com.shihab.studyabroad.data.repository.SampleData
 import com.shihab.studyabroad.feature.documents.components.AttestationStepsSection
 import com.shihab.studyabroad.feature.documents.components.DocumentItemRow
 
@@ -123,7 +123,7 @@ fun DocumentsScreenPreview() {
         DocumentsScreen(
             uiState = DocumentsUiState.Content(
                 data = DocumentsData(
-                    items = SampleData.sampleChecklistItems,
+                    items = PreviewData.sampleChecklistItems,
                     completedCount = 2,
                     totalCount = 4,
                     progressPercentage = 50,

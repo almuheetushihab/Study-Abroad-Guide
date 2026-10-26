@@ -1,7 +1,7 @@
 package com.shihab.studyabroad.data.repository
 
 import android.app.Activity
-import com.shihab.studyabroad.domain.repository.PhoneAuthLauncher
+import com.shihab.studyabroad.core.common.PhoneAuthLauncher
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 import javax.inject.Singleton
