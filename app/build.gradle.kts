@@ -21,7 +21,7 @@ ksp {
 
 android {
     namespace = "com.shihab.studyabroad"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.shihab.studyabroad"
