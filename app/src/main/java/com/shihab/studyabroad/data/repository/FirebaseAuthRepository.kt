@@ -5,6 +5,7 @@ import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialCancellationException
+import androidx.credentials.exceptions.NoCredentialException
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.FirebaseException
@@ -186,6 +187,9 @@ class FirebaseAuthRepository @Inject constructor(
         } catch (e: GetCredentialCancellationException) {
             logAndReport(e)
             AppResult.Error(e)
+        } catch (e: NoCredentialException) {
+            logAndReport(e)
+            AppResult.Error(e)
         } catch (e: Exception) {
             logAndReport(e)
             AppResult.Error(e)
@@ -283,6 +287,9 @@ class FirebaseAuthRepository @Inject constructor(
                     }
             }
         } catch (e: GetCredentialCancellationException) {
+            logAndReport(e)
+            AppResult.Error(e)
+        } catch (e: NoCredentialException) {
             logAndReport(e)
             AppResult.Error(e)
         } catch (e: Exception) {
