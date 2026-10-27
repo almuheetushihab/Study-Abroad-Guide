@@ -28,6 +28,12 @@ From the first public release:
 
 ---
 
+## 🔍 Static Code Analysis & Detekt Note
+- **Android Lint & Spotless:** Active and checked on every build.
+- **Detekt:** `detekt 1.23.8` is currently incompatible with AGP 9 built-in Kotlin (requires deprecated `android.newDsl=false` and `android.builtInKotlin=false` flags). Detekt has been temporarily removed from the Gradle build in Stage 1 of the toolchain upgrade and will be re-added once a stable Detekt release with native AGP 9 support is published.
+
+---
+
 ## ✅ Definition of Done (DoD)
 Before opening or merging a Pull Request, ensure all the following criteria are met:
 
