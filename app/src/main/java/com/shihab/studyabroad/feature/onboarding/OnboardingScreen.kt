@@ -39,11 +39,13 @@ fun OnboardingScreen(
 ) {
     when (uiState) {
         is OnboardingUiState.Loading -> AppLoadingWheel(modifier = modifier)
+
         is OnboardingUiState.Error -> AppErrorContent(
             message = uiState.message.asString(),
             onRetry = onRetry,
             modifier = modifier,
         )
+
         is OnboardingUiState.Content -> {
             OnboardingContent(
                 uiState = uiState,

@@ -333,7 +333,9 @@ class FirebaseAuthRepository @Inject constructor(
         val providerId = user.providerData.firstOrNull { it.providerId != "firebase" }?.providerId
         return when (providerId) {
             GoogleAuthProvider.PROVIDER_ID -> AuthProvider.GOOGLE
+
             PhoneAuthProvider.PROVIDER_ID -> AuthProvider.PHONE
+
             else -> when {
                 !user.phoneNumber.isNullOrBlank() -> AuthProvider.PHONE
                 !user.email.isNullOrBlank() -> AuthProvider.GOOGLE

@@ -59,12 +59,14 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
                     )
                     startResendTimer()
                 }
+
                 is AppResult.Error -> {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         errorMessage = AuthErrorMapper.mapExceptionToUiText(result.throwable),
                     )
                 }
+
                 else -> {}
             }
         }
@@ -81,12 +83,14 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
                     _uiState.value = _uiState.value.copy(isLoading = false)
                     startResendTimer()
                 }
+
                 is AppResult.Error -> {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         errorMessage = AuthErrorMapper.mapExceptionToUiText(result.throwable),
                     )
                 }
+
                 else -> {}
             }
         }
@@ -110,12 +114,14 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
                         isSignedIn = true,
                     )
                 }
+
                 is AppResult.Error -> {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         errorMessage = AuthErrorMapper.mapExceptionToUiText(result.throwable),
                     )
                 }
+
                 else -> {}
             }
         }
@@ -131,12 +137,14 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
                         isSignedIn = true,
                     )
                 }
+
                 is AppResult.Error -> {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         errorMessage = AuthErrorMapper.mapExceptionToUiText(result.throwable),
                     )
                 }
+
                 else -> {}
             }
         }

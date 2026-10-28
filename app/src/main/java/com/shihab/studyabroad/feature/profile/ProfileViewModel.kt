@@ -136,11 +136,13 @@ class ProfileViewModel @Inject constructor(
                     isProcessing.value = false
                     onDeletedToOnboarding()
                 }
+
                 is DeleteAccountResult.ReauthenticationRequired -> {
                     isProcessing.value = false
                     reauthProvider.value = result.provider
                     showReauthDialog.value = true
                 }
+
                 is DeleteAccountResult.Error -> {
                     isProcessing.value = false
                     errorMessage.value = AuthErrorMapper.mapExceptionToUiText(result.throwable)
@@ -168,16 +170,19 @@ class ProfileViewModel @Inject constructor(
                             isProcessing.value = false
                             onDeletedToOnboarding()
                         }
+
                         is AppResult.Error -> {
                             isProcessing.value = false
                             errorMessage.value = AuthErrorMapper.mapExceptionToUiText(result.throwable)
                         }
+
                         else -> {
                             isProcessing.value = false
                         }
                     }
                 }
             }
+
             AuthProvider.PHONE, AuthProvider.UNKNOWN -> {
                 viewModelScope.launch {
                     val user = authRepository.currentUser.firstOrNull()
@@ -198,10 +203,12 @@ class ProfileViewModel @Inject constructor(
                     showOtpDialog.value = true
                     startResendCountdown()
                 }
+
                 is AppResult.Error -> {
                     isProcessing.value = false
                     errorMessage.value = AuthErrorMapper.mapExceptionToUiText(result.throwable)
                 }
+
                 else -> {
                     isProcessing.value = false
                 }
@@ -236,10 +243,12 @@ class ProfileViewModel @Inject constructor(
                     showOtpDialog.value = false
                     onDeletedToOnboarding()
                 }
+
                 is AppResult.Error -> {
                     isProcessing.value = false
                     errorMessage.value = AuthErrorMapper.mapExceptionToUiText(result.throwable)
                 }
+
                 else -> {
                     isProcessing.value = false
                 }

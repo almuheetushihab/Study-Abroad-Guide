@@ -56,11 +56,13 @@ fun ProfileSetupScreen(
 ) {
     when (uiState) {
         is ProfileSetupUiState.Loading -> AppLoadingWheel(modifier = modifier)
+
         is ProfileSetupUiState.Error -> AppErrorContent(
             message = uiState.message.asString(),
             onRetry = onRetry,
             modifier = modifier,
         )
+
         is ProfileSetupUiState.Content -> {
             ProfileSetupContent(
                 uiState = uiState,
@@ -140,6 +142,7 @@ private fun ProfileSetupContent(
                     onLevelChanged = onLevelChanged,
                     onSubjectChanged = onSubjectChanged,
                 )
+
                 2 -> Step2Scores(
                     formState = uiState.formState,
                     validationResult = uiState.validationResult,
@@ -148,12 +151,14 @@ private fun ProfileSetupContent(
                     onTestTypeChanged = onTestTypeChanged,
                     onTestScoreChanged = onTestScoreChanged,
                 )
+
                 3 -> Step3ExperienceAge(
                     formState = uiState.formState,
                     validationResult = uiState.validationResult,
                     onExperienceYearsChanged = onExperienceYearsChanged,
                     onAgeChanged = onAgeChanged,
                 )
+
                 4 -> Step4BudgetCountries(
                     formState = uiState.formState,
                     validationResult = uiState.validationResult,

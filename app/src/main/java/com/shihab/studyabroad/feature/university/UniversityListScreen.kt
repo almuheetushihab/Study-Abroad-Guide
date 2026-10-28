@@ -65,12 +65,15 @@ fun UniversityListScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is UniversityListUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is UniversityListUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is UniversityListUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is UniversityListUiState.Content -> UniversityListContent(
                 data = uiState.data,
                 onSearchQueryChange = onSearchQueryChange,
@@ -79,6 +82,7 @@ fun UniversityListScreen(
                 onUniversityClick = onUniversityClick,
                 modifier = contentModifier,
             )
+
             is UniversityListUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 UniversityListContent(

@@ -61,18 +61,22 @@ fun HomeScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is HomeUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is HomeUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is HomeUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is HomeUiState.Content -> HomeContent(
                 data = uiState.data,
                 onScholarshipClick = onScholarshipClick,
                 onCountryClick = onCountryClick,
                 modifier = contentModifier,
             )
+
             is HomeUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 HomeContent(

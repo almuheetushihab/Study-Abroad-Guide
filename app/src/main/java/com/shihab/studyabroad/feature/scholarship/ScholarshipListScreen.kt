@@ -61,12 +61,15 @@ fun ScholarshipListScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is ScholarshipListUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is ScholarshipListUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is ScholarshipListUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is ScholarshipListUiState.Content -> ScholarshipListContent(
                 data = uiState.data,
                 onSelectCountryFilter = onSelectCountryFilter,
@@ -76,6 +79,7 @@ fun ScholarshipListScreen(
                 onScholarshipClick = onScholarshipClick,
                 modifier = contentModifier,
             )
+
             is ScholarshipListUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 ScholarshipListContent(

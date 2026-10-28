@@ -67,18 +67,22 @@ fun CountryComparisonScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is CountryComparisonUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is CountryComparisonUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is CountryComparisonUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is CountryComparisonUiState.Content -> ComparisonContent(
                 data = uiState.data,
                 onToggleCountry = onToggleCountry,
                 onSortColumnClick = onSortColumnClick,
                 modifier = contentModifier,
             )
+
             is CountryComparisonUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 ComparisonContent(

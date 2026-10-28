@@ -32,11 +32,13 @@ fun TrackSelectScreen(
 ) {
     when (uiState) {
         is TrackSelectUiState.Loading -> AppLoadingWheel(modifier = modifier)
+
         is TrackSelectUiState.Error -> AppErrorContent(
             message = uiState.message.asString(),
             onRetry = onRetry,
             modifier = modifier,
         )
+
         is TrackSelectUiState.Content -> {
             TrackSelectContent(
                 uiState = uiState,

@@ -113,12 +113,15 @@ fun CountryDetailScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is CountryDetailUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is CountryDetailUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is CountryDetailUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is CountryDetailUiState.Content -> CountryDetailContent(
                 data = uiState.data,
                 onScholarshipClick = onScholarshipClick,
@@ -127,6 +130,7 @@ fun CountryDetailScreen(
                 onOpenSource = onOpenSource,
                 modifier = contentModifier,
             )
+
             is CountryDetailUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 CountryDetailContent(

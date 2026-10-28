@@ -54,6 +54,7 @@ fun TrackScreen(
 
         when (selectedTabIndex) {
             0 -> DocumentsRoute(modifier = Modifier.padding())
+
             1 -> SavedRoute(
                 onNavigateToCountryDetail = onNavigateToCountryDetail,
                 onNavigateToUniversityDetail = onNavigateToUniversityDetail,
