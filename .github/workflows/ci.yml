@@ -63,7 +63,7 @@ jobs:
               ],
               "configuration_version": "1"
             }
-            EOF
+          EOF
             exit 0
           fi
           echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > app/google-services.json
