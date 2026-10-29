@@ -102,11 +102,13 @@ private fun RequirementStatusChip(status: RequirementStatus) {
             MaterialTheme.colorScheme.onPrimaryContainer,
             R.string.status_ok,
         )
+
         RequirementStatus.LOW -> Triple(
             MaterialTheme.colorScheme.errorContainer,
             MaterialTheme.colorScheme.onErrorContainer,
             R.string.status_low,
         )
+
         RequirementStatus.UNKNOWN -> Triple(
             MaterialTheme.colorScheme.surfaceVariant,
             MaterialTheme.colorScheme.onSurfaceVariant,

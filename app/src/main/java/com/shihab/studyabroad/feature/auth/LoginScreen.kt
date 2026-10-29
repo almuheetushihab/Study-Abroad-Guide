@@ -33,11 +33,13 @@ fun LoginScreen(
 ) {
     when (uiState) {
         is LoginUiState.Loading -> AppLoadingWheel(modifier = modifier)
+
         is LoginUiState.Error -> AppErrorContent(
             message = uiState.message.asString(),
             onRetry = onRetry,
             modifier = modifier,
         )
+
         is LoginUiState.Content -> {
             LoginContent(
                 uiState = uiState,
@@ -85,6 +87,7 @@ private fun LoginContent(
                         errorMessage = uiState.errorMessage,
                     )
                 }
+
                 LoginStep.OTP_ENTRY -> {
                     OtpVerifyForm(
                         phoneNumber = uiState.phoneNumber,

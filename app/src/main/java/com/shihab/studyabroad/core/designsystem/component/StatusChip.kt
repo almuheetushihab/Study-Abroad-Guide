@@ -41,12 +41,14 @@ fun StatusChip(status: ScholarshipStatus, modifier: Modifier = Modifier) {
             Icons.Default.CheckCircle,
             stringResource(R.string.status_open),
         )
+
         ScholarshipStatus.OPENING_SOON -> Quadruple(
             statusColors.openingSoonContainerColor,
             statusColors.onOpeningSoonContainerColor,
             Icons.Default.Schedule,
             stringResource(R.string.status_opening_soon),
         )
+
         ScholarshipStatus.CLOSED -> Quadruple(
             statusColors.closedContainerColor,
             statusColors.onClosedContainerColor,

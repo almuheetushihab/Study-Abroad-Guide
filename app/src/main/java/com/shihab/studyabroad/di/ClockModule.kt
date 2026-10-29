@@ -15,7 +15,10 @@ object ClockModule {
 
     @Provides
     @Singleton
-    fun provideClock(): Clock = Clock.System
+    fun provideClock(): Clock = object : Clock {
+        override fun now(): kotlinx.datetime.Instant =
+            kotlinx.datetime.Instant.fromEpochMilliseconds(kotlin.time.Clock.System.now().toEpochMilliseconds())
+    }
 
     @Provides
     @Singleton

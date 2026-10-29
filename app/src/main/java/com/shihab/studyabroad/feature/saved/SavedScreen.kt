@@ -100,15 +100,18 @@ fun SavedScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is SavedUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is SavedUiState.Empty -> AppEmptyContent(
                 message = stringResource(id = R.string.saved_empty_desc),
                 modifier = contentModifier,
             )
+
             is SavedUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is SavedUiState.Content -> SavedContent(
                 data = uiState.data,
                 onNavigateToCountryDetail = onNavigateToCountryDetail,
@@ -117,6 +120,7 @@ fun SavedScreen(
                 onUnsave = handleUnsave,
                 modifier = contentModifier,
             )
+
             is SavedUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 SavedContent(

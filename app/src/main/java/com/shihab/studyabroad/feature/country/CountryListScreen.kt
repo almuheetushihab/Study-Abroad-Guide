@@ -74,18 +74,22 @@ fun CountryListScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is CountryListUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is CountryListUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is CountryListUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is CountryListUiState.Content -> CountryListContent(
                 data = uiState.data,
                 onSelectTierFilter = onSelectTierFilter,
                 onCountryClick = onCountryClick,
                 modifier = contentModifier,
             )
+
             is CountryListUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 CountryListContent(

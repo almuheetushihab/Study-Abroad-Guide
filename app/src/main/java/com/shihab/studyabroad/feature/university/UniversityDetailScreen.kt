@@ -105,18 +105,22 @@ fun UniversityDetailScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is UniversityDetailUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is UniversityDetailUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is UniversityDetailUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is UniversityDetailUiState.Content -> UniversityDetailContent(
                 data = uiState.data,
                 onSubmitReport = onSubmitReport,
                 onOpenWebsite = onOpenWebsite,
                 modifier = contentModifier,
             )
+
             is UniversityDetailUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 UniversityDetailContent(

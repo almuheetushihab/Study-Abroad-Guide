@@ -59,18 +59,22 @@ fun DocumentsScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is DocumentsUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is DocumentsUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is DocumentsUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is DocumentsUiState.Content -> DocumentsContent(
                 data = uiState.data,
                 onToggleItem = onToggleItem,
                 onVisitMoFA = onVisitMoFA,
                 modifier = contentModifier,
             )
+
             is DocumentsUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 DocumentsContent(

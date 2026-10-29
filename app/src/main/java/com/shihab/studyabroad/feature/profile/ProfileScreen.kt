@@ -302,6 +302,7 @@ fun ProfileScreen(
 
         when (uiState) {
             is ProfileUiState.Loading -> AppLoadingWheel()
+
             is ProfileUiState.Content -> {
                 val profile = uiState.userProfile
 

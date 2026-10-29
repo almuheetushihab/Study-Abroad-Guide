@@ -108,12 +108,15 @@ fun ScholarshipDetailScreen(
         val contentModifier = Modifier.padding(innerPadding)
         when (uiState) {
             is ScholarshipDetailUiState.Loading -> AppLoadingWheel(modifier = contentModifier)
+
             is ScholarshipDetailUiState.Empty -> AppEmptyContent(modifier = contentModifier)
+
             is ScholarshipDetailUiState.Error -> AppErrorContent(
                 message = uiState.message.asString(),
                 onRetry = onRetry,
                 modifier = contentModifier,
             )
+
             is ScholarshipDetailUiState.Content -> ScholarshipDetailContent(
                 data = uiState.data,
                 onSetReminderDays = onSetReminderDays,
@@ -121,6 +124,7 @@ fun ScholarshipDetailScreen(
                 onOpenApplyUrl = onOpenApplyUrl,
                 modifier = contentModifier,
             )
+
             is ScholarshipDetailUiState.OfflineStale -> Column(modifier = contentModifier) {
                 OfflineBanner(lastUpdated = "2025-01-15")
                 ScholarshipDetailContent(

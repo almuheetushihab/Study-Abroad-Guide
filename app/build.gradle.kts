@@ -1,18 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.spotless)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
 }
 
 kotlin {
-    jvmToolchain(17)
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
 
 ksp {
@@ -21,7 +21,7 @@ ksp {
 
 android {
     namespace = "com.shihab.studyabroad"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.shihab.studyabroad"
@@ -75,11 +75,6 @@ spotless {
         target("*.gradle.kts")
         ktlint()
     }
-}
-
-detekt {
-    buildUponDefaultConfig = true
-    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
 }
 
 dependencies {
