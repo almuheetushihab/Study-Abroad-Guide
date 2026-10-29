@@ -25,8 +25,46 @@ jobs:
           GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: |
           if [ -z "$GOOGLE_SERVICES_JSON_BASE64" ]; then
-            echo "Error: GOOGLE_SERVICES_JSON secret is missing or empty!"
-            exit 1
+            echo "Warning: GOOGLE_SERVICES_JSON is missing. Writing CI placeholder file."
+            cat <<'EOF' > app/google-services.json
+            {
+              "project_info": {
+                "project_number": "000000000000",
+                "project_id": "ci-placeholder",
+                "storage_bucket": "ci-placeholder.appspot.com"
+              },
+              "client": [
+                {
+                  "client_info": {
+                    "mobilesdk_app_id": "1:000000000000:android:placeholder",
+                    "android_client_info": {
+                      "package_name": "com.shihab.studyabroad"
+                    }
+                  },
+                  "api_key": [
+                    {
+                      "current_key": "DUMMY_KEY"
+                    }
+                  ]
+                },
+                {
+                  "client_info": {
+                    "mobilesdk_app_id": "1:000000000000:android:placeholderdebug",
+                    "android_client_info": {
+                      "package_name": "com.shihab.studyabroad.debug"
+                    }
+                  },
+                  "api_key": [
+                    {
+                      "current_key": "DUMMY_KEY"
+                    }
+                  ]
+                }
+              ],
+              "configuration_version": "1"
+            }
+            EOF
+            exit 0
           fi
           echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > app/google-services.json
 
