@@ -35,7 +35,7 @@ object DatabaseModule {
             "study_abroad.db",
         )
         if (BuildConfig.DEBUG) {
-            builder.fallbackToDestructiveMigration()
+            builder.fallbackToDestructiveMigration(dropAllTables = true)
         }
         return builder.build()
     }

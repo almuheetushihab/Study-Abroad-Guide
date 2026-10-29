@@ -26,6 +26,7 @@ import com.shihab.studyabroad.core.common.PhoneNumberNormalizer
 import com.shihab.studyabroad.domain.model.AuthProvider
 import com.shihab.studyabroad.domain.model.AuthUser
 import com.shihab.studyabroad.domain.model.DeleteAccountResult
+import com.shihab.studyabroad.domain.model.NoGoogleAccountException
 import com.shihab.studyabroad.domain.repository.AuthRepository
 import com.shihab.studyabroad.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -189,7 +190,7 @@ class FirebaseAuthRepository @Inject constructor(
             AppResult.Error(e)
         } catch (e: NoCredentialException) {
             logAndReport(e)
-            AppResult.Error(e)
+            AppResult.Error(NoGoogleAccountException(e.message ?: "No Google account found on device"))
         } catch (e: Exception) {
             logAndReport(e)
             AppResult.Error(e)
@@ -291,7 +292,7 @@ class FirebaseAuthRepository @Inject constructor(
             AppResult.Error(e)
         } catch (e: NoCredentialException) {
             logAndReport(e)
-            AppResult.Error(e)
+            AppResult.Error(NoGoogleAccountException(e.message ?: "No Google account found on device"))
         } catch (e: Exception) {
             logAndReport(e)
             AppResult.Error(e)
