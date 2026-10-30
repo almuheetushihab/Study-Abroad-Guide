@@ -61,6 +61,8 @@
     <string name="error_auth_cancelled">সাইন ইন বাতিল করা হয়েছে।</string>
     <string name="error_auth_requires_recent_login">নিরাপত্তার স্বার্থে, আপনার অ্যাকাউন্ট মোছার পূর্বে অনুগ্রহ করে পুনরায় সাইন ইন করুন।</string>
     <string name="error_auth_generic">অথেন্টিকেশন ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।</string>
+    <string name="error_auth_no_google_account">এই ডিভাইসে একটি গুগল অ্যাকাউন্ট যোগ করুন এবং আবার চেষ্টা করুন।</string>
+    <string name="action_open_settings">সেটিংস খুলুন</string>
 
     <!-- Track Select (FR-PRO-001) -->
     <string name="track_select_title">আপনার ট্র্যাক নির্বাচন করুন</string>
@@ -116,7 +118,7 @@
     <string name="me_disclaimer_label">সতর্কবার্তা ও দাবিত্যাগ</string>
 
     <!-- States & Common Actions -->
-    <string name="state_loading">লোড হচ্ছে...</string>
+    <string name="state_loading">লোড হচ্ছে…</string>
     <string name="state_empty">কোনো তথ্য পাওয়া যায়নি।</string>
     <string name="state_error">কিছু ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।</string>
     <string name="state_offline">অফলাইন ক্যাশ ডেটা দেখানো হচ্ছে।</string>
@@ -135,7 +137,7 @@
     <string name="label_verified_on">যাচাই করা হয়েছে: %s</string>
     <string name="action_report_wrong_info">ভুল তথ্য রিপোর্ট করুন</string>
     <string name="report_info_dialog_title">ভুল তথ্য রিপোর্ট করুন</string>
-    <string name="report_info_hint">কী ভুল বা পুরানো রয়েছে তা বর্ণনা করুন...</string>
+    <string name="report_info_hint">কী ভুল বা পুরানো রয়েছে তা বর্ণনা করুন…</string>
     <string name="report_info_error_empty">অনুগ্রহ করে আপনার রিপোর্টের বিবরণ লিখুন।</string>
     <string name="submit">জমা দিন</string>
     <string name="cancel">বাতিল</string>
@@ -186,7 +188,7 @@
     <string name="country_tip_warning_title">পরামর্শ ও টিপস</string>
 
     <!-- University Screen -->
-    <string name="university_search_placeholder">বিশ্ববিদ্যালয় খুঁজুন...</string>
+    <string name="university_search_placeholder">বিশ্ববিদ্যালয় খুঁজুন…</string>
     <string name="university_filter_scholarship">বৃত্তি রয়েছে</string>
     <string name="university_programs_title">বিশেষ স্থানপ্রাপ্ত প্রোগ্রাম</string>
     <string name="university_req_vs_profile">যোগ্যতার শর্ত বনাম আপনার প্রোফাইল</string>

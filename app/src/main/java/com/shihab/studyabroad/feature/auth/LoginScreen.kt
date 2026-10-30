@@ -30,6 +30,7 @@ fun LoginScreen(
     onBackToPhone: () -> Unit,
     modifier: Modifier = Modifier,
     onRetry: () -> Unit = {},
+    onOpenAddAccountSettings: () -> Unit = {},
 ) {
     when (uiState) {
         is LoginUiState.Loading -> AppLoadingWheel(modifier = modifier)
@@ -50,6 +51,7 @@ fun LoginScreen(
                 onVerifyOtp = onVerifyOtp,
                 onSignInWithGoogle = onSignInWithGoogle,
                 onBackToPhone = onBackToPhone,
+                onOpenAddAccountSettings = onOpenAddAccountSettings,
                 modifier = modifier,
             )
         }
@@ -66,6 +68,7 @@ private fun LoginContent(
     onVerifyOtp: () -> Unit,
     onSignInWithGoogle: () -> Unit,
     onBackToPhone: () -> Unit,
+    onOpenAddAccountSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -83,6 +86,7 @@ private fun LoginContent(
                         onPhoneNumberChanged = onPhoneNumberChanged,
                         onSendOtp = onSendOtp,
                         onSignInWithGoogle = onSignInWithGoogle,
+                        onOpenAddAccountSettings = onOpenAddAccountSettings,
                         isLoading = uiState.isLoading,
                         errorMessage = uiState.errorMessage,
                     )

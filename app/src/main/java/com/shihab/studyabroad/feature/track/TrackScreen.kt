@@ -3,9 +3,10 @@ package com.shihab.studyabroad.feature.track
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +20,7 @@ import com.shihab.studyabroad.R
 import com.shihab.studyabroad.feature.documents.DocumentsRoute
 import com.shihab.studyabroad.feature.saved.SavedRoute
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TrackScreen(
     modifier: Modifier = Modifier,
@@ -35,7 +37,7 @@ fun TrackScreen(
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
-        TabRow(selectedTabIndex = selectedTabIndex) {
+        PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
             tabs.forEachIndexed { index, title ->
                 Tab(
                     selected = selectedTabIndex == index,

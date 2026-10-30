@@ -1,13 +1,15 @@
 package com.shihab.studyabroad.feature.auth
 
 import android.app.Activity
+import android.content.Intent
+import android.provider.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shihab.studyabroad.core.common.PhoneAuthLauncher
 import dagger.hilt.EntryPoint
@@ -30,6 +32,15 @@ fun LoginRoute(onLoginSuccess: () -> Unit, viewModel: LoginViewModel = hiltViewM
             context.applicationContext,
             PhoneAuthLauncherEntryPoint::class.java,
         ).phoneAuthLauncher()
+    }
+
+    val onOpenAddAccountSettings = remember(context) {
+        {
+            val intent = Intent(Settings.ACTION_ADD_ACCOUNT).apply {
+                putExtra(Settings.EXTRA_ACCOUNT_TYPES, arrayOf("com.google"))
+            }
+            context.startActivity(intent)
+        }
     }
 
     DisposableEffect(activity, phoneAuthLauncher) {
@@ -56,5 +67,6 @@ fun LoginRoute(onLoginSuccess: () -> Unit, viewModel: LoginViewModel = hiltViewM
         onVerifyOtp = viewModel::onVerifyOtp,
         onSignInWithGoogle = viewModel::onSignInWithGoogle,
         onBackToPhone = viewModel::onBackToPhone,
+        onOpenAddAccountSettings = onOpenAddAccountSettings,
     )
 }

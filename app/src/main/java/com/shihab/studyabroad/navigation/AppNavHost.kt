@@ -69,9 +69,9 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
             if (shouldShowBottomBar) {
                 NavigationBar {
                     BottomBarItem.entries.forEach { item ->
-                        val isSelected = currentDestination?.hierarchy?.any {
+                        val isSelected = currentDestination.hierarchy.any {
                             it.hasRoute(item.route::class)
-                        } == true
+                        }
 
                         NavigationBarItem(
                             selected = isSelected,

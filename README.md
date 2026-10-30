@@ -12,8 +12,8 @@ The Study Abroad Guide App serves as a single, verified reference point to answe
 ## 🛠 Requirements to Run
 * **JDK:** Java 17 or higher
 * **Android Studio:** Ladybug (2024.2) or newer
-* **Android SDK:** Compile SDK 35, Min SDK 24 (Android 7.0+)
-* **Gradle:** Version Catalog (`gradle/libs.versions.toml`)
+* **Android SDK:** Compile SDK 37, Target SDK 35, Min SDK 24 (Android 7.0+)
+* **Gradle:** Version Catalog (`gradle/libs.versions.toml`) - AGP 9.4.1, Kotlin 2.3.21
 
 ---
 

@@ -414,6 +414,7 @@ Alternative: missing profile fields are listed; the plan still shows with Unknow
 | --- | --- | --- |
 | 1.0 | 22 Oct 2026 | First full draft |
 | 1.1 | 24 Oct 2026 | Added FR-AUTH-005 (Sign out from Me tab) and re-authentication flow for account deletion |
+| 1.2 | 29 Oct 2026 | Updated technology stack details (AGP 9.4.1, Kotlin 2.3.21, Compose BOM 2026.08.00, Room 2.8.5, Hilt 2.60.1, Firebase BoM 34.17.0) and code hygiene cleanup |
 
 ---
 
@@ -441,18 +442,19 @@ All screens render from Room. The network only fills Room. This is why the app w
 
 | Area | Choice | Reason |
 | --- | --- | --- |
-| Language | Kotlin, Coroutines, Flow | Standard for Android |
-| UI | Jetpack Compose, Material 3 | Modern, theme and dark mode built in |
+| Language | Kotlin 2.3.21, Coroutines, Flow | Standard for Android |
+| UI | Jetpack Compose (BOM 2026.08.00), Material 3 | Modern, theme and dark mode built in |
 | Navigation | Navigation Compose | Official, type-safe routes |
-| Dependency injection | Hilt | ViewModel injection |
-| Local database | Room | Offline catalog and progress |
+| Dependency injection | Hilt 2.60.1 | ViewModel injection |
+| Local database | Room 2.8.5 | Offline catalog and progress |
 | Preferences | DataStore | Language, Track, onboarding flag |
-| Backend | Firebase: Auth, Firestore, FCM, Remote Config, App Check, Crashlytics, Analytics | Fastest for one developer |
+| Backend | Firebase (BoM 34.17.0): Auth, Firestore, FCM, Remote Config, App Check, Crashlytics, Analytics | Fastest for one developer |
+| Build System | AGP 9.4.1 | Android Gradle Plugin |
 | Server logic | Cloud Functions | Admin writes, validation, scheduled jobs |
 | Reminders | WorkManager plus FCM | Survives app close and restart |
 | Serialization | kotlinx.serialization | Seed data and API models |
 | Images | Coil | Compose friendly |
-| Quality tools | JUnit, MockK, Turbine, Compose UI test, detekt, ktlint, Android Lint | See Part 6 |
+| Quality tools | JUnit, MockK, Turbine, Compose UI test, Spotless (ktlint), Android Lint | Static analysis and test harness |
 | CI | GitHub Actions | Build, lint, tests on every pull request |
 
 Backend choice is kept behind Repository interfaces, so Supabase or Postgres can replace Firebase later without changing screens.

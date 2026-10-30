@@ -61,6 +61,8 @@
     <string name="error_auth_cancelled">Sign-in was cancelled.</string>
     <string name="error_auth_requires_recent_login">For security, please sign in again before deleting your account.</string>
     <string name="error_auth_generic">Authentication failed. Please try again.</string>
+    <string name="error_auth_no_google_account">Add a Google account to this device and try again.</string>
+    <string name="action_open_settings">Open settings</string>
 
     <!-- Track Select (FR-PRO-001) -->
     <string name="track_select_title">Choose Your Track</string>
@@ -116,7 +118,7 @@
     <string name="me_disclaimer_label">Notice &amp; Disclaimer</string>
 
     <!-- States & Common Actions -->
-    <string name="state_loading">Loading...</string>
+    <string name="state_loading">Loading…</string>
     <string name="state_empty">No items found.</string>
     <string name="state_error">Something went wrong. Please try again.</string>
     <string name="state_offline">Showing offline cached data.</string>
@@ -135,7 +137,7 @@
     <string name="label_verified_on">Verified on %s</string>
     <string name="action_report_wrong_info">Report wrong info</string>
     <string name="report_info_dialog_title">Report Incorrect Information</string>
-    <string name="report_info_hint">Describe what is incorrect or outdated...</string>
+    <string name="report_info_hint">Describe what is incorrect or outdated…</string>
     <string name="report_info_error_empty">Please enter a description for your report.</string>
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
@@ -186,7 +188,7 @@
     <string name="country_tip_warning_title">Advisory &amp; Tips</string>
 
     <!-- University Screen -->
-    <string name="university_search_placeholder">Search universities...</string>
+    <string name="university_search_placeholder">Search universities…</string>
     <string name="university_filter_scholarship">Has Scholarship</string>
     <string name="university_programs_title">Featured Programs</string>
     <string name="university_req_vs_profile">Requirement vs Your Profile</string>

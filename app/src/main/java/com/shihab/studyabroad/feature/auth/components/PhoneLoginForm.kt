@@ -25,6 +25,7 @@ fun PhoneLoginForm(
     isLoading: Boolean,
     errorMessage: UiText?,
     modifier: Modifier = Modifier,
+    onOpenAddAccountSettings: () -> Unit = {},
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
@@ -66,5 +67,14 @@ fun PhoneLoginForm(
             onClick = onSignInWithGoogle,
             enabled = !isLoading,
         )
+
+        if (errorMessage == UiText.StringResource(R.string.error_auth_no_google_account)) {
+            Spacer(modifier = Modifier.height(12.dp))
+            SecondaryButton(
+                text = stringResource(id = R.string.action_open_settings),
+                onClick = onOpenAddAccountSettings,
+                enabled = !isLoading,
+            )
+        }
     }
 }

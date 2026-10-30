@@ -2,6 +2,7 @@ package com.shihab.studyabroad.core.common
 
 import com.shihab.studyabroad.R
 import com.shihab.studyabroad.core.ui.UiText
+import com.shihab.studyabroad.domain.model.NoGoogleAccountException
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -47,5 +48,19 @@ class AuthErrorMapperTest {
         val exception = Exception("FirebaseNetworkException: A network error occurred")
         val result = AuthErrorMapper.mapExceptionToUiText(exception)
         assertEquals(UiText.StringResource(R.string.error_auth_network_error), result)
+    }
+
+    @Test
+    fun `maps NoGoogleAccountException to no google account string resource`() {
+        val exception = NoGoogleAccountException()
+        val result = AuthErrorMapper.mapExceptionToUiText(exception)
+        assertEquals(UiText.StringResource(R.string.error_auth_no_google_account), result)
+    }
+
+    @Test
+    fun `maps NoCredentialException message to no google account string resource`() {
+        val exception = Exception("androidx.credentials.exceptions.NoCredentialException: No credentials available")
+        val result = AuthErrorMapper.mapExceptionToUiText(exception)
+        assertEquals(UiText.StringResource(R.string.error_auth_no_google_account), result)
     }
 }
